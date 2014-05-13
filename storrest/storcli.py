@@ -168,6 +168,37 @@ class Storcli(object):
         data = self._run(cmd)
         return data
 
+    def create_virtual_drive(self, physical_drives,
+                             spare_drives=None,
+                             raid_level=0,
+                             strip_size=None,
+                             name=None,
+                             read_ahead=None,
+                             write_cache=None,
+                             io_policy=None):
+        def fmt_drives_info(drives):
+            enclosure = drives[0]['enclosure']
+            slots = ','.join(['%(slot)s' % d for d in drives])
+            return '%s:%s' % (enclosure, slots)
+
+        cmd = '/c{controller} add vd r{raid_level} {name} drives={drives}'
+        params = {'controller': physical_drives[0]['controller_id'],
+                  'raid_level': raid_level,
+                  'drives': fmt_drives_info(physical_drives),
+                  'name': 'name=%s' % name if name else '',
+                  }
+        cmd = cmd.format(**params).split()
+        if strip_size:
+            cmd.append('Strip=%s' % strip_size)
+        if read_ahead is not None:
+            cmd.append('ra' if read_ahead else 'nora')
+        if write_cache and write_cache in ['wb', 'wt']:
+            cmd.append(write_cache)
+        if io_policy and io_policy in ['direct', 'cached']:
+            cmd.append(io_policy)
+        if spare_drives:
+            cmd.append('Spares=%s' % fmt_drives_info(spare_drives))
+        return self._run(cmd)
 
     #physical_drives=property(_physical_drives)
     @property
