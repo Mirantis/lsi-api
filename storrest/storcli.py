@@ -12,18 +12,16 @@ NO_SUCH_VDRIVE = SOMETHING_BAD_HAPPEND
 
 
 class StorcliError(Exception):
-    def __init__(self, msg, controller_id=None):
-        super(self, StorcliError).__init__(msg)
-        self.controller_id = controller_id
-
-
+    def __init__(self, msg, error_code=None):
+        super(StorcliError, self).__init__(msg)
+        self.error_code = error_code
 
 
 class Storcli(object):
     def __init__(self, storcli_cmd=STORCLI_CMD):
         self.storcli_cmd = storcli_cmd
 
-    def _extract_storcli_data(self, data):
+    def _extract_storcli_data(self, data, error_code=None):
         ret = {}
         for controller_out in data['Controllers']:
             status_obj = controller_out['Command Status']
@@ -31,8 +29,9 @@ class Storcli(object):
             status = status_obj['Status']
             if status != 'Success':
                 print '_extract_storcli_data: data: %s' % data
+                error_code = error_code or SOMETHING_BAD_HAPPEND
                 raise StorcliError(status_obj.get('Description', 'Unknown'),
-                                   controller_id=controller_id)
+                                   error_code=error_code)
             ret[controller_id] = controller_out.get('Response Data', {})
             return ret
 
@@ -41,9 +40,21 @@ class Storcli(object):
         _cmd.extend(self.storcli_cmd)
         _cmd.extend(cmd)
         _cmd.append('J')
-        raw_out = subprocess.check_output(_cmd)
+        error_code = None
+        try:
+            raw_out = subprocess.check_output(_cmd)
+        except subprocess.CalledProcessError, e:
+            raw_out = e.output
+            error_code = e.returncode
+        except OSError, oe:
+            msg = 'Failed to run "{cmd}", error: {errno} ({strerror})'
+            msg = msg.format(cmd=' '.join(_cmd),
+                             errno=oe.errno,
+                             strerror=oe.strerror)
+            raise StorcliError(msg, error_code=oe.errno)
+
         out = json.loads(raw_out)
-        out = self._extract_storcli_data(out)
+        out = self._extract_storcli_data(out, error_code)
         return out
 
     def _parse_controller_data(self, controller_id, dat):

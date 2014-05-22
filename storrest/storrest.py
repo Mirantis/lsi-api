@@ -26,6 +26,20 @@ def get_storcli():
     return storcli.Storcli(storcli_cmd=CFG['storcli_command'])
 
 
+def dumb_error_handler(fcn):
+    def wrapper(*args, **kwargs):
+        try:
+            return {'error_code': 0,
+                    'error_message': None,
+                    'data': fcn(*args, **kwargs)}
+        except storcli.StorcliError, e:
+            web.ctx.status = '500 Internal Server Error'
+            return {'error_code': e.error_code,
+                    'error_message': e.message,
+                    'data': None}
+    return wrapper
+
+
 def jsonize(fcn):
     def wrapper(*args, **kwargs):
         web.header('Content-Type', 'application/json')
@@ -38,6 +52,7 @@ class ControllersView(object):
         self.storcli = get_storcli()
 
     @jsonize
+    @dumb_error_handler
     def GET(self):
         return self.storcli.controllers
 
@@ -47,6 +62,7 @@ class ControllerDetails(object):
         self.storcli = get_storcli()
 
     @jsonize
+    @dumb_error_handler
     def GET(self, controller_id):
         return self.storcli.controller_details(controller_id)
 
@@ -56,6 +72,7 @@ class PhysicalDrivesView(object):
         self.storcli = get_storcli()
 
     @jsonize
+    @dumb_error_handler
     def GET(self, controller_id=None):
         return self.storcli.physical_drives(controller=controller_id)
 
@@ -65,10 +82,12 @@ class VirtualDrivesView(object):
         self.storcli = get_storcli()
 
     @jsonize
+    @dumb_error_handler
     def GET(self, controller_id=None):
         return self.storcli.virtual_drives(controller=controller_id)
 
     @jsonize
+    @dumb_error_handler
     def POST(self, controller_id):
         raw_data = web.data()
         data = json.loads(raw_data)
@@ -89,11 +108,13 @@ class VirtualDriveDetails(object):
         self.storcli = get_storcli()
 
     @jsonize
+    @dumb_error_handler
     def GET(self, controller_id, virtual_drive_id):
         return self.storcli.virtual_drive_details(int(controller_id),
                                                   int(virtual_drive_id))
 
     @jsonize
+    @dumb_error_handler
     def DELETE(self, controller_id, virtual_drive_id):
         return self.storcli.delete_virtual_drive(controller_id,
                                                  virtual_drive_id,
