@@ -1,0 +1,242 @@
+
+A brief list of implemented methods.
+====================================
+
+Enumerate controllers.
+Enumerate the physical drives attached to the controller.
+Enumerate the virtual drives defined by the controller.
+Get the controller details (virtual and physical drives).
+Create a virtual drive.
+Delete a virtual drive.
+
+
+Detailed information.
+=====================
+
+Generic structure of replies
+-----------------------------
+
+{"error_code": int,
+ "error_message": "string",
+ "data": object}
+
+The subsequent paragraphs describe the "data" object structure.
+
+
+Enumerate controllers.
+----------------------
+
+GET /v0.5/controllers
+
+[{"controller_id": 0,
+  "model": "LSI MegaRAID SAS 9260-4i",
+  "pci_address": "00:06:00:00",
+  "serial_number": "SV24603934"}]
+
+
+Enumerate physical drives attached to the controller.
+-----------------------------------------------------
+
+GET /v0.5/controllers/${controller_id}/physicaldevices
+
+[{"controller_id": 0,
+  "slot": 0,
+  "enclosure": 252
+  # measured in bytes
+  "size": 999653638144,
+  "sector_size": 512,
+  "model": "ST1000NM0011",
+  "allocated": true,
+  "drive_group": 0,
+  # possible values:
+  # "online", "offline", "unconfigured_good", "unconfigured_bad",
+  # "dedicated_hot_spare", "global_hot_spare"
+  "status": "online"},
+ {"controller_id": 0,
+  "slot": 1,
+  "enclosure": 252,
+  "size": 999653638144,
+  "sector_size": 512,
+  "model": "ST1000NM0011",
+  "allocated": true,
+  "drive_group": 0,
+  "status": "online"}]
+
+
+Enumerate virtual drives (raid arrays).
+--------------------------------------
+
+GET /v0.5/controllers/${controller_id}/virtualdevices
+
+[{"controller_id": 0,
+  "virtual_drive": 0,
+  "drive_group": 0,
+  "name": "test_raid1", 
+  "raid_level": "1",
+  "consistent": false,
+  "size": 999653638144,
+  "access": "rw",
+  "read_ahead": True,
+  "write_cache": "wb",
+  "io_policy": "direct",
+  # possible values: optimal, partially_degraded, degraded, offline
+  "state": "optimal",
+  "physical_drives": [PD_LIST]}
+
+Complete example:
+
+[{"controller_id": 0,
+  "virtual_drive": 0,
+  "drive_group": 0,
+  "name": "test_raid1", 
+  "raid_level": "1",
+  "consistent": false,
+  "size": 999653638144,
+  "access": "rw",
+  "read_ahead": True,
+  "write_cache": "wb",
+  "io_policy": "direct",
+  # possible values: optimal, partially_degraded, degraded, offline
+  "state": "optimal",
+  "physical_drives": [{"controller_id": 0,
+                       "enclosure": 252,
+                       "slot": 0,
+                       "drive_group": 0,
+                       "size": 999653638144,
+                       "sector_size": 512,
+                       "model": "ST1000NM0011",
+                       "allocated": true,
+                       "status": "online"},
+                      {"controller_id": 0,
+                       "enclosure": 252,
+                       "slot": 1,
+                       "drive_group": 0,
+                       "size": 999653638144,
+                       "sector_size": 512,
+                       "model": "ST1000NM0011",
+                       "allocated": true,
+                       "status": "online"}],
+ }]
+
+
+ Create a virtual drive (RAID array).
+ ------------------------------------
+
+ POST /v0.5/controllers/${controller_id}/virtualdevices
+
+ The expected data:
+
+ {"drives": [{"controller_id": 0, "enclosure": 252, "slot": 0},
+             {"controller_id": 0, "enclosure": 252, "slot": 1}],
+ "raid_level": "1", # valid values: 0, 1, 5, 6, 10, 50, 60
+ # optional
+ "spare_drives": [{"controller_id": 0, "enclosure": 252, "slot": 2}],
+ # optional, measured in kilobytes
+ "strip_size": 8,
+ # optional
+ "name": "test_raid1",
+ # optional
+ "read_ahead": true,
+ # optional, valid values: "wb", "wt"
+ "write_cache": "wb"
+ # optional, valid values: "direct", "cached"
+ "io_policy": "direct"
+ }
+
+
+Remove the virtual drive.
+-------------------------
+
+DELETE /v0.5/controllers/${controller_id}/virtualdevices/${virtual_drive_id}
+
+
+Show the controller details (physical and virtual drives).
+----------------------------------------------------------
+
+GET /v0.5/controllers/${controller_id}
+
+{"controller_id": int,
+ "pci_address": "string",
+ "serial_number": "string",
+ "model": "string",
+ "physical_drives": [PD_LIST],
+ "virtual_drives": [VD_LIST]
+}
+
+Complete example:
+
+{"controller_id": 0,
+ "pci_address": "00:06:00:00",
+ "serial_number": "SV24603934",
+ "model": "LSI MegaRAID SAS 9260-4i",
+ "physical_drives": [
+	{"controller_id": 0,
+	 "slot": 0,
+	 "enclosure": 252
+	 # measured in bytes
+	 "size": 999653638144,
+	 "sector_size": 512,
+	 "model": "ST1000NM0011",
+	 "allocated": true,
+	 "drive_group": 0,
+	 # possible values: "online", "offline", "unconfigured_good", "unconfigured_bad",
+	 # "dedicated_hot_spare", "global_hot_spare"
+	 "status": "online"},
+	{"controller_id": 0,
+	 "slot": 1,
+	 "enclosure": 252
+	 # measured in bytes
+	 "size": 999653638144,
+	 "sector_size": 512,
+	 "model": "ST1000NM0011",
+	 "allocated": true,
+	 "drive_group": 0,
+	 # possible values: "online", "offline", "unconfigured_good", "unconfigured_bad",
+	 # "dedicated_hot_spare", "global_hot_spare"
+	 "status": "online"},
+	{"controller_id": 0,
+	 "slot": 2,
+	 "enclosure": 252
+	 # measured in bytes
+	 "size": 999653638144,
+	 "sector_size": 512,
+	 "model": "ST1000NM0011",
+	 "allocated": true,
+	 "drive_group": 0,
+	 # possible values: "online", "offline", "unconfigured_good", "unconfigured_bad",
+	 # "dedicated_hot_spare", "global_hot_spare"
+	 "status": "unconfigured_good"}],
+ "virtual_drives": [
+	{"controller_id": 0,
+	 "virtual_drive": 0,
+	 "drive_group": 0,
+	 "name": "test_raid1", 
+	 raid_level": "1",
+	 "consistent": false,
+	 "size": 999653638144,
+	 "access": "rw",
+	 "read_ahead": True,
+	 "write_cache": "wb",
+	 "io_policy": "direct",
+	 # possible values: optimal, partially_degraded, degraded, offline
+	 "state": "optimal",
+	 "physical_drives": [{"controller_id": 0,
+			      "enclosure": 252,
+			      "slot": 0,
+			      "drive_group": 0,
+			      "size": 999653638144,
+			      "sector_size": 512,
+			      "model": "ST1000NM0011",
+			      "allocated": true,
+			      "status": "online"},
+			     {"controller_id": 0,
+			      "enclosure": 252,
+			      "slot": 1,
+			      "drive_group": 0,
+			      "size": 999653638144,
+			      "sector_size": 512,
+			      "model": "ST1000NM0011",
+			      "allocated": true,
+			      "status": "online"}]
+ }]}
+
