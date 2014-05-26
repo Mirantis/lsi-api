@@ -9,6 +9,7 @@ import storutils
 STORCLI_CMD = '/opt/MegaRAID/storcli/storcli64'.split()
 SOMETHING_BAD_HAPPEND = 42
 NO_SUCH_VDRIVE = SOMETHING_BAD_HAPPEND
+MULTIPLE_VDS_FOR_SAME_PDS = SOMETHING_BAD_HAPPEND
 
 
 class StorcliError(Exception):
@@ -184,6 +185,25 @@ class Storcli(object):
         data = self._run(cmd)
         return data
 
+    def _find_virtual_drive_by_phisical(self, physical_drives):
+        def physical_drives_ids(drives):
+            return set([(pd['enclosure'], pd['slot']) for pd in drives])
+
+        controller_id = physical_drives[0]['controller_id']
+        pdrives_ids = physical_drives_ids(physical_drives)
+        found_vd = [vd for vd in self.virtual_drives(controller_id)
+                    if physical_drives_ids(vd['physical_drives']) ==
+                    pdrives_ids]
+        if len(found_vd) == 1:
+            return found_vd[0]
+        elif len(found_vd) == 0:
+            msg = 'No virtual drive contains %s'
+            error_code = NO_SUCH_VDRIVE
+        elif len(found_vd) > 1:
+            msg = 'Multiple virtual drives contain %s'
+            error_code = MULTIPLE_VDS_FOR_SAME_PDS
+        raise StorcliError(msg % pdrives_ids, error_code=error_code)
+
     def create_virtual_drive(self, physical_drives,
                              spare_drives=None,
                              raid_level=0,
@@ -214,7 +234,10 @@ class Storcli(object):
             cmd.append(io_policy)
         if spare_drives:
             cmd.append('Spares=%s' % fmt_drives_info(spare_drives))
-        return self._run(cmd)
+
+        self._run(cmd)
+        return self._find_virtual_drive_by_phisical(physical_drives +
+                                                    (spare_drives or []))
 
     #physical_drives=property(_physical_drives)
     @property

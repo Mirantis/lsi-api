@@ -143,6 +143,40 @@ Complete example:
  "io_policy": "direct"
  }
 
+Returned data: object describing the newly created virtual drive. Example:
+
+[{"controller_id": 0,
+  "virtual_drive": 0,
+  "drive_group": 0,
+  "name": "test_raid1",
+  "raid_level": "1",
+  "consistent": false,
+  "size": 999653638144,
+  "access": "rw",
+  "read_ahead": True,
+  "write_cache": "wb",
+  "io_policy": "direct",
+  "state": "optimal",
+  "physical_drives": [{"controller_id": 0,
+                       "enclosure": 252,
+                       "slot": 0,
+                       "drive_group": 0,
+                       "size": 999653638144,
+                       "sector_size": 512,
+                       "model": "ST1000NM0011",
+                       "allocated": true,
+                       "status": "online"},
+                      {"controller_id": 0,
+                       "enclosure": 252,
+                       "slot": 1,
+                       "drive_group": 0,
+                       "size": 999653638144,
+                       "sector_size": 512,
+                       "model": "ST1000NM0011",
+                       "allocated": true,
+                       "status": "online"}],
+ }]
+
 
 Remove the virtual drive.
 -------------------------
