@@ -63,6 +63,10 @@ class Storcli(object):
                 'model': dat['Product Name'],
                 'serial_number': dat['Serial Number']}
 
+    def _enclosures(self, controller_id):
+        dat = self._run('/c{0}/eall show'.format(controller_id).split())
+        return [d['EID'] for d in dat[controller_id]['Properties']]
+
     @property
     def controllers(self):
         data = self._run('/call show'.split())
@@ -76,6 +80,7 @@ class Storcli(object):
                                               data[controller_id])
         details['physical_drives'] = self._parse_physical_drives(data)
         details['virtual_drives'] = self._parse_virtual_drives(data)
+        details['enclosures'] = self._enclosures(controller_id)
         return details
 
     def _parse_physical_drive(self, controller, drive_dat):

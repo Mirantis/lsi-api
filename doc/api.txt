@@ -159,6 +159,7 @@ GET /v0.5/controllers/${controller_id}
  "pci_address": "string",
  "serial_number": "string",
  "model": "string",
+ "enclosures": [ID_LIST],
  "physical_drives": [PD_LIST],
  "virtual_drives": [VD_LIST]
 }
@@ -169,6 +170,7 @@ Complete example:
  "pci_address": "00:06:00:00",
  "serial_number": "SV24603934",
  "model": "LSI MegaRAID SAS 9260-4i",
+ "enclosures": [252],
  "physical_drives": [
 	{"controller_id": 0,
 	 "slot": 0,

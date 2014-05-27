@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 
 import mock
-import subprocess
 import unittest
 
-import tests_helpers
+from tests_helpers import MultiReturnValues, add_top_srcdir_to_path
 
-tests_helpers.add_top_srcdir_to_path()
+add_top_srcdir_to_path()
 
-from storrest.storcli import Storcli
+import storrest
 
 STORCLI_SHOW_JSON = """
 {
@@ -214,18 +213,56 @@ STORCLI_SHOW_JSON = """
 }
 """
 
+STORCLI_ENCLOSURES_SHOW = """
+{
+"Controllers":[
+{
+        "Command Status" : {
+                "Controller" : 0,
+                "Status" : "Success",
+                "Description" : "None"
+        },
+        "Response Data" : {
+                "Properties" : [
+                        {
+                                "EID" : 252,
+                                "State" : "OK",
+                                "Slots" : 8,
+                                "PD" : 4,
+                                "PS" : 0,
+                                "Fans" : 0,
+                                "TSs" : 0,
+                                "Alms" : 0,
+                                "SIM" : 1,
+                                "Port#" : "Unavailable",
+                                "ProdID" : "SGPIO",
+                                "VendorSpecific" : " "
+                        }
+                ]
+        }
+}
+]
+}
+"""
+
 
 class StorcliTest(unittest.TestCase):
     def setUp(self):
         super(StorcliTest, self).setUp()
-        subprocess.check_output = mock.Mock(return_value=STORCLI_SHOW_JSON)
-        self.storcli = Storcli()
+        self.patcher = mock.patch('storrest.storcli.subprocess')
+        self.mock_subprocess = self.patcher.start()
+        self.mock_subprocess.check_output.return_value = STORCLI_SHOW_JSON
+        self.storcli = storrest.storcli.Storcli()
         self._expected_virtual_drives = None
         self._expected_physical_drives = None
         self.controllers = [{'controller_id': 0,
                              'pci_address': '00:06:00:00',
                              'model': 'LSI MegaRAID SAS 9260-4i',
                              'serial_number': 'SV24603934'}]
+
+    def tearDown(self):
+        super(StorcliTest, self).tearDown()
+        self.patcher.stop()
 
     @property
     def expected_physical_drives(self):
@@ -309,9 +346,12 @@ class StorcliTest(unittest.TestCase):
         self.assertEqual(actual, self.controllers)
 
     def test_controller_details(self):
+        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+            STORCLI_SHOW_JSON, STORCLI_ENCLOSURES_SHOW])
         expected = self.controllers[0]
         expected['physical_drives'] = self.expected_physical_drives
         expected['virtual_drives'] = self.expected_virtual_drives
+        expected['enclosures'] = [252]
         actual = self.storcli.controller_details(
             controller_id=expected['controller_id'])
         self.assertEqual(actual, expected)
