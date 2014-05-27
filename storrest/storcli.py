@@ -6,6 +6,10 @@ import subprocess
 
 import storutils
 
+if 'check_output' not in dir(subprocess):
+    from storcompat import patch_subprocess
+    patch_subprocess(subprocess)
+
 STORCLI_CMD = '/opt/MegaRAID/storcli/storcli64'.split()
 SOMETHING_BAD_HAPPEND = 42
 NO_SUCH_VDRIVE = SOMETHING_BAD_HAPPEND
