@@ -8,6 +8,7 @@ Enumerate the virtual drives defined by the controller.
 Get the controller details (virtual and physical drives).
 Create a virtual drive.
 Delete a virtual drive.
+Update the virtual drive parameters (name, write cache, IO policy, read cache)
 
 
 Detailed information.
@@ -182,6 +183,24 @@ Remove the virtual drive.
 -------------------------
 
 DELETE /v0.5/controllers/${controller_id}/virtualdevices/${virtual_drive_id}
+
+
+Update the virtual drive parameters (name, write cache, IO policy, read ahead)
+------------------------------------------------------------------------------
+
+POST /v0.5/controllers/${controller_id}/virtualdevices/${virtual_drive_id}
+
+The expected data:
+
+{"name": "string",
+ # possible values: "wt", "wb"
+ "write_cache": "wt",
+ "read_ahead": true,
+ # possible values: "direct", "cached"
+ "io_policy": "direct"
+}
+
+At least one parameter must be specified.
 
 
 Show the controller details (physical and virtual drives).

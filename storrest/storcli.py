@@ -243,6 +243,23 @@ class Storcli(object):
         return self._find_virtual_drive_by_phisical(physical_drives +
                                                     (spare_drives or []))
 
+    def update_virtual_drive(self, controller_id, virtual_drive_id,
+                             name=None,
+                             write_cache=None,
+                             io_policy=None,
+                             read_ahead=None):
+        cmd = '/c{0}/v{1} set'.format(controller_id, virtual_drive_id).split()
+        if io_policy in ['direct', 'cached']:
+            cmd.append('iopolicy=%s' % io_policy)
+        if name is not None:
+            cmd.append('name=%s' % name)
+        if write_cache in ['wb', 'wt']:
+            cmd.append('wrcache=%s' % write_cache)
+        if read_ahead is not None:
+            cmd.append('rdcache=%s' % ('RA' if read_ahead else 'NoRA'))
+
+        return self._run(cmd)
+
     #physical_drives=property(_physical_drives)
     @property
     def all_physical_drives(self):

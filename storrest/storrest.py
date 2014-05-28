@@ -120,6 +120,15 @@ class VirtualDriveDetails(object):
                                                  virtual_drive_id,
                                                  force=True)
 
+    @jsonize
+    @dumb_error_handler
+    def POST(self, controller_id, virtual_drive_id):
+        data = json.loads(web.data())
+        param_names = ('name', 'read_ahead', 'write_cache', 'io_policy')
+        params = dict([(k, data.get(k)) for k in param_names])
+        return self.storcli.update_virtual_drive(int(controller_id),
+                                                 int(virtual_drive_id),
+                                                 **params)
 
 if __name__ == '__main__':
     app.run()
