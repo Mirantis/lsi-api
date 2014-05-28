@@ -221,6 +221,13 @@ class Storcli(object):
             slots = ','.join(['%(slot)s' % d for d in drives])
             return '%s:%s' % (enclosure, slots)
 
+        def guess_pd_per_array(raid_level, cmd):
+            tbl = {'10': 2, 10: 2,
+                   '50': 3, 50: 3,
+                   '60': 4, 60: 4}
+            if raid_level in tbl:
+                cmd.append('PDperArray=%s' % tbl[raid_level])
+
         cmd = '/c{controller} add vd r{raid_level} {name} drives={drives}'
         params = {'controller': physical_drives[0]['controller_id'],
                   'raid_level': raid_level,
@@ -228,6 +235,7 @@ class Storcli(object):
                   'name': 'name=%s' % name if name else '',
                   }
         cmd = cmd.format(**params).split()
+        guess_pd_per_array(raid_level, cmd)
         if strip_size:
             cmd.append('Strip=%s' % strip_size)
         if read_ahead is not None:
