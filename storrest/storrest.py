@@ -92,14 +92,9 @@ class VirtualDrivesView(object):
         raw_data = web.data()
         data = json.loads(raw_data)
         web.ctx.status = '201 Created'
-        params = {'raid_level': data.get('raid_level', 0),
-                  'spare_drives': data.get('spare_drives'),
-                  'strip_size': data.get('strip_size'),
-                  'name': data.get('name'),
-                  'read_ahead': data.get('read_ahead'),
-                  'write_cache': data.get('write_cache'),
-                  'io_policy': data.get('io_policy')
-                  }
+        param_names = ('raid_level', 'spare_drives', 'strip_size',
+                       'name', 'read_ahead', 'write_cache', 'io_policy')
+        params = dict([(k, data.get(k)) for k in param_names])
         return self.storcli.create_virtual_drive(data['drives'], **params)
 
 
