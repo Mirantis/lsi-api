@@ -15,7 +15,7 @@ urls = (
 )
 
 CFG = {
-    'storcli_command': '/opt/MegaRAID/storcli/storcli64'
+    'storcli_command': ['/opt/MegaRAID/storcli/storcli64']
 }
 
 app = web.application(urls, globals())
