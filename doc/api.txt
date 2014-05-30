@@ -32,7 +32,8 @@ GET /v0.5/controllers
 [{"controller_id": 0,
   "model": "LSI MegaRAID SAS 9260-4i",
   "pci_address": "00:06:00:00",
-  "serial_number": "SV24603934"}]
+  "serial_number": "SV24603934",
+  "enclosures": [252]}]
 
 
 Enumerate physical drives attached to the controller.
