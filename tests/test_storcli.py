@@ -258,7 +258,8 @@ class StorcliTest(unittest.TestCase):
         self.controllers = [{'controller_id': 0,
                              'pci_address': '00:06:00:00',
                              'model': 'LSI MegaRAID SAS 9260-4i',
-                             'serial_number': 'SV24603934'}]
+                             'serial_number': 'SV24603934',
+                             'enclosures': [252]}]
 
     def tearDown(self):
         super(StorcliTest, self).tearDown()
@@ -342,6 +343,8 @@ class StorcliTest(unittest.TestCase):
         self.assertEqual(actual, self.expected_virtual_drives)
 
     def test_controllers(self):
+        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+            STORCLI_SHOW_JSON, STORCLI_ENCLOSURES_SHOW])
         actual = self.storcli.controllers
         self.assertEqual(actual, self.controllers)
 

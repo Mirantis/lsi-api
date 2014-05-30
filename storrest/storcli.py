@@ -66,11 +66,12 @@ class Storcli(object):
         return {'controller_id': controller_id,
                 'pci_address': dat['PCI Address'],
                 'model': dat['Product Name'],
-                'serial_number': dat['Serial Number']}
+                'serial_number': dat['Serial Number'],
+                'enclosures': self._enclosures(controller_id)}
 
     def _enclosures(self, controller_id):
         dat = self._run('/c{0}/eall show'.format(controller_id).split())
-        return [d['EID'] for d in dat[controller_id]['Properties']]
+        return sorted([d['EID'] for d in dat[controller_id]['Properties']])
 
     @property
     def controllers(self):
@@ -85,7 +86,6 @@ class Storcli(object):
                                               data[controller_id])
         details['physical_drives'] = self._parse_physical_drives(data)
         details['virtual_drives'] = self._parse_virtual_drives(data)
-        details['enclosures'] = self._enclosures(controller_id)
         return details
 
     def _parse_physical_drive(self, controller, drive_dat):
