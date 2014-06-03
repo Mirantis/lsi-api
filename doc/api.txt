@@ -49,6 +49,8 @@ GET /v0.5/controllers/${controller_id}/physicaldevices
   "sector_size": 512,
   "model": "ST1000NM0011",
   "allocated": true,
+  # Possible values: null, integer, list of integers (the latter is possible
+  # for hot spare drives only)
   "drive_group": 0,
   # possible values:
   # "online", "offline", "unconfigured_good", "unconfigured_bad",

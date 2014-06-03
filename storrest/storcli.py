@@ -90,8 +90,18 @@ class Storcli(object):
 
     def _parse_physical_drive(self, controller, drive_dat):
         enclosure, slot = drive_dat['EID:Slt'].split(':')
-        allocated = drive_dat['DG'] != '-'
-        drive_group = int(drive_dat['DG']) if allocated else None
+
+        def parse_drive_group(raw_dg):
+            allocated = raw_dg != '-'
+            drive_group = None
+            if allocated:
+                try:
+                    drive_group = int(raw_dg)
+                except ValueError:
+                    drive_group = [int(dg) for dg in raw_dg.split(',')]
+            return drive_group, allocated
+
+        drive_group, allocated = parse_drive_group(drive_dat['DG'])
         sector_size = storutils.parse_sector_size(drive_dat['SeSz'])
         size = storutils.parse_drive_size(drive_dat['Size'])
         return {'controller_id': controller,
