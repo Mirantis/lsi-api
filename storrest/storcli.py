@@ -80,13 +80,19 @@ class Storcli(object):
                        for controller_id, dat in data.iteritems()])
 
     def controller_details(self, controller_id):
-        data = self._run('/c{0} show'.format(controller_id).split())
-        controller_id = data.keys()[0]
-        details = self._parse_controller_data(controller_id,
-                                              data[controller_id])
-        details['physical_drives'] = self._parse_physical_drives(data)
-        details['virtual_drives'] = self._parse_virtual_drives(data)
-        return details
+        data = self._run('/c{0} show'.format(controller_id or 'all').split())
+
+        def _controller_details(cid, dat):
+            details = self._parse_controller_data(cid, dat)
+            _dat = {cid: dat}
+            details['physical_drives'] = self._parse_physical_drives(_dat)
+            details['virtual_drives'] = self._parse_virtual_drives(_dat)
+            return details
+
+        ret = [_controller_details(_controller_id, dat)
+               for _controller_id, dat in data.iteritems()]
+        all_controllers = controller_id is None or controller_id == 'all'
+        return ret if all_controllers else ret[0]
 
     def _parse_physical_drive(self, controller, drive_dat):
         enclosure, slot = drive_dat['EID:Slt'].split(':')

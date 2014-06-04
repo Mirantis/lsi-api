@@ -7,7 +7,7 @@ import storcli
 
 urls = (
     '/v0.5/controllers', 'ControllersView',
-    '/v0.5/controllers/([0-9]+)', 'ControllerDetails',
+    '/v0.5/controllers/((?:\d+)|(?:all))', 'ControllerDetails',
     '/v0.5/controllers/([0-9]+)/physicaldevices', 'PhysicalDrivesView',
     '/v0.5/controllers/([0-9]+)/virtualdevices', 'VirtualDrivesView',
     '/v0.5/controllers/([0-9]+)/virtualdevices/([0-9]+)', 'VirtualDriveDetails',

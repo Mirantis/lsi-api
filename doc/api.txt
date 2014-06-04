@@ -220,6 +220,9 @@ GET /v0.5/controllers/${controller_id}
  "virtual_drives": [VD_LIST]
 }
 
+controller_id is either a number or a special value 'all'. The latter returns details
+about all controllers as a list of the above mentioned objects.
+
 Complete example:
 
 {"controller_id": 0,
