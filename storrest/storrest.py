@@ -11,7 +11,7 @@ urls = (
     '/v0.5/controllers/([0-9]+)/physicaldevices', 'PhysicalDrivesView',
     '/v0.5/controllers/([0-9]+)/virtualdevices', 'VirtualDrivesView',
     '/v0.5/controllers/([0-9]+)/virtualdevices/([0-9]+)', 'VirtualDriveDetails',
-    #'/v1/servers/0/controllers/([0-9]+)/physicaldevices/([0-9]+)', 'PhysicalDriveInfo',
+    '/v0.5/controllers/(\d+)/physicaldevices/(\d+)/(\d+)/hotspare', 'HotspareOps',
 )
 
 CFG = {
@@ -124,6 +124,26 @@ class VirtualDriveDetails(object):
         return self.storcli.update_virtual_drive(int(controller_id),
                                                  int(virtual_drive_id),
                                                  **params)
+
+
+class HotSpareOps(object):
+    @jsonize
+    @dumb_error_handler
+    def POST(self, controller_id, enclosure, slot):
+        data = json.loads(web.data())
+        return get_storcli().\
+            add_hotspare_drive(data.get('virtual_drives'),
+                               controller_id=controller_id,
+                               enclosure=enclosure,
+                               slot=slot)
+
+    @jsonize
+    @dumb_error_handler
+    def DELETE(self, controller_id, enclosure, slot):
+        return get_storcli().\
+            delete_hotspare_drive(controller_id=controller_id,
+                                  enclosure=enclosure,
+                                  slot=slot)
 
 if __name__ == '__main__':
     app.run()

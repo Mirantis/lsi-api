@@ -9,6 +9,7 @@ Get the controller details (virtual and physical drives).
 Create a virtual drive.
 Delete a virtual drive.
 Update the virtual drive parameters (name, write cache, IO policy, read cache)
+Add a hot spare drive
 
 
 Detailed information.
@@ -204,6 +205,27 @@ The expected data:
 }
 
 At least one parameter must be specified.
+
+
+Add a hot spare drive to a  virtual drive(s).
+---------------------------------------------
+
+POST /v0.5/controllers/${controller_id}/physicaldevices/${enclosure}/${slot}/hotspare
+
+The expected data:
+
+{"virtual_drives": [vd1_id, vd2_id, ...]}
+
+Add the physical drive located at the specified controller/enclosure/slot
+as a hot spare drive for the given virtual drives (i.e. having identifiers
+vd1_id, vd2_id, and so on). Note that the virtual drives and the physical
+drive in question must reside on the same controller.
+
+
+Remove (unassign) the hot spare drive.
+--------------------------------------
+
+DELETE /v0.5/controllers/${controller_id}/physicaldevices/${enclosure}/${slot}/hotspare
 
 
 Show the controller details (physical and virtual drives).

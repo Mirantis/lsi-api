@@ -5,6 +5,7 @@ import json
 import subprocess
 
 import storutils
+from storutils import strlst
 
 if 'check_output' not in dir(subprocess):
     from storcompat import patch_subprocess
@@ -283,6 +284,45 @@ class Storcli(object):
             cmd.append('rdcache=%s' % ('RA' if read_ahead else 'NoRA'))
 
         return self._run(cmd)
+
+    def add_hotspare_drive(self, virtual_drives,
+                           pdrive=None,
+                           controller_id=None,
+                           enclosure=None,
+                           slot=None):
+        """Assign the physical drive as a hot spare for the virtual drives.
+
+        pdrive the physical drive description. Example:
+        {'controller_id': 0, 'enclosure': 252, 'slot': 1}
+
+        virtual_drives list of virtual drives IDs
+        """
+        if virtual_drives is None:
+            return
+        if pdrive is None:
+            pdrive = {'controller_id': controller_id,
+                      'enclosure': enclosure,
+                      'slot': slot}
+        else:
+            controller_id = pdrive['controller_id']
+        drive_groups = [vd['drive_group'] for vd in
+                        self.virtual_drives(controller_id)
+                        if vd['virtual_drive'] in virtual_drives]
+        cmd = '/c{controller_id}/e{enclosure}/s{slot} add hotsparedrive dgs={0}'
+        cmd = cmd.format(strlst(drive_groups), **pdrive)
+        return self._run(cmd.split())
+
+    def delete_hotspare_drive(self, drive=None,
+                              controller_id=None,
+                              enclosure=None,
+                              slot=None):
+        if drive is None:
+            drive = {'controller_id': controller_id,
+                     'enclosure': enclosure,
+                     'slot': slot}
+        cmd = '/c{controller_id}/e{enclosure}/s{slot} delete hotsparedrive'
+        cmd = cmd.format(**drive)
+        return self._run(cmd.split())
 
     #physical_drives=property(_physical_drives)
     @property

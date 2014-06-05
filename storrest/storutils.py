@@ -86,3 +86,7 @@ def parse_state(arg):
         return smap[state_str]
     else:
         raise ValueError('Invalid state: %s' % arg)
+
+
+def strlst(lst, separator=','):
+    return separator.join((str(elt) for elt in lst))
