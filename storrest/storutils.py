@@ -57,10 +57,7 @@ def parse_raid_level(srep):
                    'RAID50': '50',
                    'RAID60': '60',
                    }
-    if level_str in raid_levels.keys():
-        return raid_levels[level_str]
-    else:
-        raise ValueError('Unknown RAID level: %s' % level_str)
+    return raid_levels.get(level_str, srep)
 
 
 def parse_cache_flags(flags):
