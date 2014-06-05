@@ -165,8 +165,16 @@ class Storcli(object):
             return ret
 
         def drive_belongs_to(phys, virt):
-            return virt['drive_group'] == phys['drive_group'] and \
-                    virt['controller_id'] == phys['controller_id']
+            if phys['drive_group'] is None:
+                return False
+            if phys['controller_id'] != virt['controller_id']:
+                return False
+            if phys['drive_group'] == virt['drive_group']:
+                return True
+            try:
+                return virt['drive_group'] in phys['drive_group']
+            except TypeError:
+                return False
 
         phys_drives = self._parse_physical_drives(data)
 
