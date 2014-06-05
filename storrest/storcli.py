@@ -35,7 +35,7 @@ class Storcli(object):
             status = status_obj['Status']
             if status != 'Success':
                 print '_extract_storcli_data: data: %s' % data
-                error_code = error_code or SOMETHING_BAD_HAPPEND
+                error_code = status_obj.get('ErrCd', SOMETHING_BAD_HAPPEND)
                 raise StorcliError(status_obj.get('Description', 'Unknown'),
                                    error_code=error_code)
             ret[controller_id] = controller_out.get('Response Data', {})
