@@ -7,9 +7,12 @@ Enumerate the physical drives attached to the controller.
 Enumerate the virtual drives defined by the controller.
 Get the controller details (virtual and physical drives).
 Create a virtual drive.
+Create cachecade/nytrocache device. [Not implemented yet]
 Delete a virtual drive.
-Update the virtual drive parameters (name, write cache, IO policy, read cache)
-Add a hot spare drive
+Delete all virtual drives defined by the controler. [Not implemented yet]
+Delete cachecade/nytrocache device. [Not implemented yet]
+Update the virtual drive parameters (name, write cache, IO policy, read cache, SSD caching).
+Add a hot spare drive (either dedicated or a global one).
 
 
 Detailed information.
@@ -197,10 +200,49 @@ Returned data: object describing the newly created virtual drive. Example:
  }]
 
 
+Create a cachecade/nytrocache device.
+-------------------------------------
+
+POST /v0.5/controllers/${controller_id}/virtualdevices/cachecade
+
+POST /v0.5/controllers/${controller_id}/virtualdevices/nytrocache
+
+The expected data:
+
+{"drives": [{"controller_id": 0, "enclosure": 252, "slot": 0},
+            {"controller_id": 0, "enclosure": 252, "slot": 1}],
+ "raid_level": "1", # valid values: 0, 1, 10
+ # optional
+ "name": "test_cachecade",
+ }
+
+Returned data: object describing the newly created virtual drive.
+[TODO: give an example here]
+
+
 Remove the virtual drive.
 -------------------------
 
 DELETE /v0.5/controllers/${controller_id}/virtualdevices/${virtual_drive_id}
+
+
+Remove the cachecade/nytrocache device.
+---------------------------------------
+
+DELETE /v0.5/controllers/${controller_id}/virtualdevices/cachecade/${virtual_drive_id}
+
+DELETE /v0.5/controllers/${controller_id}/virtualdevices/nytrocache/${virtual_drive_id}
+
+Note that nytrocache/cachecade is actually a virtual drive so it can be deleted as
+any other virtual drive.
+
+
+Remove all virtual drives defined by the controller.
+----------------------------------------------------
+
+DELETE /v0.5/controllers/${controller_id}/virtualdevices
+
+Note: this removes the cachecade/nytrocache devices along with the orinary RAIDs.
 
 
 Update the virtual drive parameters (name, write cache, IO policy, read ahead)
@@ -216,9 +258,11 @@ The expected data:
  "read_ahead": true,
  # possible values: "direct", "cached"
  "io_policy": "direct"
+ "ssd_caching": true
 }
 
-At least one parameter must be specified.
+At least one parameter must be specified. [Note: SSD caching manipulation is
+not implemented yet]
 
 
 Add a hot spare drive to a  virtual drive(s).
@@ -234,6 +278,9 @@ Add the physical drive located at the specified controller/enclosure/slot
 as a hot spare drive for the given virtual drives (i.e. having identifiers
 vd1_id, vd2_id, and so on). Note that the virtual drives and the physical
 drive in question must reside on the same controller.
+
+If no virtual drives is specified than the physical drive is configured as
+a global hot spare. [Note: adding global hot spare drive is not implemented yet]
 
 
 Remove (unassign) the hot spare drive.
