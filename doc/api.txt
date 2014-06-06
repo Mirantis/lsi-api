@@ -49,6 +49,10 @@ GET /v0.5/controllers/${controller_id}/physicaldevices
   "size": 999653638144,
   "sector_size": 512,
   "model": "ST1000NM0011",
+  # Possible values: "HDD", "SSD" (whatever nytrocli returns)
+  "medium": "HDD",
+  # Possible values: "SATA", "SAS" (whatever nytrocli returns)
+  "interface": "SATA",
   "allocated": true,
   # Possible values: null, integer, list of integers (the latter is possible
   # for hot spare drives only)
@@ -63,6 +67,8 @@ GET /v0.5/controllers/${controller_id}/physicaldevices
   "size": 999653638144,
   "sector_size": 512,
   "model": "ST1000NM0011",
+  "medium": "HDD",
+  "interface": "SATA",
   "allocated": true,
   "drive_group": 0,
   "status": "online"}]
@@ -112,6 +118,8 @@ Complete example:
                        "size": 999653638144,
                        "sector_size": 512,
                        "model": "ST1000NM0011",
+		       "medium": "HDD",
+		       "interface": "SATA",
                        "allocated": true,
                        "status": "online"},
                       {"controller_id": 0,
@@ -121,6 +129,8 @@ Complete example:
                        "size": 999653638144,
                        "sector_size": 512,
                        "model": "ST1000NM0011",
+		       "medium": "HDD",
+		       "interface": "SATA",
                        "allocated": true,
                        "status": "online"}],
  }]
@@ -172,6 +182,8 @@ Returned data: object describing the newly created virtual drive. Example:
                        "size": 999653638144,
                        "sector_size": 512,
                        "model": "ST1000NM0011",
+		       "medium": "HDD",
+		       "interface": "SATA",
                        "allocated": true,
                        "status": "online"},
                       {"controller_id": 0,
@@ -181,6 +193,8 @@ Returned data: object describing the newly created virtual drive. Example:
                        "size": 999653638144,
                        "sector_size": 512,
                        "model": "ST1000NM0011",
+		       "medium": "HDD",
+		       "interface": "SATA",
                        "allocated": true,
                        "status": "online"}],
  }]
@@ -263,6 +277,8 @@ Complete example:
 	 "size": 999653638144,
 	 "sector_size": 512,
 	 "model": "ST1000NM0011",
+	 "medium": "HDD",
+	 "interface": "SATA",
 	 "allocated": true,
 	 "drive_group": 0,
 	 # possible values: "online", "offline", "unconfigured_good", "unconfigured_bad",
@@ -275,6 +291,8 @@ Complete example:
 	 "size": 999653638144,
 	 "sector_size": 512,
 	 "model": "ST1000NM0011",
+	 "medium": "HDD",
+	 "interface": "SATA",
 	 "allocated": true,
 	 "drive_group": 0,
 	 # possible values: "online", "offline", "unconfigured_good", "unconfigured_bad",
@@ -287,6 +305,8 @@ Complete example:
 	 "size": 999653638144,
 	 "sector_size": 512,
 	 "model": "ST1000NM0011",
+	 "medium": "HDD",
+	 "interface": "SATA",
 	 "allocated": true,
 	 "drive_group": 0,
 	 # possible values: "online", "offline", "unconfigured_good", "unconfigured_bad",
@@ -314,6 +334,8 @@ Complete example:
 			      "size": 999653638144,
 			      "sector_size": 512,
 			      "model": "ST1000NM0011",
+			      "medium": "HDD",
+			      "interface": "SATA",
 			      "allocated": true,
 			      "status": "online"},
 			     {"controller_id": 0,
@@ -323,6 +345,8 @@ Complete example:
 			      "size": 999653638144,
 			      "sector_size": 512,
 			      "model": "ST1000NM0011",
+			      "medium": "HDD",
+			      "interface": "SATA",
 			      "allocated": true,
 			      "status": "online"}]
  }]}
