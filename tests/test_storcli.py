@@ -278,6 +278,8 @@ class StorcliTest(unittest.TestCase):
                                 'drive_group': 0,
                                 'model': 'ST1000NM0011',
                                 'state': 'online',
+                                'medium': 'HDD',
+                                'interface': 'SATA',
                                 'allocated': True},
                                {'controller_id': 0,
                                 'enclosure': 252,
@@ -287,6 +289,8 @@ class StorcliTest(unittest.TestCase):
                                 'drive_group': 0,
                                 'model': 'ST1000NM0011',
                                 'state': 'online',
+                                'medium': 'HDD',
+                                'interface': 'SATA',
                                 'allocated': True},
                                {'controller_id': 0,
                                 'enclosure': 252,
@@ -296,6 +300,8 @@ class StorcliTest(unittest.TestCase):
                                 'drive_group': 0,
                                 'model': 'ST1000NM0011',
                                 'state': 'dedicated_hot_spare',
+                                'medium': 'HDD',
+                                'interface': 'SATA',
                                 'allocated': True},
                                {'controller_id': 0,
                                 'enclosure': 252,
@@ -305,6 +311,8 @@ class StorcliTest(unittest.TestCase):
                                 'drive_group': None,
                                 'model': 'ST1000NM0011',
                                 'state': 'unconfigured_good',
+                                'medium': 'HDD',
+                                'interface': 'SATA',
                                 'allocated': False}]
             physical_drives.sort()
             self._expected_physical_drives = physical_drives

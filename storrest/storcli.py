@@ -119,6 +119,8 @@ class Storcli(object):
                 'sector_size': sector_size,
                 'allocated': allocated,
                 'state': storutils.parse_phys_drive_state(drive_dat['State']),
+                'medium': drive_dat.get('Med'),
+                'interface': drive_dat.get('Intf'),
                 'model': drive_dat['Model']}
 
     def _parse_physical_drives(self, data):
