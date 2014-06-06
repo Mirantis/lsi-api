@@ -111,6 +111,7 @@ class Storcli(object):
         drive_group, allocated = parse_drive_group(drive_dat['DG'])
         sector_size = storutils.parse_sector_size(drive_dat['SeSz'])
         size = storutils.parse_drive_size(drive_dat['Size'])
+
         return {'controller_id': controller,
                 'enclosure': int(enclosure),
                 'slot': int(slot),
@@ -145,6 +146,8 @@ class Storcli(object):
         read_ahead, write_cache, io_policy = \
                 storutils.parse_cache_flags(vdrive_dat['Cache'])
         state = storutils.parse_state(vdrive_dat['State'])
+        ssd_caching = vdrive_dat.get('Cac') == 'RW'
+
         return {'controller_id': controller,
                 'virtual_drive': int(virtual_drive),
                 'drive_group': int(drive_group),
@@ -157,6 +160,7 @@ class Storcli(object):
                 'read_ahead': read_ahead,
                 'write_cache': write_cache,
                 'io_policy': io_policy,
+                'ssd_caching': ssd_caching,
                 }
 
     def _parse_virtual_drives(self, data):

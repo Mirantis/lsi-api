@@ -334,6 +334,7 @@ class StorcliTest(unittest.TestCase):
                     'consistent': False,
                     'read_ahead': True,
                     'write_cache': 'wb',
+                    'ssd_caching': False,
                     'io_policy': 'direct'}]
             drive_group = vds[0]['drive_group']
             physical_drives = [d for d in self.expected_physical_drives

@@ -86,6 +86,7 @@ GET /v0.5/controllers/${controller_id}/virtualdevices
   "io_policy": "direct",
   # possible values: optimal, partially_degraded, degraded, offline
   "state": "optimal",
+  "ssd_caching": false,
   "physical_drives": [PD_LIST]}
 
 Complete example:
@@ -103,6 +104,7 @@ Complete example:
   "io_policy": "direct",
   # possible values: optimal, partially_degraded, degraded, offline
   "state": "optimal",
+  "ssd_caching": false,
   "physical_drives": [{"controller_id": 0,
                        "enclosure": 252,
                        "slot": 0,
@@ -162,6 +164,7 @@ Returned data: object describing the newly created virtual drive. Example:
   "write_cache": "wb",
   "io_policy": "direct",
   "state": "optimal",
+  "ssd_caching": false,
   "physical_drives": [{"controller_id": 0,
                        "enclosure": 252,
                        "slot": 0,
@@ -303,6 +306,7 @@ Complete example:
 	 "io_policy": "direct",
 	 # possible values: optimal, partially_degraded, degraded, offline
 	 "state": "optimal",
+	 "ssd_caching": false,
 	 "physical_drives": [{"controller_id": 0,
 			      "enclosure": 252,
 			      "slot": 0,
