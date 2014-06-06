@@ -11,7 +11,7 @@ if 'check_output' not in dir(subprocess):
     from storcompat import patch_subprocess
     patch_subprocess(subprocess)
 
-STORCLI_CMD = '/opt/MegaRAID/storcli/storcli64'.split()
+STORCLI_CMD = '/opt/MegaRAID/nytrocli/nytrocli64'.split()
 SOMETHING_BAD_HAPPEND = 42
 NO_SUCH_VDRIVE = SOMETHING_BAD_HAPPEND
 MULTIPLE_VDS_FOR_SAME_PDS = SOMETHING_BAD_HAPPEND
