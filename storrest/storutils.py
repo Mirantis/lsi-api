@@ -73,6 +73,16 @@ def parse_cache_flags(flags):
     return (read_ahead, write_cache, io_policy)
 
 
+def vd_raid_type(vd):
+    raid_level = vd['raid_level'].lower()
+    if raid_level.startswith('nytro'):
+        return 'nytrocache'
+    elif raid_level.startswith('cache'):
+        return 'cachecade'
+    else:
+        return None
+
+
 def parse_state(arg):
     smap = {'Optl': 'optimal',
             'OfLn': 'offline',

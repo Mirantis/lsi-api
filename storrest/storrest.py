@@ -103,6 +103,12 @@ class VirtualDrivesView(object):
 class CachecadeView(object):
     @jsonize
     @dumb_error_handler
+    def GET(self, controller_id, raid_type):
+        return get_storcli().virtual_drives(controller_id,
+                                            raid_type=raid_type)
+
+    @jsonize
+    @dumb_error_handler
     def POST(self, controller_id, raid_type):
         raw_data = web.data()
         data = json.loads(raw_data)
@@ -143,6 +149,13 @@ class VirtualDriveDetails(object):
 
 
 class CachecadeDetails(object):
+    @jsonize
+    @dumb_error_handler
+    def GET(self, controller_id, raid_type, virtual_drive_id):
+        return get_storcli.\
+            virtual_drive_details(controller_id, virtual_drive_id,
+                                  raid_type=raid_type)
+
     @jsonize
     @dumb_error_handler
     def DELETE(self, controller_id, raid_type, virtual_drive_id):

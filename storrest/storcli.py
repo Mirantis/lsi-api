@@ -5,7 +5,7 @@ import json
 import subprocess
 
 import storutils
-from storutils import strlst
+from storutils import *
 
 if 'check_output' not in dir(subprocess):
     from storcompat import patch_subprocess
@@ -193,9 +193,11 @@ class Storcli(object):
             ret.extend(vdrives)
         return sorted(ret)
 
-    def virtual_drive_details(self, controller_id, virtual_drive_id):
+    def virtual_drive_details(self, controller_id, virtual_drive_id,
+                              raid_type=None):
         vdrives = [d for d in self.virtual_drives(controller_id=controller_id)
-                   if d['virtual_drive'] == virtual_drive_id]
+                   if d['virtual_drive'] == virtual_drive_id and raid_type ==
+                   vd_raid_type(vd)]
         try:
             return vdrives[0]
         except IndexError:
@@ -203,9 +205,13 @@ class Storcli(object):
             raise StorcliError(msg.format(controller_id, virtual_drive_id),
                                error_code=NO_SUCH_VDRIVE)
 
-    def virtual_drives(self, controller_id=None):
+    def virtual_drives(self, controller_id=None, raid_type=None):
         cmd = '/c{0} show'.format(controller_id or 'all')
-        return self._parse_virtual_drives(self._run(cmd.split()))
+        vds = self._parse_virtual_drives(self._run(cmd.split()))
+        raid_type = self._validate_raid_type(raid_type)
+        if raid_type:
+            vds = [vd for vd in vds if vd_raid_type(vd) == raid_type]
+        return sorted(vds)
 
     def delete_virtual_drive(self, controller_id, virtual_drive_id,
                              force=False, raid_type=None):
