@@ -99,6 +99,12 @@ class VirtualDrivesView(object):
         params = dict([(k, data.get(k)) for k in param_names])
         return self.storcli.create_virtual_drive(data['drives'], **params)
 
+    @jsonize
+    @dumb_error_handler
+    def DELETE(self, controller_id):
+        return get_storcli().\
+            delete_virtual_drive(controller_id, 'all', force=True)
+
 
 class CachecadeView(object):
     @jsonize

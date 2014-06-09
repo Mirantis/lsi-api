@@ -9,7 +9,7 @@ Get the controller details (virtual and physical drives).
 Create a virtual drive.
 Create cachecade/nytrocache device. [Not implemented yet]
 Delete a virtual drive.
-Delete all virtual drives defined by the controler. [Not implemented yet]
+Delete all virtual drives defined by the controler.
 Delete cachecade/nytrocache device. [Not implemented yet]
 Update the virtual drive parameters (name, write cache, IO policy, read cache, SSD caching).
 Add a hot spare drive (either dedicated or a global one).
