@@ -139,7 +139,14 @@ class Storcli(object):
         return self._parse_physical_drives(data)
 
     def _parse_virtual_drive(self, controller, vdrive_dat):
-        drive_group, virtual_drive = vdrive_dat['DG/VD'].split('/')
+        try:
+            drive_group, virtual_drive = vdrive_dat['DG/VD'].split('/')
+        except AttributeError:
+            # XXX: sometimes nytrocli puts an integer here
+            if isinstance(vdrive_dat['DG/VD'], int):
+                drive_group = virtual_drive = vdrive_dat['DG/VD']
+            else:
+                raise
         size = storutils.parse_drive_size(vdrive_dat['Size'])
         raid_level = storutils.parse_raid_level(vdrive_dat['TYPE'])
         consistent = vdrive_dat['Consist'].lower() == 'yes'
