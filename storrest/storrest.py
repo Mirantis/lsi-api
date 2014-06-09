@@ -12,6 +12,7 @@ urls = (
     '/v0.5/controllers/([0-9]+)/virtualdevices', 'VirtualDrivesView',
     '/v0.5/controllers/([0-9]+)/virtualdevices/([0-9]+)', 'VirtualDriveDetails',
     '/v0.5/controllers/(\d+)/physicaldevices/(\d+)/(\d+)/hotspare', 'HotspareOps',
+    '/v0.5/controllers/(\d+)/virtualdevices/((?:cachecade)|(?:nytrocache))', 'CachecadeView',
 )
 
 CFG = {
@@ -96,6 +97,20 @@ class VirtualDrivesView(object):
                        'name', 'read_ahead', 'write_cache', 'io_policy')
         params = dict([(k, data.get(k)) for k in param_names])
         return self.storcli.create_virtual_drive(data['drives'], **params)
+
+
+class CachecadeView(object):
+    @jsonize
+    @dumb_error_handler
+    def POST(self, controller_id, raid_type):
+        raw_data = web.data()
+        data = json.loads(raw_data)
+        params = {'raid_level': data.get('raid_level', 0),
+                  'raid_type': raid_type,
+                  'name': data.get('name'),
+                  }
+        web.ctx.status = '201 Created'
+        return get_storcli().create_virtual_drive(data['drives'], **params)
 
 
 class VirtualDriveDetails(object):

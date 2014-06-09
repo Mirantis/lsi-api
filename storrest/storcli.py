@@ -235,6 +235,10 @@ class Storcli(object):
             error_code = MULTIPLE_VDS_FOR_SAME_PDS
         raise StorcliError(msg % pdrives_ids, error_code=error_code)
 
+    def _validate_raid_type(self, raid_type):
+        funky_raid_types = ['cachecade', 'nytrocache']
+        return raid_type if raid_type in funky_raid_types else ''
+
     def create_virtual_drive(self, physical_drives,
                              spare_drives=None,
                              raid_level=0,
@@ -242,7 +246,8 @@ class Storcli(object):
                              name=None,
                              read_ahead=None,
                              write_cache=None,
-                             io_policy=None):
+                             io_policy=None,
+                             raid_type=None):
         def fmt_drives_info(drives):
             enclosure = drives[0]['enclosure']
             slots = ','.join(['%(slot)s' % d for d in drives])
@@ -255,11 +260,14 @@ class Storcli(object):
             if raid_level in tbl:
                 cmd.append('PDperArray=%s' % tbl[raid_level])
 
-        cmd = '/c{controller} add vd r{raid_level} {name} drives={drives}'
+        raid_type = self._validate_raid_type(raid_type)
+
+        cmd = '/c{controller} add vd {raid_type} r{raid_level} {name} drives={drives}'
         params = {'controller': physical_drives[0]['controller_id'],
                   'raid_level': raid_level,
                   'drives': fmt_drives_info(physical_drives),
                   'name': 'name=%s' % name if name else '',
+                  'raid_type': raid_type,
                   }
         cmd = cmd.format(**params).split()
         guess_pd_per_array(raid_level, cmd)
