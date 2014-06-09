@@ -325,20 +325,21 @@ class Storcli(object):
 
         virtual_drives list of virtual drives IDs
         """
-        if virtual_drives is None:
-            return
         if pdrive is None:
             pdrive = {'controller_id': controller_id,
                       'enclosure': enclosure,
                       'slot': slot}
         else:
             controller_id = pdrive['controller_id']
-        drive_groups = [vd['drive_group'] for vd in
-                        self.virtual_drives(controller_id)
-                        if vd['virtual_drive'] in virtual_drives]
-        cmd = '/c{controller_id}/e{enclosure}/s{slot} add hotsparedrive dgs={0}'
-        cmd = cmd.format(strlst(drive_groups), **pdrive)
-        return self._run(cmd.split())
+        cmd = '/c{controller_id}/e{enclosure}/s{slot} add hotsparedrive'
+        cmd = cmd.format(**pdrive).split()
+        if virtual_drives:
+            drive_groups = [vd['drive_group'] for vd in
+                            self.virtual_drives(controller_id)
+                            if vd['virtual_drive'] in virtual_drives]
+            cmd.append('dgs=%s' % strlst(drive_groups))
+        print('add_hotspare_drive: running command: %s' % ' '.join(cmd))
+        return self._run(cmd)
 
     def delete_hotspare_drive(self, drive=None,
                               controller_id=None,

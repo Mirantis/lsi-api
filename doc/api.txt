@@ -277,7 +277,7 @@ vd1_id, vd2_id, and so on). Note that the virtual drives and the physical
 drive in question must reside on the same controller.
 
 If no virtual drives is specified than the physical drive is configured as
-a global hot spare. [Note: adding global hot spare drive is not implemented yet]
+a global hot spare.
 
 
 Remove (unassign) the hot spare drive.

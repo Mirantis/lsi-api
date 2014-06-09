@@ -171,13 +171,18 @@ class CachecadeDetails(object):
                                  raid_type=raid_type)
 
 
-class HotSpareOps(object):
+class HotspareOps(object):
     @jsonize
     @dumb_error_handler
     def POST(self, controller_id, enclosure, slot):
-        data = json.loads(web.data())
+        try:
+            data = json.loads(web.data())
+            virtual_drives = data.get('virtual_drives')
+        except:
+            virtual_drives = None
+
         return get_storcli().\
-            add_hotspare_drive(data.get('virtual_drives'),
+            add_hotspare_drive(virtual_drives,
                                controller_id=controller_id,
                                enclosure=enclosure,
                                slot=slot)
