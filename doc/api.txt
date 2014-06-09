@@ -7,10 +7,10 @@ Enumerate the physical drives attached to the controller.
 Enumerate the virtual drives defined by the controller.
 Get the controller details (virtual and physical drives).
 Create a virtual drive.
-Create cachecade/nytrocache device. [Not implemented yet]
+Create cachecade/nytrocache device.
 Delete a virtual drive.
 Delete all virtual drives defined by the controler.
-Delete cachecade/nytrocache device. [Not implemented yet]
+Delete cachecade/nytrocache device.
 Update the virtual drive parameters (name, write cache, IO policy, read cache, SSD caching).
 Add a hot spare drive (either dedicated or a global one).
 
@@ -232,9 +232,6 @@ Remove the cachecade/nytrocache device.
 DELETE /v0.5/controllers/${controller_id}/virtualdevices/cachecade/${virtual_drive_id}
 
 DELETE /v0.5/controllers/${controller_id}/virtualdevices/nytrocache/${virtual_drive_id}
-
-Note that nytrocache/cachecade is actually a virtual drive so it can be deleted as
-any other virtual drive.
 
 
 Remove all virtual drives defined by the controller.
