@@ -346,7 +346,6 @@ class Storcli(object):
                             self.virtual_drives(controller_id)
                             if vd['virtual_drive'] in virtual_drives]
             cmd.append('dgs=%s' % strlst(drive_groups))
-        print('add_hotspare_drive: running command: %s' % ' '.join(cmd))
         return self._run(cmd)
 
     def delete_hotspare_drive(self, drive=None,
