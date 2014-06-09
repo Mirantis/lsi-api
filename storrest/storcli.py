@@ -361,6 +361,14 @@ class Storcli(object):
         cmd = cmd.format(**drive)
         return self._run(cmd.split())
 
+    def create_warp_drive_vd(self, controller_id, overprovision=None):
+        cmd = '/c{0}/eall/sall start format'.format(controller_id).split()
+        overprovision = validate_percentage(overprovision)
+        if overprovision is not None:
+            cmd.append('overprovision=%s' % overprovision)
+        return self._run(cmd)
+
+
     #physical_drives=property(_physical_drives)
     @property
     def all_physical_drives(self):

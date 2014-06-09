@@ -8,6 +8,7 @@ Enumerate the virtual drives defined by the controller.
 Get the controller details (virtual and physical drives).
 Create a virtual drive.
 Create cachecade/nytrocache device.
+Create nytrowarpdrive virtual device.
 Delete a virtual drive.
 Delete all virtual drives defined by the controler.
 Delete cachecade/nytrocache device.
@@ -218,6 +219,18 @@ The expected data:
 
 Returned data: object describing the newly created virtual drive.
 [TODO: give an example here]
+
+
+Create nytrowarpdrive virtual device.
+-------------------------------------
+
+POST /v0.5/controllers/${controller_id}/virtualdevices/warpdrive
+
+Optional data:
+
+{"overprovision": int}
+
+The overprovision value must be in the [0, 100] range.
 
 
 Remove the virtual drive.

@@ -97,3 +97,16 @@ def parse_state(arg):
 
 def strlst(lst, separator=','):
     return separator.join((str(elt) for elt in lst))
+
+
+def validate_integer(val, interval):
+    try:
+        v = int(val)
+        val = v if interval[0] <= v <= interval[1] else None
+    except ValueError:
+        val = None
+    return val
+
+
+def validate_percentage(val):
+    return validate_integer(val, (0, 100))

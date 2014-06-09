@@ -14,6 +14,7 @@ urls = (
     '/v0.5/controllers/(\d+)/physicaldevices/(\d+)/(\d+)/hotspare', 'HotspareOps',
     '/v0.5/controllers/(\d+)/virtualdevices/((?:cachecade)|(?:nytrocache))', 'CachecadeView',
     '/v0.5/controllers/(\d+)/virtualdevices/((?:cachecade)|(?:nytrocache))/(\d+)', 'CachecadeDetails',
+    '/v0.5/controllers/(\d+)/virtualdevices/warpdrive', 'WarpdriveView'
 )
 
 CFG = {
@@ -169,6 +170,20 @@ class CachecadeDetails(object):
             delete_virtual_drive(controller_id,
                                  virtual_drive_id,
                                  raid_type=raid_type)
+
+
+class WarpdriveView(object):
+    @jsonize
+    @dumb_error_handler
+    def POST(self, controller_id):
+        try:
+            data = json.loads(web.data())
+            overprovision = data.get('overprovision')
+        except:
+            overprovision = None
+        return get_storcli().\
+            create_warp_drive_vd(controller_id,
+                                 overprovision=overprovision)
 
 
 class HotspareOps(object):
