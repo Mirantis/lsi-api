@@ -208,13 +208,17 @@ class Storcli(object):
         return self._parse_virtual_drives(self._run(cmd.split()))
 
     def delete_virtual_drive(self, controller_id, virtual_drive_id,
-                             force=False):
-        cmd = '/c%s/v%s del' % (controller_id, virtual_drive_id)
-        cmd = cmd.split()
-        if force:
-            cmd.append('force')
-        data = self._run(cmd)
-        return data
+                             force=False, raid_type=None):
+        cmd = '/c{controller_id}/v{virtual_drive_id} del {raid_type} {force}'
+        raid_type = self._validate_raid_type(raid_type)
+        if raid_type:
+            # force doesn't seem to work with cachecade/nytrocache
+            force = False
+        cmd = cmd.format(controller_id=controller_id,
+                         virtual_drive_id=virtual_drive_id,
+                         raid_type='cc' if raid_type else '',
+                         force='force' if force else '')
+        return self._run(cmd.split())
 
     def _find_virtual_drive_by_phisical(self, physical_drives):
         def physical_drives_ids(drives):

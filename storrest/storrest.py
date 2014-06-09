@@ -13,6 +13,7 @@ urls = (
     '/v0.5/controllers/([0-9]+)/virtualdevices/([0-9]+)', 'VirtualDriveDetails',
     '/v0.5/controllers/(\d+)/physicaldevices/(\d+)/(\d+)/hotspare', 'HotspareOps',
     '/v0.5/controllers/(\d+)/virtualdevices/((?:cachecade)|(?:nytrocache))', 'CachecadeView',
+    '/v0.5/controllers/(\d+)/virtualdevices/((?:cachecade)|(?:nytrocache))/(\d+)', 'CachecadeDetails',
 )
 
 CFG = {
@@ -139,6 +140,16 @@ class VirtualDriveDetails(object):
         return self.storcli.update_virtual_drive(int(controller_id),
                                                  int(virtual_drive_id),
                                                  **params)
+
+
+class CachecadeDetails(object):
+    @jsonize
+    @dumb_error_handler
+    def DELETE(self, controller_id, raid_type, virtual_drive_id):
+        return get_storcli().\
+            delete_virtual_drive(controller_id,
+                                 virtual_drive_id,
+                                 raid_type=raid_type)
 
 
 class HotSpareOps(object):
