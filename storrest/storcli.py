@@ -39,7 +39,7 @@ class Storcli(object):
                 raise StorcliError(status_obj.get('Description', 'Unknown'),
                                    error_code=error_code)
             ret[controller_id] = controller_out.get('Response Data', {})
-            return ret
+        return ret
 
     def _run(self, cmd):
         _cmd = []
