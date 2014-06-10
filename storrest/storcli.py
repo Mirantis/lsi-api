@@ -65,9 +65,9 @@ class Storcli(object):
 
     def _parse_controller_data(self, controller_id, dat):
         return {'controller_id': controller_id,
-                'pci_address': dat['PCI Address'],
-                'model': dat['Product Name'],
-                'serial_number': dat['Serial Number'],
+                'pci_address': dat.get('PCI Address'),
+                'model': dat.get('Product Name'),
+                'serial_number': dat.get('Serial Number'),
                 'enclosures': self._enclosures(controller_id)}
 
     def _enclosures(self, controller_id):
