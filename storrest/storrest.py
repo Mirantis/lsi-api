@@ -5,6 +5,12 @@ import web
 
 import storcli
 
+try:
+    from storversion import storrest_git_version
+except ImportError:
+    from gitversion import get_git_version
+    storrest_git_version = get_git_version()
+
 urls = (
     '/v0.5/controllers', 'ControllersView',
     '/v0.5/controllers/((?:\d+)|(?:all))', 'ControllerDetails',
@@ -34,6 +40,7 @@ def dumb_error_handler(fcn):
         try:
             return {'error_code': 0,
                     'error_message': None,
+                    'storrest_version': storrest_git_version,
                     'data': fcn(*args, **kwargs)}
         except storcli.StorcliError, e:
             web.ctx.status = '500 Internal Server Error'
