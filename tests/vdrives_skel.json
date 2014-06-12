@@ -1,0 +1,43 @@
+[   {
+	"controller_id": 0,
+	"virtual_drive": 1,
+	"drive_group": 0,
+	"size": 96267396972,
+	"state": "optimal",
+	"raid_level": "NytroCache1",
+	"name": "Nytro_Cache_1",
+	"access": "rw",
+	"consistent": false,
+	"read_ahead": false,
+	"write_cache": "wb",
+	"io_policy": "direct"
+    },
+    {
+        "controller_id": 0,
+	"virtual_drive": 0,
+	"drive_group": 1,
+	"size": 146264037523,
+	"state": "optimal",
+	"raid_level": "1",
+	"name": "test_r1",
+	"access": "rw",
+	"consistent": false,
+	"read_ahead": true,
+	"write_cache": "wt",
+	"io_policy": "direct"
+    },
+    {
+        "controller_id": 1,
+	"virtual_drive": 0,
+	"drive_group": 0,
+	"size": 1597590395158,
+	"state": "optimal",
+	"raid_level": "0",
+	"name": "",
+	"access": "rw",
+	"consistent": false,
+	"read_ahead": false,
+	"write_cache": "wt",
+	"io_policy": "direct"
+    }
+]

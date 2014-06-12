@@ -1,4 +1,5 @@
 
+import json
 import os
 import sys
 
@@ -26,3 +27,11 @@ def add_top_srcdir_to_path():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     top_srcdir = os.path.abspath(os.path.join(script_dir, '..'))
     sys.path.insert(0, top_srcdir)
+
+
+def read_expected(name, raw=True):
+    script_dir = os.path.abspath(os.path.dirname(__file__))
+    filename = os.path.join(script_dir, name)
+    with open(filename, 'r') as f:
+        txt = '\n'.join((l for l in f))
+        return txt if raw else json.loads(txt)

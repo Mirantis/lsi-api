@@ -1,0 +1,44 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Properties" : [
+			{
+				"EID" : 62,
+				"State" : "OK",
+				"Slots" : 24,
+				"PD" : 23,
+				"PS" : 2,
+				"Fans" : 4,
+				"TSs" : 4,
+				"Alms" : 1,
+				"SIM" : 2,
+				"Port#" : "Port 0 - 3",
+				"ProdID" : "MD1220",
+				"VendorSpecific" : "J6LFC2S"
+			},
+			{
+				"EID" : 252,
+				"State" : "OK",
+				"Slots" : 8,
+				"PD" : 2,
+				"PS" : 0,
+				"Fans" : 0,
+				"TSs" : 0,
+				"Alms" : 0,
+				"SIM" : 1,
+				"Port#" : "Unavailable",
+				"ProdID" : "SGPIO",
+				"VendorSpecific" : " "
+			}
+		]
+	}
+}
+]
+}
+
