@@ -378,9 +378,13 @@ class Storcli(object):
 
     def create_warp_drive_vd(self, controller_id, overprovision=None):
         cmd = '/c{0}/eall/sall start format'.format(controller_id).split()
-        overprovision = validate_percentage(overprovision)
-        if overprovision is not None:
-            cmd.append('overprovision=%s' % overprovision)
+        possible_levels = ('nom', 'cap', 'perf')
+        if overprovision in possible_levels:
+            cmd.append('overprovision level=%s' % overprovision)
+        else:
+            overprovision = validate_percentage(overprovision)
+            if overprovision is not None:
+                cmd.append('overprovision=%s' % overprovision)
         return self._run(cmd)
 
 
