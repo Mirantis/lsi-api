@@ -64,11 +64,19 @@ class Storcli(object):
         return out
 
     def _parse_controller_data(self, controller_id, dat):
-        cinf = {'controller_id': controller_id,
-                'pci_address': dat.get('PCI Address'),
-                'model': dat.get('Product Name'),
-                'serial_number': dat.get('Serial Number'),
-                }
+        if 'Basics' in dat:
+            cinf = {'controller_id': controller_id,
+                    'pci_address': dat['Basics'].get('PCI Address'),
+                    'model': dat['Basics'].get('Model'),
+                    'serial_number': dat['Basics'].get('Serial Number'),
+                    }
+        else:
+            cinf = {'controller_id': controller_id,
+                    'pci_address': dat.get('PCI Address'),
+                    'model': dat.get('Product Name'),
+                    'serial_number': dat.get('Serial Number'),
+                    }
+
         # XXX: nytrocli errors out when trying to enumerate the enclosures
         # of Nytro WarpDrive (instead of givin an empty list)
         if cinf['model'].startswith('Nytro WarpDrive'):
@@ -84,7 +92,7 @@ class Storcli(object):
 
     @property
     def controllers(self):
-        data = self._run('/call show'.split())
+        data = self._run('/call show all'.split())
         return sorted([self._parse_controller_data(controller_id, dat)
                        for controller_id, dat in data.iteritems()])
 
