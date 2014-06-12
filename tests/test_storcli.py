@@ -22,7 +22,7 @@ class StorcliTest(unittest.TestCase):
         self.maxDiff = None
         self.patcher = mock.patch('storrest.storcli.subprocess')
         self.mock_subprocess = self.patcher.start()
-        self.mock_subprocess.check_output.return_value = STORCLI_SHOW
+        self.mock_subprocess.check_output.return_value = STORCLI_SHOW_ALL
         self.storcli = storrest.storcli.Storcli()
         self._expected_virtual_drives = None
         self._expected_physical_drives = None
@@ -38,6 +38,7 @@ class StorcliTest(unittest.TestCase):
                              'serial_number': '123456789',
                              'enclosures': [],
                              }]
+        self.controllers = sorted(self.controllers)
 
     def tearDown(self):
         super(StorcliTest, self).tearDown()
@@ -85,8 +86,9 @@ class StorcliTest(unittest.TestCase):
     def test_controller_details(self):
         self.mock_subprocess.check_output.side_effect = MultiReturnValues([
             STORCLI_SHOW_ALL, STORCLI_ENCLOSURES_SHOW])
-        expected = self.controllers[0]
-        controller_id = expected['controller_id']
+        controller_id = 0
+        expected = [c for c in self.controllers
+                    if c['controller_id'] == controller_id][0]
         expected['physical_drives'] = \
             sorted([d for d in self.expected_physical_drives
                     if d['controller_id'] == controller_id])
