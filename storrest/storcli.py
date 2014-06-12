@@ -76,6 +76,7 @@ class Storcli(object):
         else:
             enclosures = self._enclosures(controller_id)
         cinf['enclosures'] = enclosures
+        cinf['capabilities'] = self._controller_capabilities(dat)
         return cinf
 
     def _enclosures(self, controller_id):
@@ -87,6 +88,13 @@ class Storcli(object):
         data = self._run('/call show all'.split())
         return sorted([self._parse_controller_data(controller_id, dat)
                        for controller_id, dat in data.iteritems()])
+
+    def _controller_capabilities(self, dat):
+        caps = dat.get('Capabilities')
+        if not caps:
+            return {'max_cachecade_size': 0, }
+        max_cachecade_size = caps.get('Max Configurable CacheCade Size', 0)
+        return {'max_cachecade_size': max_cachecade_size, }
 
     def controller_details(self, controller_id):
         data = self._run('/c{0} show'.format(controller_id or 'all').split())

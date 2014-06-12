@@ -38,7 +38,11 @@ GET /v0.5/controllers
   "model": "LSI MegaRAID SAS 9260-4i",
   "pci_address": "00:06:00:00",
   "serial_number": "SV24603934",
-  "enclosures": [252]}]
+  "enclosures": [252],
+  "capabilities": {
+    "max_cachecade_size": 1024
+  }
+  }]
 
 
 Enumerate physical drives attached to the controller.
@@ -309,6 +313,9 @@ GET /v0.5/controllers/${controller_id}
  "serial_number": "string",
  "model": "string",
  "enclosures": [ID_LIST],
+ "capabilities": {
+    "max_cachecade_size": 1024
+ },
  "physical_drives": [PD_LIST],
  "virtual_drives": [VD_LIST]
 }

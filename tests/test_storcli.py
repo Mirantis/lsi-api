@@ -31,12 +31,14 @@ class StorcliTest(unittest.TestCase):
                              'model': 'Nytro MegaRAID8100-4i',
                              'serial_number': '',
                              'enclosures': [62, 252],
+                             'capabilities': {'max_cachecade_size': 1024, },
                              },
                             {'controller_id': 1,
                              'pci_address': None,
                              'model': "Nytro WarpDrive XP6210-4A2048",
                              'serial_number': '123456789',
                              'enclosures': [],
+                             'capabilities': {'max_cachecade_size': 0, },
                              }]
         self.controllers = sorted(self.controllers)
 
