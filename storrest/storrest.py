@@ -103,7 +103,8 @@ class VirtualDrivesView(object):
         data = json.loads(raw_data)
         web.ctx.status = '201 Created'
         param_names = ('raid_level', 'spare_drives', 'strip_size',
-                       'name', 'read_ahead', 'write_cache', 'io_policy')
+                       'name', 'read_ahead', 'write_cache', 'io_policy',
+                       'ssd_caching')
         params = dict([(k, data.get(k)) for k in param_names])
         return self.storcli.create_virtual_drive(data['drives'], **params)
 
@@ -155,7 +156,8 @@ class VirtualDriveDetails(object):
     @dumb_error_handler
     def POST(self, controller_id, virtual_drive_id):
         data = json.loads(web.data())
-        param_names = ('name', 'read_ahead', 'write_cache', 'io_policy')
+        param_names = ('name', 'read_ahead', 'write_cache', 'io_policy',
+                       'ssd_caching')
         params = dict([(k, data.get(k)) for k in param_names])
         return self.storcli.update_virtual_drive(int(controller_id),
                                                  int(virtual_drive_id),

@@ -163,7 +163,8 @@ Complete example:
  # optional, valid values: "wb", "wt"
  "write_cache": "wb"
  # optional, valid values: "direct", "cached"
- "io_policy": "direct"
+ "io_policy": "direct",
+ "ssd_caching": true
  }
 
 Returned data: object describing the newly created virtual drive. Example:
@@ -275,8 +276,7 @@ The expected data:
  "ssd_caching": true
 }
 
-At least one parameter must be specified. [Note: SSD caching manipulation is
-not implemented yet]
+At least one parameter must be specified.
 
 
 Add a hot spare drive to a  virtual drive(s).

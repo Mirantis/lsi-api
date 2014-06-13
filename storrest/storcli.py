@@ -277,6 +277,7 @@ class Storcli(object):
                              spare_drives=None,
                              raid_level=0,
                              strip_size=None,
+                             ssd_caching=None,
                              name=None,
                              read_ahead=None,
                              write_cache=None,
@@ -315,6 +316,8 @@ class Storcli(object):
             cmd.append(io_policy)
         if spare_drives:
             cmd.append('Spares=%s' % fmt_drives_info(spare_drives))
+        if ssd_caching:
+            cmd.append('cachevd')
 
         self._run(cmd)
         return self._find_virtual_drive_by_phisical(physical_drives +
@@ -324,7 +327,8 @@ class Storcli(object):
                              name=None,
                              write_cache=None,
                              io_policy=None,
-                             read_ahead=None):
+                             read_ahead=None,
+                             ssd_caching=None):
         cmd = '/c{0}/v{1} set'.format(controller_id, virtual_drive_id).split()
         if io_policy in ['direct', 'cached']:
             cmd.append('iopolicy=%s' % io_policy)
@@ -334,6 +338,8 @@ class Storcli(object):
             cmd.append('wrcache=%s' % write_cache)
         if read_ahead is not None:
             cmd.append('rdcache=%s' % ('RA' if read_ahead else 'NoRA'))
+        if ssd_caching is not None:
+            cmd.append('ssdcaching=%s' % ('on' if ssd_caching else 'off'))
 
         return self._run(cmd)
 
