@@ -41,7 +41,7 @@ class Storcli(object):
             ret[controller_id] = controller_out.get('Response Data', {})
         return ret
 
-    def _run(self, cmd):
+    def _run(self, cmd, permissive=False):
         _cmd = []
         _cmd.extend(self.storcli_cmd)
         _cmd.extend(cmd)
@@ -58,6 +58,13 @@ class Storcli(object):
                              errno=oe.errno,
                              strerror=oe.strerror)
             raise StorcliError(msg, error_code=oe.errno)
+
+        def skip_nytrocli_debug_messages(s):
+            paren_idx = s.find('{')
+            return s[paren_idx:] if paren_idx != -1 else s
+
+        if permissive:
+            raw_out = skip_nytrocli_debug_messages(raw_out)
 
         out = json.loads(raw_out)
         out = self._extract_storcli_data(out, error_code)
@@ -391,8 +398,7 @@ class Storcli(object):
             overprovision = validate_percentage(overprovision)
             if overprovision is not None:
                 cmd.append('overprovision=%s' % overprovision)
-        return self._run(cmd)
-
+        return self._run(cmd, permissive=True)
 
     #physical_drives=property(_physical_drives)
     @property
