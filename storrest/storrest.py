@@ -3,7 +3,7 @@
 import json
 import web
 
-import storcli
+from storcli import Storcli
 
 try:
     from storversion import storrest_git_version
@@ -32,7 +32,7 @@ app = web.application(urls, globals())
 
 def get_storcli():
     print('get_storcli: storcli_command: %s' % CFG['storcli_command'])
-    return storcli.Storcli(storcli_cmd=CFG['storcli_command'])
+    return Storcli(storcli_cmd=CFG['storcli_command'])
 
 
 def dumb_error_handler(fcn):
