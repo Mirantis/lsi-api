@@ -104,7 +104,8 @@ class Storcli(object):
         return {'max_cachecade_size': max_cachecade_size, }
 
     def controller_details(self, controller_id):
-        data = self._run('/c{0} show'.format(controller_id or 'all').split())
+        cmd = '/c{0} show all'.format(controller_id or 'all')
+        data = self._run(cmd.split())
 
         def _controller_details(cid, dat):
             details = self._parse_controller_data(cid, dat)
