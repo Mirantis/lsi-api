@@ -156,9 +156,8 @@ class Storcli(object):
             ret.extend(drives)
         return sorted(ret)
 
-    def physical_drives(self, controller=None):
-        controller = controller or 'all'
-        cmd = '/c%s show' % controller
+    def physical_drives(self, controller_id=None):
+        cmd = '/c{0} show'.format(controller_id or 'all')
         data = self._run(cmd.split())
         return self._parse_physical_drives(data)
 

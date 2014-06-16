@@ -84,7 +84,7 @@ class PhysicalDrivesView(object):
     @jsonize
     @dumb_error_handler
     def GET(self, controller_id=None):
-        return self.storcli.physical_drives(controller=controller_id)
+        return self.storcli.physical_drives(controller_id=controller_id)
 
 
 class VirtualDrivesView(object):
