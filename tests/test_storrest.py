@@ -16,14 +16,27 @@ import storrest.storrest
 class StorrestTest(unittest.TestCase):
     api_version = 'v0.5'
     dummy_data = {'foo': 'bar'}
+    dummy_error_code = 42
+    dummy_error_msg = 'FooBar'
 
     def setUp(self):
         super(StorrestTest, self).setUp()
         self.app = storrest.storrest.app
 
-    def verify_reply(self, request):
+    def prepare(self, mock_object, positive=True):
+        mock_object.return_value = self.dummy_data
+        if not positive:
+            mock_object.side_effect = storrest.storcli.StorcliError(
+                msg=self.dummy_error_msg,
+                error_code=self.dummy_error_code)
+
+    def verify_reply(self, request, positive=True):
         reply = json.loads(request.data)
-        self.assertEqual(reply['data'], self.dummy_data)
+        if positive:
+            self.assertEqual(reply['data'], self.dummy_data)
+        else:
+            self.assertEqual(reply['error_code'], self.dummy_error_code)
+            self.assertEqual(reply['error_message'], self.dummy_error_msg)
 
     @mock.patch.object(storrest.storcli.Storcli, 'controller_details')
     def test_controllers(self, mock_obj):
@@ -65,9 +78,8 @@ class StorrestTest(unittest.TestCase):
         self.verify_reply(request)
         mock_obj.assert_called_once_with(controller_id, virtual_drive_id)
 
-    @mock.patch.object(storrest.storcli.Storcli, 'create_virtual_drive')
-    def test_create_virtual_drive(self, mock_obj):
-        mock_obj.return_value = self.dummy_data
+    def _create_virtual_drive(self, mock_obj, positive=True):
+        self.prepare(mock_obj, positive=positive)
         controller_id = 0
         url = '/{0}/controllers/{1}/virtualdevices'.format(
             self.api_version,
@@ -79,12 +91,20 @@ class StorrestTest(unittest.TestCase):
             'name': 'test_r1'
         }
         request = self.app.request(url, method='POST', data=json.dumps(data))
-        self.verify_reply(request)
+        self.verify_reply(request, positive=positive)
         param_names = ('raid_level', 'spare_drives', 'strip_size',
                        'name', 'read_ahead', 'write_cache', 'io_policy',
                        'ssd_caching')
         params = dict([(k, data.get(k)) for k in param_names])
         mock_obj.assert_called_once_with(data['drives'], **params)
+
+    @mock.patch.object(storrest.storcli.Storcli, 'create_virtual_drive')
+    def test_create_virtual_drive(self, mock_obj):
+        self._create_virtual_drive(mock_obj)
+
+    @mock.patch.object(storrest.storcli.Storcli, 'create_virtual_drive')
+    def test_create_virtual_drive_fail(self, mock_obj):
+        self._create_virtual_drive(mock_obj, positive=False)
 
     @mock.patch.object(storrest.storcli.Storcli, 'delete_virtual_drive')
     def test_delete_virtual_drive(self, mock_obj):

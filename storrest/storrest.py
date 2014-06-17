@@ -3,7 +3,7 @@
 import json
 import web
 
-from storcli import Storcli
+from storcli import Storcli, StorcliError
 
 try:
     from storversion import storrest_git_version
@@ -42,7 +42,7 @@ def dumb_error_handler(fcn):
                     'error_message': None,
                     'storrest_version': storrest_git_version,
                     'data': fcn(*args, **kwargs)}
-        except storcli.StorcliError, e:
+        except StorcliError, e:
             web.ctx.status = '500 Internal Server Error'
             return {'error_code': e.error_code,
                     'error_message': e.message,
