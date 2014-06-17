@@ -100,6 +100,8 @@ GET /v0.5/controllers/${controller_id}/virtualdevices
   "io_policy": "direct",
   # possible values: optimal, partially_degraded, degraded, offline
   "state": "optimal",
+  # possible values: null, "rw", "r"
+  "ssd_caching_active": null,
   "physical_drives": [PD_LIST]}
 
 Complete example:
@@ -117,6 +119,7 @@ Complete example:
   "io_policy": "direct",
   # possible values: optimal, partially_degraded, degraded, offline
   "state": "optimal",
+  "ssd_caching_active": null,
   "physical_drives": [{"controller_id": 0,
                        "enclosure": 252,
                        "slot": 0,

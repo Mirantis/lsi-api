@@ -183,6 +183,14 @@ class Storcli(object):
         read_ahead, write_cache, io_policy = \
                 storutils.parse_cache_flags(vdrive_dat['Cache'])
         state = storutils.parse_state(vdrive_dat['State'])
+
+        def _ssd_caching_active(vdrive_dat):
+            val = vdrive_dat.get('Cac')
+            if val is None or val == '-':
+                return None
+            else:
+                return val.lower()
+
         return {'controller_id': controller,
                 'virtual_drive': int(virtual_drive),
                 'drive_group': int(drive_group),
@@ -195,6 +203,7 @@ class Storcli(object):
                 'read_ahead': read_ahead,
                 'write_cache': write_cache,
                 'io_policy': io_policy,
+                'ssd_caching_active': _ssd_caching_active(vdrive_dat),
                 }
 
     def _parse_virtual_drives(self, data):

@@ -10,7 +10,8 @@
 	"consistent": false,
 	"read_ahead": false,
 	"write_cache": "wb",
-	"io_policy": "direct"
+	"io_policy": "direct",
+	"ssd_caching_active": null
     },
     {
         "controller_id": 0,
@@ -24,7 +25,8 @@
 	"consistent": false,
 	"read_ahead": true,
 	"write_cache": "wt",
-	"io_policy": "direct"
+	"io_policy": "direct",
+	"ssd_caching_active": null
     },
     {
         "controller_id": 1,
@@ -38,6 +40,7 @@
 	"consistent": false,
 	"read_ahead": false,
 	"write_cache": "wt",
-	"io_policy": "direct"
+	"io_policy": "direct",
+	"ssd_caching_active": null
     }
 ]
