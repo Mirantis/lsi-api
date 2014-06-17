@@ -132,7 +132,10 @@ class Storcli(object):
                 try:
                     drive_group = int(raw_dg)
                 except ValueError:
-                    drive_group = [int(dg) for dg in raw_dg.split(',')]
+                    try:
+                        drive_group = [int(dg) for dg in raw_dg.split(',')]
+                    except ValueError:
+                        drive_group = raw_dg
             return drive_group, allocated
 
         drive_group, allocated = parse_drive_group(drive_dat['DG'])
