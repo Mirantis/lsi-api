@@ -74,16 +74,24 @@ class StorcliTest(unittest.TestCase):
     def test_physical_drives(self):
         actual = sorted(self.storcli.all_physical_drives)
         self.assertEqual(actual, self.expected_physical_drives)
+        self.verify_storcli_commands(('{storcli_cmd} /call show J',))
 
     def test_virtual_drives(self):
         actual = sorted(self.storcli.all_virtual_drives)
         self.assertEqual(actual, self.expected_virtual_drives)
+        self.verify_storcli_commands(('{storcli_cmd} /call show J',))
 
     def test_controllers(self):
         self.mock_subprocess.check_output.side_effect = MultiReturnValues([
             STORCLI_SHOW_ALL, STORCLI_ENCLOSURES_SHOW])
         actual = self.storcli.controllers
         self.assertEqual(actual, self.controllers)
+        expected_commands = (
+            '{storcli_cmd} /call show all J',
+            # controller 1 is NytroWarpDrive and has no enclosures
+            '{storcli_cmd} /c0/eall show J'
+        )
+        self.verify_storcli_commands(expected_commands)
 
     def test_controller_details(self):
         self.mock_subprocess.check_output.side_effect = MultiReturnValues([
@@ -97,10 +105,24 @@ class StorcliTest(unittest.TestCase):
         expected['virtual_drives'] = \
             sorted([vd for vd in self.expected_virtual_drives
                     if vd['controller_id'] == controller_id])
+
         actual = self.storcli.controller_details(controller_id=controller_id)
         actual['physical_drives'] = sorted(actual['physical_drives'])
         actual['virtual_drives'] = sorted(actual['virtual_drives'])
         self.assertEqual(actual, expected)
+        expected_commands = (
+            '{storcli_cmd} /c{controller_id} show all J',
+            '{storcli_cmd} /c{controller_id}/eall show J'
+        )
+        self.verify_storcli_commands(expected_commands,
+                                     controller_id=controller_id)
+
+    def verify_storcli_commands(self, expected_commands, **kwargs):
+        kwargs['storcli_cmd'] = ' '.join(self.storcli.storcli_cmd)
+        expected_calls = [((cmd.format(**kwargs).split(), ), {})
+                          for cmd in expected_commands]
+        actual_calls = self.mock_subprocess.check_output.call_args_list
+        self.assertEqual(actual_calls, expected_calls)
 
 
 if __name__ == '__main__':
