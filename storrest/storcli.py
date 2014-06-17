@@ -104,7 +104,9 @@ class Storcli(object):
         return {'max_cachecade_size': max_cachecade_size, }
 
     def controller_details(self, controller_id):
-        cmd = '/c{0} show all'.format(controller_id or 'all')
+        if controller_id is None:
+            controller_id = 'all'
+        cmd = '/c{0} show all'.format(controller_id)
         data = self._run(cmd.split())
 
         def _controller_details(cid, dat):
@@ -157,7 +159,9 @@ class Storcli(object):
         return sorted(ret)
 
     def physical_drives(self, controller_id=None):
-        cmd = '/c{0} show'.format(controller_id or 'all')
+        if controller_id is None:
+            controller_id = 'all'
+        cmd = '/c{0} show'.format(controller_id)
         data = self._run(cmd.split())
         return self._parse_physical_drives(data)
 
@@ -237,7 +241,9 @@ class Storcli(object):
                                error_code=NO_SUCH_VDRIVE)
 
     def virtual_drives(self, controller_id=None, raid_type=None):
-        cmd = '/c{0} show'.format(controller_id or 'all')
+        if controller_id is None:
+            controller_id = 'all'
+        cmd = '/c{0} show'.format(controller_id)
         vds = self._parse_virtual_drives(self._run(cmd.split()))
         raid_type = self._validate_raid_type(raid_type)
         if raid_type:
