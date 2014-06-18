@@ -298,6 +298,16 @@ class Storcli(object):
         funky_raid_types = ['cachecade', 'nytrocache']
         return raid_type if raid_type in funky_raid_types else ''
 
+    def _validate_physical_drives(self, pdrives):
+        try:
+            return [{'controller_id': int(pd['controller_id']),
+                     'enclosure': int(pd['enclosure']),
+                     'slot': int(pd['slot'])}
+                    for pd in pdrives]
+        except:
+            raise StorcliError(error_code=SOMETHING_BAD_HAPPEND,
+                               msg='Invalid physical drives specified')
+
     def create_virtual_drive(self, physical_drives,
                              spare_drives=None,
                              raid_level=0,
@@ -321,6 +331,7 @@ class Storcli(object):
                 cmd.append('PDperArray=%s' % tbl[raid_level])
 
         raid_type = self._validate_raid_type(raid_type)
+        physical_drives = self._validate_physical_drives(physical_drives)
 
         cmd = '/c{controller} add vd {raid_type} r{raid_level} {name} drives={drives}'
         params = {'controller': physical_drives[0]['controller_id'],

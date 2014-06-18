@@ -182,8 +182,8 @@ class StorcliTest(unittest.TestCase):
             enclosure = 62
             slots = (0, 1)
         elif raid_type == 'nytrocache':
-            enclosure = 252
-            slots = (4, 6)
+            enclosure = '252'
+            slots = ('4', 6)
 
         physical_drives = [{
             'controller_id': controller_id,
