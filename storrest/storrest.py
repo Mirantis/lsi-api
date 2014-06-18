@@ -130,6 +130,7 @@ class CachecadeView(object):
         params = {'raid_level': data.get('raid_level', 0),
                   'raid_type': raid_type,
                   'name': data.get('name'),
+                  'write_cache': data.get('write_cache'),
                   }
         web.ctx.status = '201 Created'
         return get_storcli().create_virtual_drive(data['drives'], **params)

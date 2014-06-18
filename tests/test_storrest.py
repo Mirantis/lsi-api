@@ -237,7 +237,8 @@ class StorrestTest(unittest.TestCase):
         mock_obj.assert_called_once_with(data['drives'],
                                          raid_level=data['raid_level'],
                                          raid_type=data['raid_type'],
-                                         name=data.get('name'))
+                                         name=data.get('name'),
+                                         write_cache=data.get('write_cache'))
 
     @mock.patch.object(storrest.storcli.Storcli, 'create_virtual_drive')
     def test_create_nytrocache(self, mock_obj):
