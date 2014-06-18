@@ -247,6 +247,30 @@ class StorrestTest(unittest.TestCase):
     def test_create_cachecade(self, mock_obj):
         self._nytrocache_create(mock_obj, 'cachecade')
 
+    def _nytrocache_delete(self, mock_obj, raid_type):
+        self.prepare(mock_obj)
+        url = '/{0}/controllers/{controller_id}/virtualdevices' \
+            '/{raid_type}/{virtual_drive_id}'
+        controller_id = '0'
+        virtual_drive_id = '1'
+        url = url.format(self.api_version,
+                         controller_id=controller_id,
+                         raid_type=raid_type,
+                         virtual_drive_id=virtual_drive_id)
+        request = self.app.request(url, method='DELETE')
+        self.verify_reply(request)
+        mock_obj.assert_called_once_with(controller_id,
+                                         virtual_drive_id,
+                                         raid_type=raid_type)
+
+    @mock.patch.object(storrest.storcli.Storcli, 'delete_virtual_drive')
+    def test_nytrocache_delete(self, mock_obj):
+        self._nytrocache_delete(mock_obj, 'nytrocache')
+
+    @mock.patch.object(storrest.storcli.Storcli, 'delete_virtual_drive')
+    def test_cachecade_delete(self, mock_obj):
+        self._nytrocache_delete(mock_obj, 'cachecade')
+
 
 if __name__ == '__main__':
     unittest.main()
