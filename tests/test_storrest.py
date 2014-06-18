@@ -187,6 +187,66 @@ class StorrestTest(unittest.TestCase):
                                          enclosure=str(enclosure),
                                          slot=str(slot))
 
+    def _nytrocache_details(self, mock_obj, raid_type):
+        self.prepare(mock_obj)
+        params = {
+            'controller_id': '0',
+            'raid_type': raid_type,
+            'virtual_drive_id': '1',
+        }
+        url = '/{0}/controllers/{controller_id}/virtualdevices' \
+            '/{raid_type}/{virtual_drive_id}'
+        url = url.format(self.api_version, **params)
+        request = self.app.request(url)
+        self.verify_reply(request)
+        mock_obj.assert_called_once_with(params['controller_id'],
+                                         params['virtual_drive_id'],
+                                         raid_type=raid_type)
+
+    @mock.patch.object(storrest.storcli.Storcli, 'virtual_drive_details')
+    def test_nytrocache_details(self, mock_obj):
+        self._nytrocache_details(mock_obj, 'nytrocache')
+
+    @mock.patch.object(storrest.storcli.Storcli, 'virtual_drive_details')
+    def test_cachecade_details(self, mock_obj):
+        self._nytrocache_details(mock_obj, 'cachecade')
+
+    def _nytrocache_create(self, mock_obj, raid_type):
+        self.prepare(mock_obj)
+        controller_id = 0
+        enclosure = 252
+        data = {
+            'raid_level': '1',
+            'raid_type': raid_type,
+            'name': 'FooBar',
+            'drives': [{'controller_id': controller_id,
+                        'enclosure': enclosure,
+                        'slot': 0},
+                       {'controller_id': controller_id,
+                        'enclosure': enclosure,
+                        'slot': 1}]
+        }
+        url = '/{0}/controllers/{controller_id}/virtualdevices/{raid_type}'
+        url = url.format(self.api_version,
+                         controller_id=controller_id,
+                         raid_type=raid_type)
+        request = self.app.request(url,
+                                   method='POST',
+                                   data=json.dumps(data))
+        self.verify_reply(request)
+        mock_obj.assert_called_once_with(data['drives'],
+                                         raid_level=data['raid_level'],
+                                         raid_type=data['raid_type'],
+                                         name=data.get('name'))
+
+    @mock.patch.object(storrest.storcli.Storcli, 'create_virtual_drive')
+    def test_create_nytrocache(self, mock_obj):
+        self._nytrocache_create(mock_obj, 'nytrocache')
+
+    @mock.patch.object(storrest.storcli.Storcli, 'create_virtual_drive')
+    def test_create_cachecade(self, mock_obj):
+        self._nytrocache_create(mock_obj, 'cachecade')
+
 
 if __name__ == '__main__':
     unittest.main()
