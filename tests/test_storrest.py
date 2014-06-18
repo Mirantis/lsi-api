@@ -271,6 +271,26 @@ class StorrestTest(unittest.TestCase):
     def test_cachecade_delete(self, mock_obj):
         self._nytrocache_delete(mock_obj, 'cachecade')
 
+    def _warpdrive_create(self, mock_obj, overprovision=None):
+        self.prepare(mock_obj)
+        controller_id = '0'
+        data = {}
+        if overprovision is not None:
+            data['overprovision'] = overprovision
+        url = '/{0}/controllers/{controller_id}/virtualdevices/warpdrive'
+        url = url.format(self.api_version, controller_id=controller_id)
+        request = self.app.request(url, method='POST', data=json.dumps(data))
+        self.verify_reply(request)
+        mock_obj.assert_called_once_with(controller_id,
+                                         overprovision=overprovision)
+
+    @mock.patch.object(storrest.storcli.Storcli, 'create_warp_drive_vd')
+    def test_warpdrive_create_cap(self, mock_obj):
+        self._warpdrive_create(mock_obj, overprovision='cap')
+
+    @mock.patch.object(storrest.storcli.Storcli, 'create_warp_drive_vd')
+    def test_warpdrive_create(self, mock_obj):
+        self._warpdrive_create(mock_obj)
 
 if __name__ == '__main__':
     unittest.main()

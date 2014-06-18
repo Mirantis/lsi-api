@@ -411,7 +411,7 @@ class Storcli(object):
         cmd = '/c{0}/eall/sall start format'.format(controller_id).split()
         possible_levels = ('nom', 'cap', 'perf')
         if overprovision in possible_levels:
-            cmd.append('overprovision level=%s' % overprovision)
+            cmd.extend('overprovision level={0}'.format(overprovision).split())
         else:
             overprovision = validate_percentage(overprovision)
             if overprovision is not None:

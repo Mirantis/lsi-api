@@ -103,7 +103,7 @@ def validate_integer(val, interval):
     try:
         v = int(val)
         val = v if interval[0] <= v <= interval[1] else None
-    except ValueError:
+    except (ValueError, TypeError):
         val = None
     return val
 

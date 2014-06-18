@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import json
 import mock
 import unittest
 
@@ -123,6 +124,51 @@ class StorcliTest(unittest.TestCase):
                           for cmd in expected_commands]
         actual_calls = self.mock_subprocess.check_output.call_args_list
         self.assertEqual(actual_calls, expected_calls)
+
+    def _make_success_reply(self, controller_id, serialize=True):
+        data = {
+            'Controllers': [
+                {
+                    'Command Status': {
+                        'Controller': controller_id,
+                        'Status': 'Success',
+                        'Description': 'None',
+                    },
+                },
+            ]}
+        return json.dumps(data) if serialize else data
+
+    def _mock_success_reply(self, controller_id):
+        self.mock_subprocess.check_output.return_value = \
+            self._make_success_reply(controller_id)
+
+    def test_create_warp_drive_vd_dflt(self):
+        controller_id = 0
+        self._mock_success_reply(controller_id)
+        self.storcli.create_warp_drive_vd(controller_id)
+        expected_commands = (
+            '{storcli_cmd} /c{controller_id}/eall/sall start format J',
+        )
+        self.verify_storcli_commands(expected_commands,
+                                     controller_id=controller_id)
+
+    def _create_warp_drive_vd_overprovision(self, overprovision):
+        controller_id = 0
+        self._mock_success_reply(controller_id)
+        self.storcli.create_warp_drive_vd(controller_id,
+                                          overprovision=overprovision)
+        expected_commands = (
+            '{storcli_cmd} /c{controller_id}/eall/sall start format overprovision level={overprovision} J',
+        )
+        self.verify_storcli_commands(expected_commands,
+                                     controller_id=controller_id,
+                                     overprovision=overprovision)
+
+    def test_create_warp_drive_vd_cap(self):
+        self._create_warp_drive_vd_overprovision('cap')
+
+    def test_create_warp_drive_vd_perf(self):
+        self._create_warp_drive_vd_overprovision('perf')
 
 
 if __name__ == '__main__':
