@@ -11,6 +11,7 @@ from tests_helpers import MultiReturnValues, add_top_srcdir_to_path,\
 add_top_srcdir_to_path()
 
 import storrest
+from storrest.storutils import strlst
 
 STORCLI_SHOW = read_expected('call_show.json')
 STORCLI_SHOW_ALL = read_expected('call_show_all.json')
@@ -169,6 +170,51 @@ class StorcliTest(unittest.TestCase):
 
     def test_create_warp_drive_vd_perf(self):
         self._create_warp_drive_vd_overprovision('perf')
+
+    def _create_raid(self,
+                     raid_type=None,
+                     raid_level=1):
+        # XXX: these values must correspond the controllers state in
+        # call_show_all.json (i.e. drives on specified controller, enclosure
+        # and slots are part of RAID1 array)
+        controller_id = 0
+        if raid_type is None:
+            enclosure = 62
+            slots = (0, 1)
+        elif raid_type == 'nytrocache':
+            enclosure = 252
+            slots = (4, 6)
+
+        physical_drives = [{
+            'controller_id': controller_id,
+            'enclosure': enclosure,
+            'slot': slot
+        } for slot in slots]
+        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+            self._make_success_reply(controller_id),
+            STORCLI_SHOW])
+
+        self.storcli.create_virtual_drive(physical_drives,
+                                          raid_level=raid_level,
+                                          raid_type=raid_type)
+        expected_commands = (
+            '{storcli_cmd} /c{controller_id} add vd {raid_type} '
+            'r{raid_level} drives={drives_str} J',
+            '{storcli_cmd} /c{controller_id} show J'
+        )
+        drives_str = '{enclosure}:{slots}'.format(enclosure=enclosure,
+                                                  slots=strlst(slots))
+        self.verify_storcli_commands(expected_commands,
+                                     controller_id=controller_id,
+                                     raid_type=raid_type or '',
+                                     raid_level=raid_level,
+                                     drives_str=drives_str)
+
+    def test_create_raid1(self):
+        self._create_raid()
+
+    def test_create_nytrocache(self):
+        self._create_raid(raid_type='nytrocache')
 
 
 if __name__ == '__main__':
