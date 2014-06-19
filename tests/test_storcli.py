@@ -244,6 +244,31 @@ class StorcliTest(unittest.TestCase):
         )
         self.verify_storcli_commands(expected_commands, **params)
 
+    def test_update_virtual_drive(self):
+        controller_id = 0
+        virtual_drive_id = 1
+        self._mock_success_reply(controller_id)
+        params = {
+            'name': 'FooBar',
+            'io_policy': 'direct',
+            'write_cache': 'wb',
+            'read_ahead': False,
+            'ssd_caching': True,
+        }
+        self.storcli.update_virtual_drive(controller_id,
+                                          virtual_drive_id,
+                                          **params)
+        expected_commands = (
+            '{storcli_cmd} /c{controller_id}/v{virtual_drive_id} set '
+            'iopolicy={io_policy} name={name} wrcache={write_cache} '
+            'rdcache={read_ahead} ssdcaching={ssd_caching} J',
+        )
+        params['controller_id'] = controller_id
+        params['virtual_drive_id'] = virtual_drive_id
+        params['ssd_caching'] = 'on' if params['ssd_caching'] else 'off'
+        params['read_ahead'] = 'RA' if params['read_ahead'] else 'NoRA'
+        self.verify_storcli_commands(expected_commands, **params)
+
 
 if __name__ == '__main__':
     unittest.main()
