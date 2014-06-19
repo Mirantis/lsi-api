@@ -216,6 +216,34 @@ class StorcliTest(unittest.TestCase):
     def test_create_nytrocache(self):
         self._create_raid(raid_type='nytrocache')
 
+    def test_global_hotspare_create(self):
+        params = {
+            'controller_id': 0,
+            'enclosure': 62,
+            'slot': 19
+        }
+        self._mock_success_reply(params['controller_id'])
+        self.storcli.add_hotspare_drive(None, **params)
+        expected_commands = (
+            '{storcli_cmd} /c{controller_id}/e{enclosure}/s{slot} '
+            'add hotsparedrive J',
+        )
+        self.verify_storcli_commands(expected_commands, **params)
+
+    def test_hotspare_delete(self):
+        params = {
+            'controller_id': 0,
+            'enclosure': 62,
+            'slot': 19
+        }
+        self._mock_success_reply(params['controller_id'])
+        self.storcli.delete_hotspare_drive(**params)
+        expected_commands = (
+            '{storcli_cmd} /c{controller_id}/e{enclosure}/s{slot} '
+            'delete hotsparedrive J',
+        )
+        self.verify_storcli_commands(expected_commands, **params)
+
 
 if __name__ == '__main__':
     unittest.main()
