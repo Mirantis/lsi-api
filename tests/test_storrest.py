@@ -312,7 +312,8 @@ class StorrestTest(unittest.TestCase):
             data['overprovision'] = overprovision
         url = '/{0}/controllers/{controller_id}/virtualdevices/warpdrive'
         url = url.format(self.api_version, controller_id=controller_id)
-        request = self.app.request(url, method='POST', data=json.dumps(data))
+        json_data = json.dumps(data) if overprovision else None
+        request = self.app.request(url, method='POST', data=json_data)
         self.verify_reply(request)
         mock_obj.assert_called_once_with(controller_id,
                                          overprovision=overprovision)
