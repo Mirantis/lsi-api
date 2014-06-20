@@ -262,6 +262,12 @@ class Storcli(object):
             vds = [vd for vd in vds if vd_raid_type(vd) == raid_type]
         return sorted(vds)
 
+    def _is_warpdrive(self, controller_id):
+        cmd = '/c{0} show all'.format(controller_id)
+        data = self._run(cmd.split())
+        model = data[controller_id]['Basics']['Model']
+        return model.startswith('Nytro WarpDrive')
+
     def delete_virtual_drive(self, controller_id, virtual_drive_id,
                              force=False, raid_type=None):
         cmd = '/c{controller_id}/v{virtual_drive_id} del {raid_type} {force}'
@@ -269,6 +275,11 @@ class Storcli(object):
         if raid_type:
             # force doesn't seem to work with cachecade/nytrocache
             force = False
+
+        # work around nytrocli bug
+        if virtual_drive_id == 'all' and self._is_warpdrive(controller_id):
+            virtual_drive_id = 0
+
         cmd = cmd.format(controller_id=controller_id,
                          virtual_drive_id=virtual_drive_id,
                          raid_type='cc' if raid_type else '',

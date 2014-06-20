@@ -232,6 +232,36 @@ class StorcliTest(unittest.TestCase):
     def test_create_nytrocache(self):
         self._create_raid(raid_type='nytrocache')
 
+    def test_delete_virtual_drive(self):
+        controller_id = 0
+        virtual_drive_id = 1
+        force = True
+        self._mock_success_reply(controller_id)
+        expected_commands = (
+            '{storcli_cmd} /c{controller_id}/v{virtual_drive_id} del {force} J',
+        )
+        self.storcli.delete_virtual_drive(controller_id,
+                                          virtual_drive_id,
+                                          force=force)
+        self.verify_storcli_commands(expected_commands,
+                                     controller_id=controller_id,
+                                     virtual_drive_id=virtual_drive_id,
+                                     force='force' if force else '')
+
+    def test_delete_warpdrive(self):
+        controller_id = 1
+        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+            STORCLI_SHOW_ALL,
+            self._make_success_reply(controller_id)
+        ])
+        expected_commands = (
+            '{storcli_cmd} /c{controller_id} show all J',
+            '{storcli_cmd} /c{controller_id}/v0 del J',
+        )
+        self.storcli.delete_virtual_drive(controller_id, 'all')
+        self.verify_storcli_commands(expected_commands,
+                                     controller_id=controller_id)
+
     def test_global_hotspare_create(self):
         params = {
             'controller_id': 0,
