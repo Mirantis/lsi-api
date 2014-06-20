@@ -199,6 +199,26 @@ class StorrestTest(unittest.TestCase):
                                          enclosure=str(enclosure),
                                          slot=str(slot))
 
+    def _nytorcache_view(self, mock_obj, raid_type):
+        self.prepare(mock_obj)
+        params = {
+            'controller_id': '0',
+            'raid_type': raid_type
+        }
+        url = '/{0}/controllers/{controller_id}/virtualdevices/{raid_type}'
+        request = self.app.request(url.format(self.api_version, **params))
+        self.verify_reply(request)
+        mock_obj.assert_called_once_with(params['controller_id'],
+                                         raid_type=raid_type)
+
+    @mock.patch.object(storrest.storcli.Storcli, 'virtual_drives')
+    def test_nytrocache_view(self, mock_obj):
+        self._nytorcache_view(mock_obj, 'nytrocache')
+
+    @mock.patch.object(storrest.storcli.Storcli, 'virtual_drives')
+    def test_cachecade_view(self, mock_obj):
+        self._nytorcache_view(mock_obj, 'cachecade')
+
     def _nytrocache_details(self, mock_obj, raid_type):
         self.prepare(mock_obj)
         params = {
