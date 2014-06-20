@@ -121,6 +121,18 @@ class StorrestTest(unittest.TestCase):
                                          str(virtual_drive_id),
                                          force=True)
 
+    @mock.patch.object(storrest.storcli.Storcli, 'delete_virtual_drive')
+    def test_delete_all_virtual_drives(self, mock_obj):
+        self.prepare(mock_obj)
+        controller_id = '0'
+        url = '/{0}/controllers/{controller_id}/virtualdevices'
+        url = url.format(self.api_version, controller_id=controller_id)
+        request = self.app.request(url, method='DELETE')
+        self.verify_reply(request)
+        mock_obj.assert_called_once_with(controller_id,
+                                         'all',
+                                         force=True)
+
     @mock.patch.object(storrest.storcli.Storcli, 'update_virtual_drive')
     def test_update_virtual_drive(self, mock_obj):
         mock_obj.return_value = self.dummy_data
