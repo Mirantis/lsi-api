@@ -119,6 +119,22 @@ class StorcliTest(unittest.TestCase):
         self.verify_storcli_commands(expected_commands,
                                      controller_id=controller_id)
 
+    def test_virtual_drive_details(self):
+        self.mock_subprocess.check_output.return_value = STORCLI_SHOW
+        controller_id = 0
+        virtual_drive_id = 0
+        actual = self.storcli.virtual_drive_details(controller_id,
+                                                    virtual_drive_id)
+        expected = [vd for vd in self.expected_virtual_drives
+                    if vd['controller_id'] == controller_id and
+                    vd['virtual_drive'] == virtual_drive_id][0]
+        expected_commands = (
+            '{storcli_cmd} /c{controller_id} show J',
+        )
+        self.assertEqual(actual, expected)
+        self.verify_storcli_commands(expected_commands,
+                                     controller_id=controller_id)
+
     def verify_storcli_commands(self, expected_commands, **kwargs):
         kwargs['storcli_cmd'] = ' '.join(self.storcli.storcli_cmd)
         expected_calls = [((cmd.format(**kwargs).split(), ), {})

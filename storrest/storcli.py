@@ -244,7 +244,7 @@ class Storcli(object):
                               raid_type=None):
         vdrives = [d for d in self.virtual_drives(controller_id=controller_id)
                    if d['virtual_drive'] == virtual_drive_id and raid_type ==
-                   vd_raid_type(vd)]
+                   vd_raid_type(d)]
         try:
             return vdrives[0]
         except IndexError:
