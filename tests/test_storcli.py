@@ -183,11 +183,22 @@ class StorcliTest(unittest.TestCase):
         self._mock_success_reply(controller_id)
         self.storcli.create_warp_drive_vd(controller_id,
                                           overprovision=overprovision)
+
+        overprovision_level = 'overprovision level'
+        try:
+            testval = int(overprovision)
+            overprovision_level = 'overprovision'
+        except:
+            pass
+
         expected_commands = (
-            '{storcli_cmd} /c{controller_id}/eall/sall start format overprovision level={overprovision} J',
+            '{storcli_cmd} /c{controller_id}/eall/sall start format '
+            '{overprovision_level}={overprovision} J',
+
         )
         self.verify_storcli_commands(expected_commands,
                                      controller_id=controller_id,
+                                     overprovision_level=overprovision_level,
                                      overprovision=overprovision)
 
     def test_create_warp_drive_vd_cap(self):
@@ -195,6 +206,9 @@ class StorcliTest(unittest.TestCase):
 
     def test_create_warp_drive_vd_perf(self):
         self._create_warp_drive_vd_overprovision('perf')
+
+    def test_create_warp_drive_vd_percentage(self):
+        self._create_warp_drive_vd_overprovision(50)
 
     def _create_raid(self,
                      raid_type=None,
