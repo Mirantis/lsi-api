@@ -18,6 +18,15 @@ STORCLI_SHOW_ALL = read_expected('call_show_all.json')
 STORCLI_ENCLOSURES_SHOW = read_expected('c0_eall_show.json')
 
 
+def extract_controller_raw_data(raw_dat, controller_id):
+    def _controller_match(ctrl):
+        return ctrl['Command Status']['Controller'] == controller_id
+
+    dat = json.loads(raw_dat)
+    subdat = [ctrl for ctrl in dat['Controllers'] if _controller_match(ctrl)]
+    return json.dumps({'Controllers': subdat})
+
+
 class StorcliTest(unittest.TestCase):
     def setUp(self):
         super(StorcliTest, self).setUp()
@@ -274,6 +283,31 @@ class StorcliTest(unittest.TestCase):
             '{storcli_cmd} /c{controller_id}/e{enclosure}/s{slot} '
             'add hotsparedrive J',
         )
+        self.verify_storcli_commands(expected_commands, **params)
+
+    def test_add_dedicated_hotspare(self):
+        params = {
+            'controller_id': 0,
+            'enclosure': 62,
+            'slot': 19,
+        }
+        target_vd = [vd for vd in self.expected_virtual_drives
+                     if vd['controller_id'] == params['controller_id'] and
+                     not vd['raid_level'].startswith('Nytro')][0]
+        vdrives = [target_vd['virtual_drive']]
+
+        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+            extract_controller_raw_data(STORCLI_SHOW,
+                                        controller_id=params['controller_id']),
+            self._make_success_reply(params['controller_id'])
+        ])
+        self.storcli.add_hotspare_drive(vdrives, **params)
+        expected_commands = (
+            '{storcli_cmd} /c{controller_id} show J',
+            '{storcli_cmd} /c{controller_id}/e{enclosure}/s{slot} add '
+            'hotsparedrive dgs={drive_group} J',
+        )
+        params['drive_group'] = target_vd['drive_group']
         self.verify_storcli_commands(expected_commands, **params)
 
     def test_hotspare_delete(self):
