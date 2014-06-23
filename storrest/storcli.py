@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-from collections import defaultdict
 import json
 import subprocess
 
@@ -207,11 +206,6 @@ class Storcli(object):
                 }
 
     def _parse_virtual_drives(self, data):
-        def physical_drives_by_group(phys_drives):
-            ret = defaultdict(list)
-            for pd in phys_drives:
-                ret[pd['drive_group']].append(pd)
-            return ret
 
         def drive_belongs_to(phys, virt):
             if phys['drive_group'] is None:
