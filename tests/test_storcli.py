@@ -249,16 +249,22 @@ class StorcliTest(unittest.TestCase):
             'enclosure': enclosure,
             'slot': slot
         } for slot in slots]
+
+        ssd_caching = raid_type is None
+        io_policy = 'direct'
+
         self.mock_subprocess.check_output.side_effect = MultiReturnValues([
             self._make_success_reply(controller_id),
             STORCLI_SHOW])
 
         self.storcli.create_virtual_drive(physical_drives,
                                           raid_level=raid_level,
-                                          raid_type=raid_type)
+                                          raid_type=raid_type,
+                                          io_policy=io_policy,
+                                          ssd_caching=ssd_caching)
         expected_commands = (
             '{storcli_cmd} /c{controller_id} add vd {raid_type} '
-            'r{raid_level} drives={drives_str} J',
+            'r{raid_level} drives={drives_str} {io_policy} {ssd_caching} J',
             '{storcli_cmd} /c{controller_id} show J'
         )
         drives_str = '{enclosure}:{slots}'.format(enclosure=enclosure,
@@ -267,7 +273,10 @@ class StorcliTest(unittest.TestCase):
                                      controller_id=controller_id,
                                      raid_type=raid_type or '',
                                      raid_level=raid_level,
-                                     drives_str=drives_str)
+                                     drives_str=drives_str,
+                                     io_policy=io_policy,
+                                     ssd_caching='cachevd' if ssd_caching else ''
+                                     )
 
     def test_create_raid1(self):
         self._create_raid()
