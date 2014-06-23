@@ -38,8 +38,16 @@ class StorrestTest(unittest.TestCase):
             self.assertEqual(reply['error_code'], self.dummy_error_code)
             self.assertEqual(reply['error_message'], self.dummy_error_msg)
 
-    @mock.patch.object(storrest.storcli.Storcli, 'controller_details')
+    @mock.patch.object(storrest.storcli.Storcli, 'controllers')
     def test_controllers(self, mock_obj):
+        mock_obj.__get__ = mock.Mock(return_value=self.dummy_data)
+        url = '/{0}/controllers'.format(self.api_version)
+        request = self.app.request(url)
+        self.verify_reply(request)
+        mock_obj.assert_called_once()
+
+    @mock.patch.object(storrest.storcli.Storcli, 'controller_details')
+    def test_controller_details(self, mock_obj):
         mock_obj.return_value = self.dummy_data
         controller_id = '0'
         request = self.app.request('/{0}/controllers/{1}'.
