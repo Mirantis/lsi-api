@@ -337,6 +337,20 @@ class StorcliTest(unittest.TestCase):
         )
         self.verify_storcli_commands(expected_commands, **params)
 
+    def test_global_hotspare_create_pdrive(self):
+        pdrive = {
+            'controller_id': 0,
+            'enclosure': 62,
+            'slot': 19
+        }
+        self._mock_success_reply(pdrive['controller_id'])
+        expected_commands = (
+            '{storcli_cmd} /c{controller_id}/e{enclosure}/s{slot} '
+            'add hotsparedrive J',
+        )
+        self.storcli.add_hotspare_drive(None, pdrive=pdrive)
+        self.verify_storcli_commands(expected_commands, **pdrive)
+
     def test_add_dedicated_hotspare(self):
         params = {
             'controller_id': 0,
