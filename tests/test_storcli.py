@@ -144,6 +144,19 @@ class StorcliTest(unittest.TestCase):
         self.verify_storcli_commands(expected_commands,
                                      controller_id=controller_id)
 
+    def test_virtual_drive_details_nonexistent(self):
+        self.mock_subprocess.check_output.return_value = STORCLI_SHOW
+        controller_id = 0
+        virtual_drive_id = 100500
+        with self.assertRaises(storrest.storcli.StorcliError):
+            self.storcli.virtual_drive_details(controller_id,
+                                               virtual_drive_id)
+        expected_commands = (
+            '{storcli_cmd} /c{controller_id} show J',
+        )
+        self.verify_storcli_commands(expected_commands,
+                                     controller_id=controller_id)
+
     def verify_storcli_commands(self, expected_commands, **kwargs):
         kwargs['storcli_cmd'] = ' '.join(self.storcli.storcli_cmd)
         expected_calls = [((cmd.format(**kwargs).split(), ), {})
@@ -286,6 +299,20 @@ class StorcliTest(unittest.TestCase):
                                      enclosure=enclosure,
                                      slots_str=strlst(slots),
                                      raid_level=raid_level)
+
+    def test_create_virtual_drive_enclosure_missing(self):
+        raid_level = 1
+        controller_id = 0
+        slots = (0, 1)
+        physical_drives = [{
+            'controller_id': controller_id,
+            # no enclosure here, this is intensional
+            'slot': slot
+        } for slot in slots]
+        with self.assertRaises(storrest.storcli.StorcliError):
+            self.storcli.create_virtual_drive(physical_drives,
+                                              raid_level=raid_level)
+        self.verify_storcli_commands([])
 
     def test_delete_virtual_drive(self):
         controller_id = 0
