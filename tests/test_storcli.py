@@ -271,19 +271,25 @@ class StorcliTest(unittest.TestCase):
                                      virtual_drive_id=virtual_drive_id,
                                      force='force' if force else '')
 
-    def test_delete_warpdrive(self):
-        controller_id = 1
+    def _delete_all(self, controller_id=None, is_warpdrive=False):
         self.mock_subprocess.check_output.side_effect = MultiReturnValues([
             STORCLI_SHOW_ALL,
             self._make_success_reply(controller_id)
         ])
+        vdrives_id = '0' if is_warpdrive else 'all'
         expected_commands = (
             '{storcli_cmd} /c{controller_id} show all J',
-            '{storcli_cmd} /c{controller_id}/v0 del J',
+            '{storcli_cmd} /c{controller_id}/v%s del J' % vdrives_id,
         )
         self.storcli.delete_virtual_drive(controller_id, 'all')
         self.verify_storcli_commands(expected_commands,
                                      controller_id=controller_id)
+
+    def test_delete_warpdrive(self):
+        self._delete_all(controller_id=1, is_warpdrive=True)
+
+    def test_delete_all_virtual_drives(self):
+        self._delete_all(controller_id=0, is_warpdrive=False)
 
     def test_global_hotspare_create(self):
         params = {
