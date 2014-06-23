@@ -249,6 +249,11 @@ class StorcliTest(unittest.TestCase):
             'enclosure': enclosure,
             'slot': slot
         } for slot in slots]
+        pd_per_array = ''
+        if raid_level in ('10', 10):
+            pd_per_array = 2
+        if pd_per_array:
+            pd_per_array = 'PDperArray={0}'.format(pd_per_array)
 
         ssd_caching = raid_type is None
         io_policy = 'direct'
@@ -264,25 +269,31 @@ class StorcliTest(unittest.TestCase):
                                           ssd_caching=ssd_caching)
         expected_commands = (
             '{storcli_cmd} /c{controller_id} add vd {raid_type} '
-            'r{raid_level} drives={drives_str} {io_policy} {ssd_caching} J',
+            'r{raid_level} drives={drives_str} '
+            '{pd_per_array} {io_policy} {ssd_caching} J',
             '{storcli_cmd} /c{controller_id} show J'
         )
         drives_str = '{enclosure}:{slots}'.format(enclosure=enclosure,
                                                   slots=strlst(slots))
-        self.verify_storcli_commands(expected_commands,
-                                     controller_id=controller_id,
-                                     raid_type=raid_type or '',
-                                     raid_level=raid_level,
-                                     drives_str=drives_str,
-                                     io_policy=io_policy,
-                                     ssd_caching='cachevd' if ssd_caching else ''
-                                     )
+        params = {
+            'controller_id': controller_id,
+            'raid_type': raid_type or '',
+            'raid_level': raid_level,
+            'drives_str': drives_str,
+            'io_policy': io_policy,
+            'ssd_caching': 'cachevd' if ssd_caching else '',
+            'pd_per_array': pd_per_array,
+        }
+        self.verify_storcli_commands(expected_commands, **params)
 
     def test_create_raid1(self):
         self._create_raid()
 
     def test_create_nytrocache(self):
         self._create_raid(raid_type='nytrocache')
+
+    def test_create_raid10(self):
+        self._create_raid(raid_level=10)
 
     def test_create_raid_negative(self):
         raid_level = 1
