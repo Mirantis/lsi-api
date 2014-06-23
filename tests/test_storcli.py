@@ -152,16 +152,23 @@ class StorcliTest(unittest.TestCase):
         self.assertEqual(actual_calls, expected_calls)
 
     def _make_success_reply(self, controller_id, serialize=True):
+        return self._make_reply(controller_id, serialize=serialize)
+
+    def _make_reply(self, controller_id, error_code=None, serialize=True):
         data = {
             'Controllers': [
                 {
                     'Command Status': {
                         'Controller': controller_id,
-                        'Status': 'Success',
+                        'Status': 'Success' if not error_code else 'Failed',
                         'Description': 'None',
                     },
                 },
             ]}
+
+        if error_code:
+            data['Controllers'][0]['Command Status']['ErrCd'] = error_code
+
         return json.dumps(data) if serialize else data
 
     def _mock_success_reply(self, controller_id):
@@ -254,6 +261,31 @@ class StorcliTest(unittest.TestCase):
 
     def test_create_nytrocache(self):
         self._create_raid(raid_type='nytrocache')
+
+    def test_create_raid_negative(self):
+        raid_level = 1
+        controller_id = 0
+        enclosure = 62
+        slots = (0, 1)
+        physical_drives = [{
+            'controller_id': controller_id,
+            'enclosure': enclosure,
+            'slot': slot
+        } for slot in slots]
+        self.mock_subprocess.check_output.return_value = \
+            self._make_reply(controller_id, error_code=42)
+        expected_commands = (
+            '{storcli_cmd} /c{controller_id} add vd '
+            'r{raid_level} drives={enclosure}:{slots_str} J',
+        )
+        with self.assertRaises(storrest.storcli.StorcliError):
+            self.storcli.create_virtual_drive(physical_drives,
+                                              raid_level=raid_level)
+        self.verify_storcli_commands(expected_commands,
+                                     controller_id=controller_id,
+                                     enclosure=enclosure,
+                                     slots_str=strlst(slots),
+                                     raid_level=raid_level)
 
     def test_delete_virtual_drive(self):
         controller_id = 0
