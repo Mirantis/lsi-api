@@ -46,6 +46,7 @@ def dumb_error_handler(fcn):
             web.ctx.status = '500 Internal Server Error'
             return {'error_code': e.error_code,
                     'error_message': e.message,
+                    'storrest_version': storrest_git_version,
                     'data': None}
     return wrapper
 
