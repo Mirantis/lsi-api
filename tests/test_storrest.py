@@ -114,6 +114,46 @@ class StorrestTest(unittest.TestCase):
     def test_create_virtual_drive_fail(self, mock_obj):
         self._create_virtual_drive(mock_obj, positive=False)
 
+    def _create_virtual_drive_missing_params(self, mock_obj, raid_type=None):
+        controller_id = 0
+        url = '/{0}/controllers/{controller_id}/virtualdevices'
+        url = url.format(self.api_version, controller_id=controller_id)
+        if raid_type:
+            url += '/{0}'.format(raid_type)
+        stupid_data = {'foo': 'bar', 'blah': 'baz'}
+        request = self.app.request(url,
+                                   method='POST',
+                                   data=json.dumps(stupid_data))
+        reply = json.loads(request.data)
+        self.assertEqual(reply['error_code'], 400)
+        self.assertFalse(mock_obj.called)
+
+    @mock.patch.object(storrest.storcli.Storcli, 'create_virtual_drive')
+    def test_create_virtual_drive_missing_params(self, mock_obj):
+        self._create_virtual_drive_missing_params(mock_obj)
+
+    @mock.patch.object(storrest.storcli.Storcli, 'create_virtual_drive')
+    def test_create_nytrocache_missing_params(self, mock_obj):
+        self._create_virtual_drive_missing_params(mock_obj,
+                                                  raid_type='nytrocache')
+
+    @mock.patch.object(storrest.storcli.Storcli, 'create_virtual_drive')
+    def test_create_cachecade_missing_params(self, mock_obj):
+        self._create_virtual_drive_missing_params(mock_obj,
+                                                  raid_type='cachecade')
+
+    @mock.patch.object(storrest.storcli.Storcli, 'create_virtual_drive')
+    def test_create_virtual_drive_invalid_json(self, mock_obj):
+        controller_id = 0
+        url = '/{0}/controllers/{controller_id}/virtualdevices'
+        url = url.format(self.api_version, controller_id=controller_id)
+        request = self.app.request(url,
+                                   method='POST',
+                                   data='@choke it@')
+        reply = json.loads(request.data)
+        self.assertEqual(reply['error_code'], 400)
+        self.assertFalse(mock_obj.called)
+
     @mock.patch.object(storrest.storcli.Storcli, 'delete_virtual_drive')
     def test_delete_virtual_drive(self, mock_obj):
         mock_obj.return_value = self.dummy_data

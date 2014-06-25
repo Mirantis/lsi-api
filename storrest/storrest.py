@@ -57,6 +57,14 @@ def jsonize(fcn):
     return wrapper
 
 
+def get_post_data():
+    raw_data = web.data()
+    try:
+        return json.loads(raw_data)
+    except:
+        raise StorcliError(error_code=400, msg='invalid JSON')
+
+
 class ControllersView(object):
     def __init__(self):
         self.storcli = get_storcli()
@@ -99,8 +107,10 @@ class VirtualDrivesView(object):
     @jsonize
     @dumb_error_handler
     def POST(self, controller_id):
-        raw_data = web.data()
-        data = json.loads(raw_data)
+        data = get_post_data()
+        if 'drives' not in data:
+            raise StorcliError(error_code=400,
+                               msg='mandatory parameter "drives" is missing')
         web.ctx.status = '201 Created'
         param_names = ('raid_level', 'spare_drives', 'strip_size',
                        'name', 'read_ahead', 'write_cache', 'io_policy',
@@ -127,8 +137,10 @@ class CachecadeView(object):
     @jsonize
     @dumb_error_handler
     def POST(self, controller_id, raid_type):
-        raw_data = web.data()
-        data = json.loads(raw_data)
+        data = get_post_data()
+        if 'drives' not in data:
+            raise StorcliError(error_code=400,
+                               msg='mandatory parameter "drives" is missing')
         params = {'raid_level': data.get('raid_level', 0),
                   'raid_type': raid_type,
                   'name': data.get('name'),
@@ -158,7 +170,7 @@ class VirtualDriveDetails(object):
     @jsonize
     @dumb_error_handler
     def POST(self, controller_id, virtual_drive_id):
-        data = json.loads(web.data())
+        data = get_post_data()
         param_names = ('name', 'read_ahead', 'write_cache', 'io_policy',
                        'ssd_caching')
         params = dict([(k, data.get(k)) for k in param_names])
