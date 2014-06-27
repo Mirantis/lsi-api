@@ -38,6 +38,8 @@ GET /v0.5/controllers
   "model": "LSI MegaRAID SAS 9260-4i",
   "pci_address": "00:06:00:00",
   "serial_number": "SV24603934",
+  "sas_address": " 500605b012061206",
+  "host_interface": "PCIE",
   "enclosures": [252],
   "capabilities": {
     "max_cachecade_size": 1024

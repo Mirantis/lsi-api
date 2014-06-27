@@ -70,10 +70,23 @@ class Storcli(object):
         return out
 
     def _parse_controller_data(self, controller_id, dat):
+        def get_host_interface(obj):
+            # XXX: for some reason this information is located
+            # in different subobjects for WarpDrive and MegaRAID.
+            key = 'Host Interface'
+            bus_dat = obj.get('Bus')
+            if bus_dat:
+                return bus_dat.get(key)
+            version_dat = obj.get('Version')
+            if version_dat:
+                return version_dat.get(key)
+
         cinf = {'controller_id': controller_id,
                 'pci_address': dat['Basics'].get('PCI Address'),
                 'model': dat['Basics'].get('Model'),
                 'serial_number': dat['Basics'].get('Serial Number'),
+                'sas_address': dat['Basics'].get('SAS Address'),
+                'host_interface': get_host_interface(dat),
                 }
         # XXX: nytrocli errors out when trying to enumerate the enclosures
         # of Nytro WarpDrive (instead of givin an empty list)
