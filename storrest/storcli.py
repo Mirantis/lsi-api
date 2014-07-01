@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import json
+import logging
 import subprocess
 
 import storutils
@@ -13,7 +14,9 @@ if 'check_output' not in dir(subprocess):
 STORCLI_CMD = '/opt/MegaRAID/nytrocli/nytrocli64'.split()
 SOMETHING_BAD_HAPPEND = 42
 NO_SUCH_VDRIVE = SOMETHING_BAD_HAPPEND
+INVALID_NYTROCLI_JSON = 100500
 MULTIPLE_VDS_FOR_SAME_PDS = SOMETHING_BAD_HAPPEND
+LOG = logging.getLogger('storrest.storcli')
 
 
 class StorcliError(Exception):
@@ -33,7 +36,7 @@ class Storcli(object):
             controller_id = status_obj['Controller']
             status = status_obj['Status']
             if status != 'Success':
-                print '_extract_storcli_data: data: %s' % data
+                LOG.info('error data: %s', data)
                 error_code = status_obj.get('ErrCd', SOMETHING_BAD_HAPPEND)
                 raise StorcliError(status_obj.get('Description', 'Unknown'),
                                    error_code=error_code)
@@ -65,7 +68,12 @@ class Storcli(object):
         if permissive:
             raw_out = skip_nytrocli_debug_messages(raw_out)
 
-        out = json.loads(raw_out)
+        try:
+            out = json.loads(raw_out)
+        except:
+            LOG.info('invalid JSON %s', raw_out)
+            raise StorcliError(msg='invalid JSON received',
+                               error_code=INVALID_NYTROCLI_JSON)
         out = self._extract_storcli_data(out, error_code)
         return out
 

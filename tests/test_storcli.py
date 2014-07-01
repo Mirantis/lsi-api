@@ -299,7 +299,7 @@ class StorcliTest(unittest.TestCase):
     def test_create_raid10(self):
         self._create_raid(raid_level=10)
 
-    def test_create_raid_negative(self):
+    def _create_raid_negative(self, valid_reply=True):
         raid_level = 1
         controller_id = 0
         enclosure = 62
@@ -310,19 +310,30 @@ class StorcliTest(unittest.TestCase):
             'slot': slot
         } for slot in slots]
         self.mock_subprocess.check_output.return_value = \
-            self._make_reply(controller_id, error_code=42)
+            self._make_reply(controller_id, error_code=42) \
+            if valid_reply else 'choke; JSON! parser'
         expected_commands = (
             '{storcli_cmd} /c{controller_id} add vd '
             'r{raid_level} drives={enclosure}:{slots_str} J',
         )
-        with self.assertRaises(storrest.storcli.StorcliError):
+        with self.assertRaises(storrest.storcli.StorcliError) as cm:
             self.storcli.create_virtual_drive(physical_drives,
                                               raid_level=raid_level)
+        the_exception = cm.exception
+        if not valid_reply:
+            self.assertEqual(the_exception.error_code,
+                             storrest.storcli.INVALID_NYTROCLI_JSON)
         self.verify_storcli_commands(expected_commands,
                                      controller_id=controller_id,
                                      enclosure=enclosure,
                                      slots_str=strlst(slots),
                                      raid_level=raid_level)
+
+    def test_create_virtual_drive_negative(self):
+        self._create_raid_negative()
+
+    def test_create_virtual_drive_invalid_reply(self):
+        self._create_raid_negative(valid_reply=False)
 
     def test_create_virtual_drive_enclosure_missing(self):
         raid_level = 1
