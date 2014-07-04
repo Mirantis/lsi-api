@@ -87,7 +87,9 @@ def parse_state(arg):
     smap = {'Optl': 'optimal',
             'OfLn': 'offline',
             'Pdgd': 'partially_degraded',
-            'dgrd': 'degraded'}
+            'Rec': 'recovery',
+            'Dgrd': 'degraded',
+            }
     state_str = arg.strip()
     if state_str in smap:
         return smap[state_str]
