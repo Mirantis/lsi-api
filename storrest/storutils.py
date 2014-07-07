@@ -1,5 +1,8 @@
 
+import logging
 import re
+
+LOG = logging.getLogger('storrest.storcli.storutils')
 
 
 def size_in_bytes(size, units):
@@ -20,12 +23,14 @@ def parse_phys_drive_state(state_str):
               'UGood': 'unconfigured_good',
               'GHS': 'global_hot_spare',
               'UBad': 'unconfigured_bad',
+              'Rbld': 'rebuild',
               'Onln': 'online',
               'Offln': 'offline'}
     if state_str in states:
         return states[state_str]
     else:
-        raise ValueError('Unknown state: %s' % state_str)
+        LOG.warning('Unknown PD state: %s', state_str)
+        return state_str.lower()
 
 
 def parse_drive_size(srep):
@@ -94,7 +99,8 @@ def parse_state(arg):
     if state_str in smap:
         return smap[state_str]
     else:
-        raise ValueError('Invalid state: %s' % arg)
+        LOG.warning('Unknown VD state: %s', arg)
+        return arg.lower()
 
 
 def strlst(lst, separator=','):
