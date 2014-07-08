@@ -185,7 +185,7 @@ class CachecadeDetails(object):
     @dumb_error_handler
     def GET(self, controller_id, raid_type, virtual_drive_id):
         return get_storcli().\
-            virtual_drive_details(controller_id, virtual_drive_id,
+            virtual_drive_details(controller_id, int(virtual_drive_id),
                                   raid_type=raid_type)
 
     @jsonize
