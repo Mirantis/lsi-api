@@ -272,7 +272,7 @@ class StorrestTest(unittest.TestCase):
         params = {
             'controller_id': '0',
             'raid_type': raid_type,
-            'virtual_drive_id': '1',
+            'virtual_drive_id': 1,
         }
         url = '/{0}/controllers/{controller_id}/virtualdevices' \
             '/{raid_type}/{virtual_drive_id}'
