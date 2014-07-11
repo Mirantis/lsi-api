@@ -16,6 +16,8 @@ from storrest.storutils import strlst
 STORCLI_SHOW = read_expected('call_show.json')
 STORCLI_SHOW_ALL = read_expected('call_show_all.json')
 STORCLI_ENCLOSURES_SHOW = read_expected('c0_eall_show.json')
+STORCLI_C0_EALL_SALL_SHOW = read_expected('c0_eall_sall_show_all.json')
+STORCLI_C1_SALL_SHOW = read_expected('c1_sall_show_all.json')
 
 
 def extract_controller_raw_data(raw_dat, controller_id):
@@ -87,14 +89,34 @@ class StorcliTest(unittest.TestCase):
             return self._expected_virtual_drives
 
     def test_physical_drives(self):
+        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+            STORCLI_SHOW,
+            STORCLI_C0_EALL_SALL_SHOW,
+            STORCLI_C1_SALL_SHOW
+        ])
         actual = sorted(self.storcli.all_physical_drives)
+        expected_commands = (
+            '{storcli_cmd} /call show J',
+            '{storcli_cmd} /c0/eall/sall show all J',
+            '{storcli_cmd} /c1/sall show all J',
+        )
+        self.verify_storcli_commands(expected_commands)
         self.assertEqual(actual, self.expected_physical_drives)
-        self.verify_storcli_commands(('{storcli_cmd} /call show J',))
 
     def test_virtual_drives(self):
+        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+            STORCLI_SHOW,
+            STORCLI_C0_EALL_SALL_SHOW,
+            STORCLI_C1_SALL_SHOW
+        ])
         actual = sorted(self.storcli.all_virtual_drives)
+        expected_commands = (
+            '{storcli_cmd} /call show J',
+            '{storcli_cmd} /c0/eall/sall show all J',
+            '{storcli_cmd} /c1/sall show all J',
+        )
+        self.verify_storcli_commands(expected_commands)
         self.assertEqual(actual, self.expected_virtual_drives)
-        self.verify_storcli_commands(('{storcli_cmd} /call show J',))
 
     def test_controllers(self):
         self.mock_subprocess.check_output.side_effect = MultiReturnValues([
@@ -109,9 +131,12 @@ class StorcliTest(unittest.TestCase):
         self.verify_storcli_commands(expected_commands)
 
     def test_controller_details(self):
-        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
-            STORCLI_SHOW_ALL, STORCLI_ENCLOSURES_SHOW])
         controller_id = 0
+        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+            extract_controller_raw_data(STORCLI_SHOW_ALL, controller_id),
+            STORCLI_ENCLOSURES_SHOW,
+            STORCLI_C0_EALL_SALL_SHOW,
+        ])
         expected = [c for c in self.controllers
                     if c['controller_id'] == controller_id][0]
         expected['physical_drives'] = \
@@ -127,15 +152,19 @@ class StorcliTest(unittest.TestCase):
         self.assertEqual(actual, expected)
         expected_commands = (
             '{storcli_cmd} /c{controller_id} show all J',
-            '{storcli_cmd} /c{controller_id}/eall show J'
+            '{storcli_cmd} /c{controller_id}/eall show J',
+            '{storcli_cmd} /c{controller_id}/eall/sall show all J',
         )
         self.verify_storcli_commands(expected_commands,
                                      controller_id=controller_id)
 
     def test_virtual_drive_details(self):
-        self.mock_subprocess.check_output.return_value = STORCLI_SHOW
         controller_id = 0
         virtual_drive_id = 0
+        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+            extract_controller_raw_data(STORCLI_SHOW_ALL, controller_id),
+            STORCLI_C0_EALL_SALL_SHOW
+        ])
         actual = self.storcli.virtual_drive_details(controller_id,
                                                     virtual_drive_id)
         expected = [vd for vd in self.expected_virtual_drives
@@ -143,6 +172,7 @@ class StorcliTest(unittest.TestCase):
                     vd['virtual_drive'] == virtual_drive_id][0]
         expected_commands = (
             '{storcli_cmd} /c{controller_id} show J',
+            '{storcli_cmd} /c{controller_id}/eall/sall show all J',
         )
         self.assertEqual(actual, expected)
         self.verify_storcli_commands(expected_commands,
@@ -157,6 +187,8 @@ class StorcliTest(unittest.TestCase):
                                                virtual_drive_id)
         expected_commands = (
             '{storcli_cmd} /c{controller_id} show J',
+            '{storcli_cmd} /c0/eall/sall show all J',
+            '{storcli_cmd} /c1/sall show all J',
         )
         self.verify_storcli_commands(expected_commands,
                                      controller_id=controller_id)
@@ -264,7 +296,9 @@ class StorcliTest(unittest.TestCase):
 
         self.mock_subprocess.check_output.side_effect = MultiReturnValues([
             self._make_success_reply(controller_id),
-            STORCLI_SHOW])
+            extract_controller_raw_data(STORCLI_SHOW, controller_id),
+            STORCLI_C0_EALL_SALL_SHOW
+        ])
 
         self.storcli.create_virtual_drive(physical_drives,
                                           raid_level=raid_level,
@@ -275,7 +309,8 @@ class StorcliTest(unittest.TestCase):
             '{storcli_cmd} /c{controller_id} add vd {raid_type} '
             'r{raid_level} drives={drives_str} '
             '{pd_per_array} {io_policy} {ssd_caching} J',
-            '{storcli_cmd} /c{controller_id} show J'
+            '{storcli_cmd} /c{controller_id} show J',
+            '{storcli_cmd} /c{controller_id}/eall/sall show all J',
         )
         drives_str = '{enclosure}:{slots}'.format(enclosure=enclosure,
                                                   slots=strlst(slots))
@@ -427,11 +462,13 @@ class StorcliTest(unittest.TestCase):
         self.mock_subprocess.check_output.side_effect = MultiReturnValues([
             extract_controller_raw_data(STORCLI_SHOW,
                                         controller_id=params['controller_id']),
+            STORCLI_C0_EALL_SALL_SHOW,
             self._make_success_reply(params['controller_id'])
         ])
         self.storcli.add_hotspare_drive(vdrives, **params)
         expected_commands = (
             '{storcli_cmd} /c{controller_id} show J',
+            '{storcli_cmd} /c{controller_id}/eall/sall show all J',
             '{storcli_cmd} /c{controller_id}/e{enclosure}/s{slot} add '
             'hotsparedrive dgs={drive_group} J',
         )

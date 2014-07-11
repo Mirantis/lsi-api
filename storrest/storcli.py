@@ -5,6 +5,7 @@ import logging
 import subprocess
 
 import storutils
+from storcli_health import HealthInfoParser
 from storutils import *
 
 if 'check_output' not in dir(subprocess):
@@ -28,6 +29,7 @@ class StorcliError(Exception):
 class Storcli(object):
     def __init__(self, storcli_cmd=STORCLI_CMD):
         self.storcli_cmd = storcli_cmd
+        self._health_parser = HealthInfoParser()
 
     def _extract_storcli_data(self, data, error_code=None):
         ret = {}
@@ -132,8 +134,12 @@ class Storcli(object):
         def _controller_details(cid, dat):
             details = self._parse_controller_data(cid, dat)
             _dat = {cid: dat}
-            details['physical_drives'] = self._parse_physical_drives(_dat)
-            details['virtual_drives'] = self._parse_virtual_drives(_dat)
+            physical_drives = self._parse_physical_drives(_dat)
+            details['virtual_drives'] = self._parse_virtual_drives(
+                _dat,
+                phys_drives=physical_drives
+            )
+            details['physical_drives'] = physical_drives
             return details
 
         ret = [_controller_details(_controller_id, dat)
@@ -173,11 +179,28 @@ class Storcli(object):
                 'interface': drive_dat.get('Intf'),
                 'model': drive_dat['Model']}
 
+    def _get_raw_health_info(self, controller_id, is_warpdrive):
+        health_cmd = '/c{0}/eall/sall show all'
+        if is_warpdrive:
+            health_cmd = '/c{0}/sall show all'
+        health_cmd = health_cmd.format(controller_id)
+        return self._run(health_cmd.split())
+
+    def _add_health_info(self, controller_id, pdrives, is_warpdrive=False):
+        raw_health_info = self._get_raw_health_info(controller_id,
+                                                    is_warpdrive)
+        self._health_parser.add_health_info(controller_id,
+                                            raw_health_info,
+                                            pdrives)
+
     def _parse_physical_drives(self, data):
         ret = []
-        for controller, response_data in data.iteritems():
-            drives = [self._parse_physical_drive(controller, drive_dat)
-                      for drive_dat in response_data.get('PD LIST', [])]
+        for controller_id, controller_data in data.iteritems():
+            is_warpdrive = self._is_warpdrive(controller_id,
+                                              controller_data=controller_data)
+            drives = [self._parse_physical_drive(controller_id, drive_dat)
+                      for drive_dat in controller_data.get('PD LIST', [])]
+            self._add_health_info(controller_id, drives, is_warpdrive)
             ret.extend(drives)
         return sorted(ret)
 
@@ -226,7 +249,7 @@ class Storcli(object):
                 'ssd_caching_active': _ssd_caching_active(vdrive_dat),
                 }
 
-    def _parse_virtual_drives(self, data):
+    def _parse_virtual_drives(self, data, phys_drives=None):
 
         def drive_belongs_to(phys, virt):
             if phys['drive_group'] is None:
@@ -240,7 +263,8 @@ class Storcli(object):
             except TypeError:
                 return False
 
-        phys_drives = self._parse_physical_drives(data)
+        if phys_drives is None:
+            phys_drives = self._parse_physical_drives(data)
 
         def find_physical_drives_of_vdrive(vdrive):
             pdrives = [d for d in phys_drives if drive_belongs_to(d, vdrive)]
@@ -277,10 +301,15 @@ class Storcli(object):
             vds = [vd for vd in vds if vd_raid_type(vd) == raid_type]
         return sorted(vds)
 
-    def _is_warpdrive(self, controller_id):
-        cmd = '/c{0} show all'.format(controller_id)
-        data = self._run(cmd.split())
-        model = data[controller_id]['Basics']['Model']
+    def _is_warpdrive(self, controller_id, controller_data=None):
+        if controller_data is None:
+            cmd = '/c{0} show all'.format(controller_id)
+            data = self._run(cmd.split())
+            controller_data = data[controller_id]
+        if 'Basics' in controller_data:
+            model = controller_data['Basics']['Model']
+        elif 'Product Name' in controller_data:
+            model = controller_data['Product Name']
         return model.startswith('Nytro WarpDrive')
 
     def delete_virtual_drive(self, controller_id, virtual_drive_id,

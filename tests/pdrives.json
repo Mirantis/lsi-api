@@ -10,7 +10,11 @@
         "controller_id": 0, 
         "drive_group": 1, 
         "state": "online", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+		       "temperature": " 32C (89.60 F)",
+                       "ssd_life_left": null
+	}
     }, 
     {
         "medium": "HDD", 
@@ -23,7 +27,11 @@
         "controller_id": 0, 
         "drive_group": 1, 
         "state": "online", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+		       "temperature": " 32C (89.60 F)",
+                       "ssd_life_left": null
+	}
     }, 
     {
         "medium": "HDD", 
@@ -36,7 +44,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+		       "temperature": " 32C (89.60 F)",
+                       "ssd_life_left": null
+	}
     }, 
     {
         "medium": "HDD", 
@@ -49,7 +61,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+		       "temperature": " 32C (89.60 F)",
+                       "ssd_life_left": null
+	}
     }, 
     {
         "medium": "HDD", 
@@ -62,7 +78,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+		       "temperature": " 32C (89.60 F)",
+                       "ssd_life_left": null
+	}
     }, 
     {
         "medium": "HDD", 
@@ -75,7 +95,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+		       "temperature": " 32C (89.60 F)",
+                       "ssd_life_left": null
+	}
     }, 
     {
         "medium": "HDD", 
@@ -88,7 +112,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+		       "temperature": " 32C (89.60 F)",
+                       "ssd_life_left": null
+	}
     }, 
     {
         "medium": "HDD", 
@@ -101,7 +129,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+                       "ssd_life_left": null,
+		       "temperature": " 32C (89.60 F)"
+	}
     }, 
     {
         "medium": "HDD", 
@@ -114,7 +146,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+                       "ssd_life_left": null,
+		       "temperature": " 32C (89.60 F)"
+	}
     }, 
     {
         "medium": "HDD", 
@@ -127,7 +163,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+                       "ssd_life_left": null,
+		       "temperature": " 32C (89.60 F)"
+	}
     }, 
     {
         "medium": "HDD", 
@@ -140,7 +180,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+                       "ssd_life_left": null,
+		       "temperature": " 32C (89.60 F)"
+	}
     }, 
     {
         "medium": "HDD", 
@@ -153,7 +197,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+                       "ssd_life_left": null,
+		       "temperature": " 32C (89.60 F)"
+	}
     }, 
     {
         "medium": "HDD", 
@@ -166,7 +214,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+                       "ssd_life_left": null,
+		       "temperature": " 32C (89.60 F)"
+	}
     }, 
     {
         "medium": "HDD", 
@@ -179,7 +231,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+                       "ssd_life_left": null,
+		       "temperature": " 32C (89.60 F)"
+	}
     }, 
     {
         "medium": "HDD", 
@@ -192,7 +248,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+                       "ssd_life_left": null,
+		       "temperature": " 32C (89.60 F)"
+	}
     }, 
     {
         "medium": "HDD", 
@@ -205,7 +265,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+                       "ssd_life_left": null,
+		       "temperature": " 32C (89.60 F)"
+	}
     }, 
     {
         "medium": "HDD", 
@@ -218,7 +282,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+                       "ssd_life_left": null,
+		       "temperature": " 32C (89.60 F)"
+	}
     }, 
     {
         "medium": "HDD", 
@@ -231,7 +299,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+                       "ssd_life_left": null,
+		       "temperature": " 32C (89.60 F)"
+	}
     }, 
     {
         "medium": "HDD", 
@@ -244,7 +316,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+                       "ssd_life_left": null,
+		       "temperature": " 32C (89.60 F)"
+	}
     }, 
     {
         "medium": "HDD", 
@@ -257,7 +333,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+                       "ssd_life_left": null,
+		       "temperature": " 32C (89.60 F)"
+	}
     }, 
     {
         "medium": "HDD", 
@@ -270,7 +350,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+                       "ssd_life_left": null,
+		       "temperature": " 32C (89.60 F)"
+	}
     }, 
     {
         "medium": "HDD", 
@@ -283,7 +367,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+                       "ssd_life_left": null,
+		       "temperature": " 32C (89.60 F)"
+	}
     }, 
     {
         "medium": "HDD", 
@@ -296,7 +384,11 @@
         "controller_id": 0, 
         "drive_group": null, 
         "state": "unconfigured_good", 
-        "model": "ST9146803SS     "
+        "model": "ST9146803SS     ",
+	"health": {
+                       "ssd_life_left": null,
+		       "temperature": " 32C (89.60 F)"
+	}
     }, 
     {
         "medium": "Nytro Flash", 
@@ -309,7 +401,8 @@
         "controller_id": 0, 
         "drive_group": 0, 
         "state": "online", 
-        "model": "2E128-TU2-510G00"
+        "model": "2E128-TU2-510G00",
+	"health": null
     }, 
     {
         "medium": "Nytro Flash", 
@@ -322,7 +415,8 @@
         "controller_id": 0, 
         "drive_group": 0, 
         "state": "online", 
-        "model": "2E128-TU2-510G00"
+        "model": "2E128-TU2-510G00",
+	"health": null
     }, 
     {
         "medium": null, 
@@ -335,7 +429,11 @@
         "controller_id": 1, 
         "drive_group": 0, 
         "state": "online", 
-        "model": "TH58TEG9DDJBA89"
+        "model": "TH58TEG9DDJBA89",
+        "health": {
+            "ssd_life_left": " 100.00",
+            "temperature": " 45C (113.00 F)"
+        }
     }, 
     {
         "medium": null, 
@@ -348,7 +446,11 @@
         "controller_id": 1, 
         "drive_group": 0, 
         "state": "online", 
-        "model": "TH58TEG9DDJBA89"
+        "model": "TH58TEG9DDJBA89",
+	"health": {
+                       "ssd_life_left": " 100.00",
+		       "temperature": " 45C (113.00 F)"
+	}
     }, 
     {
         "medium": null, 
@@ -361,7 +463,11 @@
         "controller_id": 1, 
         "drive_group": 0, 
         "state": "online", 
-        "model": "TH58TEG9DDJBA89"
+        "model": "TH58TEG9DDJBA89",
+	"health": {
+		       "temperature": " 45C (113.00 F)",
+                       "ssd_life_left": " 100.00"
+	}
     }, 
     {
         "medium": null, 
@@ -374,6 +480,10 @@
         "controller_id": 1, 
         "drive_group": 0, 
         "state": "online", 
-        "model": "TH58TEG9DDJBA89"
+        "model": "TH58TEG9DDJBA89",
+	"health": {
+		       "temperature": " 45C (113.00 F)",
+                       "ssd_life_left": " 100.00"
+	}
     }
 ]

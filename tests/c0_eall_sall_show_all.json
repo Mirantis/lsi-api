@@ -1,0 +1,1864 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"Controller" : 0,
+		"Status" : "Success",
+		"Description" : "Show Drive Information Succeeded."
+	},
+	"Response Data" : {
+		"Drive /c0/e62/s0" : [
+			{
+				"EID:Slt" : "62:0",
+				"DID" : 9,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "U"
+			}
+		],
+		"Drive /c0/e62/s0 - Detailed Information" : {
+			"Drive /c0/e62/s0 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s0 Device attributes" : {
+				"SN" : "S0N0MH7N",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BD2E770",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s0 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 3,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bd2e771"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4d 48 37 4e 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s1" : [
+			{
+				"EID:Slt" : "62:1",
+				"DID" : 10,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "U"
+			}
+		],
+		"Drive /c0/e62/s1 - Detailed Information" : {
+			"Drive /c0/e62/s1 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s1 Device attributes" : {
+				"SN" : "S0N0NYZH",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BD43680",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s1 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 3,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bd43681"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4e 59 5a 48 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s2" : [
+			{
+				"EID:Slt" : "62:2",
+				"DID" : 11,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "U"
+			}
+		],
+		"Drive /c0/e62/s2 - Detailed Information" : {
+			"Drive /c0/e62/s2 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s2 Device attributes" : {
+				"SN" : "S0N0NZPA",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BD3AE48",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s2 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 3,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bd3ae49"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4e 5a 50 41 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s3" : [
+			{
+				"EID:Slt" : "62:3",
+				"DID" : 12,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "U"
+			}
+		],
+		"Drive /c0/e62/s3 - Detailed Information" : {
+			"Drive /c0/e62/s3 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s3 Device attributes" : {
+				"SN" : "S0N0MP1C",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BB54F68",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s3 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 3,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bb54f69"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4d 50 31 43 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s4" : [
+			{
+				"EID:Slt" : "62:4",
+				"DID" : 13,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "U"
+			}
+		],
+		"Drive /c0/e62/s4 - Detailed Information" : {
+			"Drive /c0/e62/s4 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s4 Device attributes" : {
+				"SN" : "S0N0MP11",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BB54EA0",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s4 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 3,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bb54ea1"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4d 50 31 31 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s5" : [
+			{
+				"EID:Slt" : "62:5",
+				"DID" : 14,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "U"
+			}
+		],
+		"Drive /c0/e62/s5 - Detailed Information" : {
+			"Drive /c0/e62/s5 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s5 Device attributes" : {
+				"SN" : "S0N0M6E6",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BB4B9D4",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s5 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 3,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bb4b9d5"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4d 36 45 36 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s6" : [
+			{
+				"EID:Slt" : "62:6",
+				"DID" : 15,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "D"
+			}
+		],
+		"Drive /c0/e62/s6 - Detailed Information" : {
+			"Drive /c0/e62/s6 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s6 Device attributes" : {
+				"SN" : "S0N0MNNY",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BB58078",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s6 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 1,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bb58079"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4d 4e 4e 59 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s7" : [
+			{
+				"EID:Slt" : "62:7",
+				"DID" : 16,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "D"
+			}
+		],
+		"Drive /c0/e62/s7 - Detailed Information" : {
+			"Drive /c0/e62/s7 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s7 Device attributes" : {
+				"SN" : "S0N0MNKH",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BB58C00",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s7 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 1,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bb58c01"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4d 4e 4b 48 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s8" : [
+			{
+				"EID:Slt" : "62:8",
+				"DID" : 17,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "D"
+			}
+		],
+		"Drive /c0/e62/s8 - Detailed Information" : {
+			"Drive /c0/e62/s8 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s8 Device attributes" : {
+				"SN" : "S0N0PFAD",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BD7FAF0",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s8 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 1,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bd7faf1"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 50 46 41 44 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s9" : [
+			{
+				"EID:Slt" : "62:11",
+				"DID" : 18,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "D"
+			}
+		],
+		"Drive /c0/e62/s9 - Detailed Information" : {
+			"Drive /c0/e62/s9 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s9 Device attributes" : {
+				"SN" : "S0N0J058",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BC96338",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s9 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 1,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bc96339"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4a 30 35 38 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s10" : [
+			{
+				"EID:Slt" : "62:10",
+				"DID" : 19,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "D"
+			}
+		],
+		"Drive /c0/e62/s10 - Detailed Information" : {
+			"Drive /c0/e62/s10 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s10 Device attributes" : {
+				"SN" : "S0N0M6FJ",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BB4B288",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s10 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 1,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bb4b289"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4d 36 46 4a 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s11" : [
+			{
+				"EID:Slt" : "62:13",
+				"DID" : 20,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "D"
+			}
+		],
+		"Drive /c0/e62/s11 - Detailed Information" : {
+			"Drive /c0/e62/s11 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s11 Device attributes" : {
+				"SN" : "S0N0PKLX",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BD6F5CC",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s11 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 1,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bd6f5cd"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 50 4b 4c 58 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s12" : [
+			{
+				"EID:Slt" : "62:12",
+				"DID" : 21,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "D"
+			}
+		],
+		"Drive /c0/e62/s12 - Detailed Information" : {
+			"Drive /c0/e62/s12 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s12 Device attributes" : {
+				"SN" : "S0N0MNRJ",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BB57D60",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s12 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 1,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bb57d61"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4d 4e 52 4a 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s13" : [
+			{
+				"EID:Slt" : "62:13",
+				"DID" : 22,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "D"
+			}
+		],
+		"Drive /c0/e62/s13 - Detailed Information" : {
+			"Drive /c0/e62/s13 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s13 Device attributes" : {
+				"SN" : "S0N0PE8C",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BD7CB80",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s13 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 1,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bd7cb81"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 50 45 38 43 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s14" : [
+			{
+				"EID:Slt" : "62:14",
+				"DID" : 24,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "D"
+			}
+		],
+		"Drive /c0/e62/s14 - Detailed Information" : {
+			"Drive /c0/e62/s14 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s14 Device attributes" : {
+				"SN" : "S0N0J049",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BC95870",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s14 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 1,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bc95871"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4a 30 34 39 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s15" : [
+			{
+				"EID:Slt" : "62:15",
+				"DID" : 25,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "D"
+			}
+		],
+		"Drive /c0/e62/s15 - Detailed Information" : {
+			"Drive /c0/e62/s15 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s15 Device attributes" : {
+				"SN" : "S0N0NZJN",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BD3B2E8",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s15 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 1,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bd3b2e9"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4e 5a 4a 4e 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s16" : [
+			{
+				"EID:Slt" : "62:16",
+				"DID" : 26,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "D"
+			}
+		],
+		"Drive /c0/e62/s16 - Detailed Information" : {
+			"Drive /c0/e62/s16 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s16 Device attributes" : {
+				"SN" : "S0N0PEB4",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BD7BEB8",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s16 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 1,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bd7beb9"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 50 45 42 34 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s17" : [
+			{
+				"EID:Slt" : "62:17",
+				"DID" : 27,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "D"
+			}
+		],
+		"Drive /c0/e62/s17 - Detailed Information" : {
+			"Drive /c0/e62/s17 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s17 Device attributes" : {
+				"SN" : "S0N0MP63",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BB54A00",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s17 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 1,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bb54a01"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4d 50 36 33 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s18" : [
+			{
+				"EID:Slt" : "62:18",
+				"DID" : 28,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "D"
+			}
+		],
+		"Drive /c0/e62/s18 - Detailed Information" : {
+			"Drive /c0/e62/s18 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s18 Device attributes" : {
+				"SN" : "S0N0MPXP",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BB4F290",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s18 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 1,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bb4f291"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4d 50 58 50 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s19" : [
+			{
+				"EID:Slt" : "62:19",
+				"DID" : 28,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "D"
+			}
+		],
+		"Drive /c0/e62/s19 - Detailed Information" : {
+			"Drive /c0/e62/s19 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s19 Device attributes" : {
+				"SN" : "S0N0MPXP",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BB4F290",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s19 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 1,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bb4f291"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4d 50 58 50 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s20" : [
+			{
+				"EID:Slt" : "62:20",
+				"DID" : 29,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "D"
+			}
+		],
+		"Drive /c0/e62/s20 - Detailed Information" : {
+			"Drive /c0/e62/s20 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s20 Device attributes" : {
+				"SN" : "S0N0PFJ0",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BD7BB30",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s20 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 1,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bd7bb31"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 50 46 4a 30 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s21" : [
+			{
+				"EID:Slt" : "62:21",
+				"DID" : 29,
+				"State" : "UGood",
+				"DG" : "-",
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "D"
+			}
+		],
+		"Drive /c0/e62/s21 - Detailed Information" : {
+			"Drive /c0/e62/s21 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s21 Device attributes" : {
+				"SN" : "S0N0PFJ0",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BD7BB30",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s21 Policies/Settings" : {
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 1,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bd7bb31"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 50 46 4a 30 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s22" : [
+			{
+				"EID:Slt" : "62:22",
+				"DID" : 30,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "U"
+			}
+		],
+		"Drive /c0/e62/s22 - Detailed Information" : {
+			"Drive /c0/e62/s22 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s22 Device attributes" : {
+				"SN" : "S0N0NQR0",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BD40FB8",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s22 Policies/Settings" : {
+				"Drive position" : "DriveGroup:0, Span:0, Row:0",
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 2,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bd40fb9"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4e 51 52 30 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		},
+		"Drive /c0/e62/s23" : [
+			{
+				"EID:Slt" : "62:24",
+				"DID" : 31,
+				"State" : "Onln",
+				"DG" : 0,
+				"Size" : "837.259 GB",
+				"Intf" : "SAS",
+				"Med" : "HDD",
+				"SED" : "N",
+				"PI" : "N",
+				"SeSz" : "512B",
+				"Model" : "ST900MM0006     ",
+				"Sp" : "U"
+			}
+		],
+		"Drive /c0/e62/s23 - Detailed Information" : {
+			"Drive /c0/e62/s23 State" : {
+				"Shield Counter" : 0,
+				"Media Error Count" : 0,
+				"Other Error Count" : 0,
+				"BBM Error Count" : 0,
+				"Drive Temperature" : " 32C (89.60 F)",
+				"Predictive Failure Count" : 0,
+				"S.M.A.R.T alert flagged by drive" : "No"
+			},
+			"Drive /c0/e62/s23 Device attributes" : {
+				"SN" : "S0N0NQPZ",
+				"Manufacturer Id" : "SEAGATE ",
+				"Model Number" : "ST900MM0006     ",
+				"NAND Vendor" : "NA",
+				"WWN" : "5000C5006BD41398",
+				"Firmware Revision" : "0001",
+				"Raw size" : "838.362 GB [0x68cb9e30 Sectors]",
+				"Coerced size" : "837.259 GB [0x68a84800 Sectors]",
+				"Non Coerced size" : "837.862 GB [0x68bb9e30 Sectors]",
+				"Device Speed" : "6.0Gb/s",
+				"Link Speed" : "6.0Gb/s",
+				"Logical Sector Size" : "512B",
+				"Physical Sector Size" : "512B",
+				"Number of Blocks" : 1758174768,
+				"Capacity (Bytes)" : 2537316352
+			},
+			"Drive /c0/e62/s23 Policies/Settings" : {
+				"Drive position" : "DriveGroup:0, Span:0, Row:1",
+				"Enclosure position" : 0,
+				"Connected Port Number" : "0(path0) ",
+				"Sequence Number" : 2,
+				"Commissioned Spare" : "No",
+				"Emergency Spare" : "No",
+				"Last Predictive Failure Event Sequence Number" : 0,
+				"Successful diagnostics completion on" : "N/A",
+				"SED Capable" : "No",
+				"SED Enabled" : "No",
+				"Secured" : "No",
+				"Locked" : "No",
+				"Needs EKM Attention" : "No",
+				"PI Eligible" : "No",
+				"Trim Supported" : "No",
+				"Certified" : "No",
+				"Wide Port Capable" : "No",
+				"Port Information" : [
+					{
+						"Port" : 0,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x5000c5006bd41399"
+					},
+					{
+						"Port" : 1,
+						"Status" : "Active",
+						"Linkspeed" : "6.0Gb/s",
+						"SAS address" : "0x0"
+					}
+				]
+			},
+			"Inquiry Data" : "00 00 06 12 8b 01 10 02 53 45 41 47 41 54 45 20 53 54 39 30 30 4d 4d 30 30 30 36 20 20 20 20 20 30 30 30 31 53 30 4e 30 4e 51 50 5a 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 43 6f 70 79 72 69 67 68 74 20 28 63 29 20 32 30 31 32 20 53 65 61 67 61 74 65 20 41 6c 6c 20 "
+		}
+	}
+}
+]
+}
+

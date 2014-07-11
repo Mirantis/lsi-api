@@ -70,7 +70,12 @@ GET /v0.5/controllers/${controller_id}/physicaldevices
   # possible values:
   # "online", "offline", "unconfigured_good", "unconfigured_bad",
   # "dedicated_hot_spare", "global_hot_spare"
-  "status": "online"},
+  "status": "online",
+  "health": {
+     "temperature": " 32C (89.60 F)",
+     "ssd_life_left": null
+   }
+  },
  {"controller_id": 0,
   "slot": 1,
   "enclosure": 252,
@@ -81,7 +86,11 @@ GET /v0.5/controllers/${controller_id}/physicaldevices
   "interface": "SATA",
   "allocated": true,
   "drive_group": 0,
-  "status": "online"}]
+  "status": "online",
+  "health": {
+     "temperature": " 32C (89.60 F)",
+     "ssd_life_left": null
+   }}]
 
 
 Enumerate virtual drives (raid arrays).
@@ -132,7 +141,11 @@ Complete example:
 		       "medium": "HDD",
 		       "interface": "SATA",
                        "allocated": true,
-                       "status": "online"},
+                       "status": "online",
+                       "health": {
+		          "temperature": " 32C (89.60 F)",
+			  "ssd_life_left": null
+                        }},
                       {"controller_id": 0,
                        "enclosure": 252,
                        "slot": 1,
@@ -143,7 +156,11 @@ Complete example:
 		       "medium": "HDD",
 		       "interface": "SATA",
                        "allocated": true,
-                       "status": "online"}],
+                       "status": "online",
+		       "health": {
+                          "temperature": " 32C (89.60 F)",
+                          "ssd_life_left": null
+                       }}],
  }]
 
 
@@ -196,7 +213,11 @@ Returned data: object describing the newly created virtual drive. Example:
 		       "medium": "HDD",
 		       "interface": "SATA",
                        "allocated": true,
-                       "status": "online"},
+                       "status": "online",
+                       "health": {
+		          "temperature": " 32C (89.60 F)",
+			  "ssd_life_left": null
+                       }},
                       {"controller_id": 0,
                        "enclosure": 252,
                        "slot": 1,
@@ -207,7 +228,11 @@ Returned data: object describing the newly created virtual drive. Example:
 		       "medium": "HDD",
 		       "interface": "SATA",
                        "allocated": true,
-                       "status": "online"}],
+                       "status": "online",
+                       "health": {
+		          "temperature": " 32C (89.60 F)",
+			  "ssd_life_left": null
+                        }}]
  }]
 
 
