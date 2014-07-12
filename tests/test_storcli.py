@@ -181,6 +181,23 @@ class StorcliTest(unittest.TestCase):
         self.verify_storcli_commands(expected_commands,
                                      controller_id=controller_id)
 
+    def test_controller_details_all(self):
+        controller_id = None
+        self.mock_check_output.side_effect = MultiReturnValues([
+            STORCLI_SHOW_ALL,
+            STORCLI_ENCLOSURES_SHOW,
+            STORCLI_C0_EALL_SALL_SHOW,
+            STORCLI_C1_SALL_SHOW
+        ])
+        expected_commands = (
+            '{storcli_cmd} /call show all J',
+            '{storcli_cmd} /c0/eall show J',
+            '{storcli_cmd} /c0/eall/sall show all J',
+            '{storcli_cmd} /c1/sall show all J',
+        )
+        actual = self.storcli.controller_details(controller_id)
+        self.verify_storcli_commands(expected_commands)
+
     def test_virtual_drive_details(self):
         controller_id = 0
         virtual_drive_id = 0
