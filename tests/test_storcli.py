@@ -537,12 +537,29 @@ class StorcliTest(unittest.TestCase):
         params['read_ahead'] = 'RA' if params['read_ahead'] else 'NoRA'
         self.verify_storcli_commands(expected_commands, **params)
 
-    def test_faulty_command(self):
+    def test_nonexisting_command(self):
         self.mock_check_output.side_effect = \
             OSError(2, 'no such file or directory', '/foo')
         cli = storrest.storcli.Storcli(storcli_cmd=['/foo'])
         with self.assertRaises(storrest.storcli.StorcliError):
             cli.all_virtual_drives
+
+    def test_faulty_command(self):
+        controller_id = 1
+        returncode = 111
+        error_code = 42
+        command_output = self._make_reply(controller_id, error_code=error_code)
+        self.mock_check_output.side_effect = \
+            storrest.storcli.subprocess.CalledProcessError(
+                returncode,
+                self.storcli.storcli_cmd,
+                output=command_output
+            )
+        with self.assertRaises(storrest.storcli.StorcliError) as ee:
+            self.storcli.all_virtual_drives
+        the_exception = ee.exception
+        self.assertEqual(the_exception.error_code, error_code)
+
 
 if __name__ == '__main__':
     unittest.main()
