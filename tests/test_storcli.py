@@ -578,5 +578,57 @@ class StorcliTest(unittest.TestCase):
         self.assertEqual(the_exception.error_code, error_code)
 
 
+class StorutilsTest(unittest.TestCase):
+    def test_parse_phys_drive_state_unusual(self):
+        from storrest.storutils import parse_phys_drive_state
+        raw_weird_state = 'FooBar'
+        processed_weird_state = parse_phys_drive_state(raw_weird_state)
+        self.assertEqual(raw_weird_state.lower(), processed_weird_state)
+
+    def test_size_units_conversion(self):
+        from storrest.storutils import parse_drive_size
+        sizes_tbl = {
+            '1 Mb': 1024 * 1024,
+            '10 Kb': 10 * 1024,
+            '2 Tb': 2 * 1024 * 1024 * 1024 * 1024,
+        }
+        for str_size, size in sizes_tbl.iteritems():
+            self.assertEqual(parse_drive_size(str_size), size)
+
+    def test_size_units_conversion_negative(self):
+        from storrest.storutils import parse_drive_size
+        with self.assertRaises(ValueError):
+            parse_drive_size('100500 FooBar')
+
+    def test_parse_weird_virtual_drive_state(self):
+        from storrest.storutils import parse_state
+        raw_weird_state = 'FooBar'
+        weird_state = parse_state(raw_weird_state)
+        self.assertEqual(weird_state, raw_weird_state.lower())
+
+    def test_vd_raid_type(self):
+        from storrest.storutils import vd_raid_type
+        self.assertEqual(vd_raid_type({'raid_level': 'CacheCade1'}),
+                         'cachecade')
+        self.assertEqual(vd_raid_type({'raid_level': 'NytroCache1'}),
+                         'nytrocache')
+
+    def test_parse_sector_size(self):
+        from storrest.storutils import parse_sector_size
+        self.assertEqual(parse_sector_size('512B'), 512)
+        self.assertEqual(parse_sector_size('4Kb'), 4096)
+        with self.assertRaises(ValueError):
+            parse_sector_size('foo bar')
+
+    def test_parse_cache_flags_negative(self):
+        from storrest.storutils import parse_cache_flags
+
+        with self.assertRaises(ValueError):
+            parse_cache_flags('foo bar')
+
+        with self.assertRaises(ValueError):
+            parse_cache_flags('NRWTF')
+
+
 if __name__ == '__main__':
     unittest.main()
