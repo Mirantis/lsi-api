@@ -33,9 +33,9 @@ class StorcliTest(unittest.TestCase):
     def setUp(self):
         super(StorcliTest, self).setUp()
         self.maxDiff = None
-        self.patcher = mock.patch('storrest.storcli.subprocess')
-        self.mock_subprocess = self.patcher.start()
-        self.mock_subprocess.check_output.return_value = STORCLI_SHOW_ALL
+        self.patcher = mock.patch('storrest.storcli.subprocess.check_output')
+        self.mock_check_output = self.patcher.start()
+        self.mock_check_output.return_value = STORCLI_SHOW_ALL
         self.storcli = storrest.storcli.Storcli()
         self._expected_virtual_drives = None
         self._expected_physical_drives = None
@@ -89,7 +89,7 @@ class StorcliTest(unittest.TestCase):
             return self._expected_virtual_drives
 
     def test_physical_drives(self):
-        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+        self.mock_check_output.side_effect = MultiReturnValues([
             STORCLI_SHOW,
             STORCLI_C0_EALL_SALL_SHOW,
             STORCLI_C1_SALL_SHOW
@@ -104,7 +104,7 @@ class StorcliTest(unittest.TestCase):
         self.assertEqual(actual, self.expected_physical_drives)
 
     def test_virtual_drives(self):
-        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+        self.mock_check_output.side_effect = MultiReturnValues([
             STORCLI_SHOW,
             STORCLI_C0_EALL_SALL_SHOW,
             STORCLI_C1_SALL_SHOW
@@ -119,7 +119,7 @@ class StorcliTest(unittest.TestCase):
         self.assertEqual(actual, self.expected_virtual_drives)
 
     def _get_nytrocache(self, raid_type='nytrocache'):
-        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+        self.mock_check_output.side_effect = MultiReturnValues([
             STORCLI_SHOW,
             STORCLI_C0_EALL_SALL_SHOW,
             STORCLI_C1_SALL_SHOW
@@ -142,7 +142,7 @@ class StorcliTest(unittest.TestCase):
         self._get_nytrocache(raid_type='cachecade')
 
     def test_controllers(self):
-        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+        self.mock_check_output.side_effect = MultiReturnValues([
             STORCLI_SHOW_ALL, STORCLI_ENCLOSURES_SHOW])
         actual = self.storcli.controllers
         self.assertEqual(actual, self.controllers)
@@ -155,7 +155,7 @@ class StorcliTest(unittest.TestCase):
 
     def test_controller_details(self):
         controller_id = 0
-        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+        self.mock_check_output.side_effect = MultiReturnValues([
             extract_controller_raw_data(STORCLI_SHOW_ALL, controller_id),
             STORCLI_ENCLOSURES_SHOW,
             STORCLI_C0_EALL_SALL_SHOW,
@@ -184,7 +184,7 @@ class StorcliTest(unittest.TestCase):
     def test_virtual_drive_details(self):
         controller_id = 0
         virtual_drive_id = 0
-        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+        self.mock_check_output.side_effect = MultiReturnValues([
             extract_controller_raw_data(STORCLI_SHOW_ALL, controller_id),
             STORCLI_C0_EALL_SALL_SHOW
         ])
@@ -202,7 +202,7 @@ class StorcliTest(unittest.TestCase):
                                      controller_id=controller_id)
 
     def test_virtual_drive_details_nonexistent(self):
-        self.mock_subprocess.check_output.return_value = STORCLI_SHOW
+        self.mock_check_output.return_value = STORCLI_SHOW
         controller_id = 0
         virtual_drive_id = 100500
         with self.assertRaises(storrest.storcli.StorcliError):
@@ -220,7 +220,7 @@ class StorcliTest(unittest.TestCase):
         kwargs['storcli_cmd'] = ' '.join(self.storcli.storcli_cmd)
         expected_calls = [((cmd.format(**kwargs).split(), ), {})
                           for cmd in expected_commands]
-        actual_calls = self.mock_subprocess.check_output.call_args_list
+        actual_calls = self.mock_check_output.call_args_list
         self.assertEqual(actual_calls, expected_calls)
 
     def _make_success_reply(self, controller_id, serialize=True):
@@ -244,7 +244,7 @@ class StorcliTest(unittest.TestCase):
         return json.dumps(data) if serialize else data
 
     def _mock_success_reply(self, controller_id):
-        self.mock_subprocess.check_output.return_value = \
+        self.mock_check_output.return_value = \
             self._make_success_reply(controller_id)
 
     def test_create_warp_drive_vd_dflt(self):
@@ -317,7 +317,7 @@ class StorcliTest(unittest.TestCase):
         ssd_caching = raid_type is None
         io_policy = 'direct'
 
-        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+        self.mock_check_output.side_effect = MultiReturnValues([
             self._make_success_reply(controller_id),
             extract_controller_raw_data(STORCLI_SHOW, controller_id),
             STORCLI_C0_EALL_SALL_SHOW
@@ -367,7 +367,7 @@ class StorcliTest(unittest.TestCase):
             'enclosure': enclosure,
             'slot': slot
         } for slot in slots]
-        self.mock_subprocess.check_output.return_value = \
+        self.mock_check_output.return_value = \
             self._make_reply(controller_id, error_code=42) \
             if valid_reply else 'choke; JSON! parser'
         expected_commands = (
@@ -424,7 +424,7 @@ class StorcliTest(unittest.TestCase):
                                      force='force' if force else '')
 
     def _delete_all(self, controller_id=None, is_warpdrive=False):
-        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+        self.mock_check_output.side_effect = MultiReturnValues([
             STORCLI_SHOW_ALL,
             self._make_success_reply(controller_id)
         ])
@@ -482,7 +482,7 @@ class StorcliTest(unittest.TestCase):
                      not vd['raid_level'].startswith('Nytro')][0]
         vdrives = [target_vd['virtual_drive']]
 
-        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+        self.mock_check_output.side_effect = MultiReturnValues([
             extract_controller_raw_data(STORCLI_SHOW,
                                         controller_id=params['controller_id']),
             STORCLI_C0_EALL_SALL_SHOW,
@@ -538,7 +538,7 @@ class StorcliTest(unittest.TestCase):
         self.verify_storcli_commands(expected_commands, **params)
 
     def test_faulty_command(self):
-        self.mock_subprocess.check_output.side_effect = \
+        self.mock_check_output.side_effect = \
             OSError(2, 'no such file or directory', '/foo')
         cli = storrest.storcli.Storcli(storcli_cmd=['/foo'])
         with self.assertRaises(storrest.storcli.StorcliError):
