@@ -11,7 +11,7 @@ from tests_helpers import MultiReturnValues, add_top_srcdir_to_path,\
 add_top_srcdir_to_path()
 
 import storrest
-from storrest.storutils import strlst
+from storrest.storutils import strlst, vd_raid_type
 
 STORCLI_SHOW = read_expected('call_show.json')
 STORCLI_SHOW_ALL = read_expected('call_show_all.json')
@@ -117,6 +117,29 @@ class StorcliTest(unittest.TestCase):
         )
         self.verify_storcli_commands(expected_commands)
         self.assertEqual(actual, self.expected_virtual_drives)
+
+    def _get_nytrocache(self, raid_type='nytrocache'):
+        self.mock_subprocess.check_output.side_effect = MultiReturnValues([
+            STORCLI_SHOW,
+            STORCLI_C0_EALL_SALL_SHOW,
+            STORCLI_C1_SALL_SHOW
+        ])
+        expected_commands = (
+            '{storcli_cmd} /call show J',
+            '{storcli_cmd} /c0/eall/sall show all J',
+            '{storcli_cmd} /c1/sall show all J',
+        )
+        actual = sorted(self.storcli.virtual_drives(raid_type=raid_type))
+        self.verify_storcli_commands(expected_commands)
+        expected = sorted([vd for vd in self.expected_virtual_drives
+                           if vd_raid_type(vd) == raid_type])
+        self.assertEqual(actual, expected)
+
+    def test_get_nytrocache(self):
+        self._get_nytrocache(raid_type='nytrocache')
+
+    def test_get_cachecade(self):
+        self._get_nytrocache(raid_type='cachecade')
 
     def test_controllers(self):
         self.mock_subprocess.check_output.side_effect = MultiReturnValues([
@@ -514,6 +537,12 @@ class StorcliTest(unittest.TestCase):
         params['read_ahead'] = 'RA' if params['read_ahead'] else 'NoRA'
         self.verify_storcli_commands(expected_commands, **params)
 
+    def test_faulty_command(self):
+        self.mock_subprocess.check_output.side_effect = \
+            OSError(2, 'no such file or directory', '/foo')
+        cli = storrest.storcli.Storcli(storcli_cmd=['/foo'])
+        with self.assertRaises(storrest.storcli.StorcliError):
+            cli.all_virtual_drives
 
 if __name__ == '__main__':
     unittest.main()
