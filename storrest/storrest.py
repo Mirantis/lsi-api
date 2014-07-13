@@ -27,6 +27,7 @@ CFG = {
     'storcli_command': ['/opt/MegaRAID/nytrocli/nytrocli64']
 }
 
+web.config.debug = False
 app = web.application(urls, globals())
 
 
