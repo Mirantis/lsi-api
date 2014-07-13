@@ -8,8 +8,11 @@ def main():
     parser = OptionParser()
     parser.add_option('-c', '--storcli-command', dest='storcli_command',
                       help='path to the storcli binary')
+    parser.add_option('-l', '--listen', dest='listen',
+                      default='127.0.0.1:8080',
+                      help='interface/address to listen')
     options, args = parser.parse_args()
-    argv_new = [sys.argv[0]]
+    argv_new = [sys.argv[0], options.listen]
     argv_new.extend(args)
     sys.argv = argv_new
     if options.storcli_command:
