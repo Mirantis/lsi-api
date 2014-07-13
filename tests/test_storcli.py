@@ -20,13 +20,14 @@ STORCLI_C0_EALL_SALL_SHOW = read_expected('c0_eall_sall_show_all.json')
 STORCLI_C1_SALL_SHOW = read_expected('c1_sall_show_all.json')
 
 
-def extract_controller_raw_data(raw_dat, controller_id):
+def extract_controller_raw_data(raw_dat, controller_id, serialize=True):
     def _controller_match(ctrl):
         return ctrl['Command Status']['Controller'] == controller_id
 
     dat = json.loads(raw_dat)
     subdat = [ctrl for ctrl in dat['Controllers'] if _controller_match(ctrl)]
-    return json.dumps({'Controllers': subdat})
+    ret = {'Controllers': subdat}
+    return json.dumps(ret) if serialize else ret
 
 
 class StorcliTest(unittest.TestCase):
@@ -168,15 +169,24 @@ class StorcliTest(unittest.TestCase):
         self._controller_details = self.controllers
         return self._controller_details
 
-    def test_controller_details(self):
+    def _test_controller_details(self, capabilities=True):
         controller_id = 0
+        controller_dat = extract_controller_raw_data(STORCLI_SHOW_ALL,
+                                                     controller_id,
+                                                     serialize=False)
+        if not capabilities:
+            del controller_dat['Controllers'][0][
+                'Response Data']['Capabilities']
+
         self.mock_check_output.side_effect = MultiReturnValues([
-            extract_controller_raw_data(STORCLI_SHOW_ALL, controller_id),
+            json.dumps(controller_dat),
             STORCLI_ENCLOSURES_SHOW,
             STORCLI_C0_EALL_SALL_SHOW,
         ])
         expected = [c for c in self.controller_details
                     if c['controller_id'] == controller_id][0]
+        if not capabilities:
+            expected['capabilities']['max_cachecade_size'] = 0
 
         actual = self.storcli.controller_details(controller_id=controller_id)
         actual['physical_drives'] = sorted(actual['physical_drives'])
@@ -189,6 +199,12 @@ class StorcliTest(unittest.TestCase):
         )
         self.verify_storcli_commands(expected_commands,
                                      controller_id=controller_id)
+
+    def test_controller_details(self):
+        self._test_controller_details()
+
+    def test_controller_details_nocaps(self):
+        self._test_controller_details(capabilities=False)
 
     def test_controller_details_all(self):
         controller_id = None
