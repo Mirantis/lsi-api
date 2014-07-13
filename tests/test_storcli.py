@@ -39,6 +39,7 @@ class StorcliTest(unittest.TestCase):
         self.storcli = storrest.storcli.Storcli()
         self._expected_virtual_drives = None
         self._expected_physical_drives = None
+        self._controller_details = None
         self.controllers = [{'controller_id': 0,
                              'pci_address': '00:06:00:00',
                              'model': 'Nytro MegaRAID8100-4i',
@@ -153,6 +154,20 @@ class StorcliTest(unittest.TestCase):
         )
         self.verify_storcli_commands(expected_commands)
 
+    @property
+    def controller_details(self):
+        if self._controller_details is not None:
+            return self._controller_details
+        for cobj in self.controllers:
+            cobj['physical_drives'] = \
+                sorted([d for d in self.expected_physical_drives
+                        if d['controller_id'] == cobj['controller_id']])
+            cobj['virtual_drives'] = \
+                sorted([vd for vd in self.expected_virtual_drives
+                        if vd['controller_id'] == cobj['controller_id']])
+        self._controller_details = self.controllers
+        return self._controller_details
+
     def test_controller_details(self):
         controller_id = 0
         self.mock_check_output.side_effect = MultiReturnValues([
@@ -160,14 +175,8 @@ class StorcliTest(unittest.TestCase):
             STORCLI_ENCLOSURES_SHOW,
             STORCLI_C0_EALL_SALL_SHOW,
         ])
-        expected = [c for c in self.controllers
+        expected = [c for c in self.controller_details
                     if c['controller_id'] == controller_id][0]
-        expected['physical_drives'] = \
-            sorted([d for d in self.expected_physical_drives
-                    if d['controller_id'] == controller_id])
-        expected['virtual_drives'] = \
-            sorted([vd for vd in self.expected_virtual_drives
-                    if vd['controller_id'] == controller_id])
 
         actual = self.storcli.controller_details(controller_id=controller_id)
         actual['physical_drives'] = sorted(actual['physical_drives'])
@@ -197,6 +206,7 @@ class StorcliTest(unittest.TestCase):
         )
         actual = self.storcli.controller_details(controller_id)
         self.verify_storcli_commands(expected_commands)
+        self.assertEqual(actual, self.controller_details)
 
     def test_virtual_drive_details(self):
         controller_id = 0

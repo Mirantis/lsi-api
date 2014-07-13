@@ -145,7 +145,7 @@ class Storcli(object):
         ret = [_controller_details(_controller_id, dat)
                for _controller_id, dat in data.iteritems()]
         all_controllers = controller_id is None or controller_id == 'all'
-        return ret if all_controllers else ret[0]
+        return sorted(ret) if all_controllers else ret[0]
 
     def _parse_physical_drive(self, controller, drive_dat):
         enclosure, slot = drive_dat['EID:Slt'].split(':')
