@@ -268,9 +268,9 @@ POST /v0.5/controllers/${controller_id}/virtualdevices/warpdrive
 
 Optional data:
 
-{"overprovision": int}
+{"overprovision": int | 'cap' | 'nom' | 'perf'}
 
-The overprovision value must be in the [0, 100] range.
+The numeric value of the overprovision parameter must be in the [0, 100] range.
 
 
 Remove the virtual drive.
