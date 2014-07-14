@@ -19,15 +19,38 @@ Add a hot spare drive (either dedicated or a global one).
 Detailed information.
 =====================
 
-Generic structure of replies
------------------------------
+Generic structure of replies and error handling.
+-----------------------------------------------
 
 {"error_code": int,
  "error_message": "string",
  "data": object}
 
-The subsequent paragraphs describe the "data" object structure.
+The nytrocli output is assumed to have the following sturcture:
 
+{"Controllers": [
+   {
+       "Command Status":
+           {
+               "Controller": $controller_id,
+	       "Status": "Success" | "Failure",
+	       "Description": $explanation,
+	       "ErrCd": $error_code
+	   },
+       "Response Data": DATA_OBJ
+    }
+]}
+
+A command is considered successful if all of the "Command Status"."Status"
+fields are equal to "Success". Otherwise an error is raised. The error_code
+is copied from the `ErrCd' field, and the error_message is copied from
+the `Description' field, respectively. In addition the HTTP status 500
+(Internal Server Error) is set. This is rather crude, but on the other hand
+nytrocli uses the very same error code on very different error conditions,
+so storrest just does the best it can (that is, convey the fact that error
+has happened along with its code and description).
+
+The subsequent sections decribe the sturcture of the "data" object.
 
 Enumerate controllers.
 ----------------------
