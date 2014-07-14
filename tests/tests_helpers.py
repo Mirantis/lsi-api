@@ -34,4 +34,4 @@ def read_expected(name, raw=True):
     filename = os.path.join(script_dir, name)
     with open(filename, 'r') as f:
         txt = '\n'.join((l for l in f))
-        return txt if raw else json.loads(txt)
+    return txt if raw else json.loads(txt)

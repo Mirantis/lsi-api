@@ -1,0 +1,147 @@
+100 (percent)100 (percent)100 (percent)100 (percent){
+"Controllers":[
+{
+	"Command Status" : {
+		"Controller" : 1,
+		"Status" : "Success",
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"6203-IT 6203-IT Health" : {
+			"PD smart Info" : {
+				"Drive /c1/s4 - Health Information " : {
+					"Device Info" : {
+						"Current (since last Power Cycle)" : {
+							"Bytes Read" : 0,
+							"Wear Range Delta" : 0,
+							"Uncorrectable RAISE Errors" : 0,
+							"Current Temperature" : "69 (degree C)",
+							"Uncorrectable ECC Errors" : 0,
+							"SATA R-Errors (CRC) Error Count" : 0
+						},
+						"Cumulative" : {
+							"Retired Block Count" : 0,
+							"Soft Read Error Rate" : 792,
+							"Power-On Hours" : "1355.5",
+							"Device Power Cycle Count" : 132,
+							"Gigabytes Erased" : "28605 (Gigabytes)",
+							"Reserved (over-provisioned) Blocks" : 35200,
+							"Program Fail Count" : 0,
+							"Erase Fail Count 1" : 0,
+							"Unexpected Power Loss Count" : "301 (percent)",
+							"I/O Error Detection Code Rate" : 0,
+							"I/O Uncorrectable RAISE Errors" : 0,
+							"Maximum Lifetime Temperature" : "69 (degree C)",
+							"SSD Life Left (PE Cycles)" : "100 (percent)",
+							"Total Writes From Host" : 34521,
+							"Total Reads To Host" : 13672,
+							"Write Amplification" : "100 (percent)",
+							"Reserved Blocks Remaining" : "100 (percent)"
+						}
+					}
+				},
+				"Drive /c1/s5 - Health Information " : {
+					"Device Info" : {
+						"Current (since last Power Cycle)" : {
+							"Bytes Read" : 0,
+							"Wear Range Delta" : 0,
+							"Uncorrectable RAISE Errors" : 0,
+							"Current Temperature" : "69 (degree C)",
+							"Uncorrectable ECC Errors" : 0,
+							"SATA R-Errors (CRC) Error Count" : 0
+						},
+						"Cumulative" : {
+							"Retired Block Count" : 0,
+							"Soft Read Error Rate" : 609,
+							"Power-On Hours" : "1433.0",
+							"Device Power Cycle Count" : 132,
+							"Gigabytes Erased" : "21876 (Gigabytes)",
+							"Reserved (over-provisioned) Blocks" : 34944,
+							"Program Fail Count" : 0,
+							"Erase Fail Count 1" : 0,
+							"Unexpected Power Loss Count" : "304 (percent)",
+							"I/O Error Detection Code Rate" : 0,
+							"I/O Uncorrectable RAISE Errors" : 0,
+							"Maximum Lifetime Temperature" : "69 (degree C)",
+							"SSD Life Left (PE Cycles)" : "100 (percent)",
+							"Total Writes From Host" : 21673,
+							"Total Reads To Host" : 7798,
+							"Write Amplification" : "100 (percent)",
+							"Reserved Blocks Remaining" : "100 (percent)"
+						}
+					}
+				},
+				"Drive /c1/s6 - Health Information " : {
+					"Device Info" : {
+						"Current (since last Power Cycle)" : {
+							"Bytes Read" : 0,
+							"Wear Range Delta" : 0,
+							"Uncorrectable RAISE Errors" : 0,
+							"Current Temperature" : "72 (degree C)",
+							"Uncorrectable ECC Errors" : 0,
+							"SATA R-Errors (CRC) Error Count" : 0
+						},
+						"Cumulative" : {
+							"Retired Block Count" : 0,
+							"Soft Read Error Rate" : 378,
+							"Power-On Hours" : "1282.3",
+							"Device Power Cycle Count" : 132,
+							"Gigabytes Erased" : "32896 (Gigabytes)",
+							"Reserved (over-provisioned) Blocks" : 35136,
+							"Program Fail Count" : 0,
+							"Erase Fail Count 1" : 0,
+							"Unexpected Power Loss Count" : "355 (percent)",
+							"I/O Error Detection Code Rate" : 0,
+							"I/O Uncorrectable RAISE Errors" : 0,
+							"Maximum Lifetime Temperature" : "72 (degree C)",
+							"SSD Life Left (PE Cycles)" : "100 (percent)",
+							"Total Writes From Host" : 34336,
+							"Total Reads To Host" : 11287,
+							"Write Amplification" : "100 (percent)",
+							"Reserved Blocks Remaining" : "100 (percent)"
+						}
+					}
+				},
+				"Drive /c1/s7 - Health Information " : {
+					"Device Info" : {
+						"Current (since last Power Cycle)" : {
+							"Bytes Read" : 0,
+							"Wear Range Delta" : 0,
+							"Uncorrectable RAISE Errors" : 0,
+							"Current Temperature" : "72 (degree C)",
+							"Uncorrectable ECC Errors" : 0,
+							"SATA R-Errors (CRC) Error Count" : 0
+						},
+						"Cumulative" : {
+							"Retired Block Count" : 0,
+							"Soft Read Error Rate" : 401,
+							"Power-On Hours" : "2361.6",
+							"Device Power Cycle Count" : 132,
+							"Gigabytes Erased" : "15380 (Gigabytes)",
+							"Reserved (over-provisioned) Blocks" : 34944,
+							"Program Fail Count" : 0,
+							"Erase Fail Count 1" : 0,
+							"Unexpected Power Loss Count" : "293 (percent)",
+							"I/O Error Detection Code Rate" : 0,
+							"I/O Uncorrectable RAISE Errors" : 0,
+							"Maximum Lifetime Temperature" : "72 (degree C)",
+							"SSD Life Left (PE Cycles)" : "100 (percent)",
+							"Total Writes From Host" : 12625,
+							"Total Reads To Host" : 4378,
+							"Write Amplification" : "100 (percent)",
+							"Reserved Blocks Remaining" : "100 (percent)"
+						}
+					}
+				}
+			},
+			"Controller Health" : {
+				"Warranty Remaining" : " 100 (percent)",
+				"Temperature" : " 72 (degree C)",
+				"Overall Health" : "GOOD"
+			}
+		}
+	}
+}
+]
+}
+

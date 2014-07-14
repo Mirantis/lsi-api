@@ -106,6 +106,7 @@ class Storcli(object):
             enclosures = self._enclosures(controller_id)
         cinf['enclosures'] = enclosures
         cinf['capabilities'] = self._controller_capabilities(dat)
+        cinf['health'] = self._controller_health(controller_id)
         return cinf
 
     def _enclosures(self, controller_id):
@@ -124,6 +125,37 @@ class Storcli(object):
             return {'max_cachecade_size': 0, }
         max_cachecade_size = caps.get('Max Configurable CacheCade Size', 0)
         return {'max_cachecade_size': max_cachecade_size, }
+
+    def _parse_controller_health(self, cdat):
+        megaraid_tbl = {
+            'temperature': 'TemperatureROC',
+            'overall_health': 'Overall Health',
+            'warranty_remaining': 'Warranty Remaining'
+        }
+        nwd_tbl = {
+            'temperature': 'Temperature',
+            'overall_health': 'Overall Health',
+            'warranty_remaining': 'Warranty Remaining'
+        }
+
+        is_nwd = (len(cdat.keys()) == 1) and cdat.keys()[0].endswith('Health')
+        if is_nwd:
+            tbl = nwd_tbl
+            health = cdat[cdat.keys()[0]].get('Controller Health')
+        else:
+            tbl = megaraid_tbl
+            health = cdat.get('Controller Health Info')
+
+        return dict([(key, str(health.get(mangled_key)))
+                     for key, mangled_key in tbl.iteritems()])
+
+    def _controller_health(self, controller_id):
+        cmd = '/c{0} show health'.format(controller_id)
+        try:
+            data = self._run(cmd.split(), permissive=True)
+        except StorcliError:
+            return None
+        return self._parse_controller_health(data[controller_id])
 
     def controller_details(self, controller_id):
         if controller_id is None:

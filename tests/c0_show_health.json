@@ -1,0 +1,21 @@
+{
+"Controllers":[
+{
+	"Command Status" : {
+		"Controller" : 0,
+		"Status" : "Failure",
+		"ErrCd" : 1,
+		"Description" : "None"
+	},
+	"Response Data" : {
+		"Controller Health Info" : {
+			"TemperatureROC" : 74,
+			"Warranty Remaining" : 100,
+			"Overall Health" : "GOOD",
+			"Reason Code" : 0
+		}
+	}
+}
+]
+}
+

@@ -49,6 +49,7 @@ class StorcliTest(unittest.TestCase):
                              'host_interface': 'PCIE',
                              'sas_address': '5000000012345678',
                              'capabilities': {'max_cachecade_size': 1024, },
+                             'health': None,
                              },
                             {'controller_id': 1,
                              'pci_address': None,
@@ -58,6 +59,11 @@ class StorcliTest(unittest.TestCase):
                              'sas_address': ' 500605b012061206',
                              'enclosures': [],
                              'capabilities': {'max_cachecade_size': 0, },
+                             'health': {
+                                 'temperature': ' 72 (degree C)',
+                                 'warranty_remaining': ' 100 (percent)',
+                                 'overall_health': 'GOOD',
+                             },
                              }]
         self.controllers = sorted(self.controllers)
 
@@ -145,13 +151,19 @@ class StorcliTest(unittest.TestCase):
 
     def test_controllers(self):
         self.mock_check_output.side_effect = MultiReturnValues([
-            STORCLI_SHOW_ALL, STORCLI_ENCLOSURES_SHOW])
+            STORCLI_SHOW_ALL,
+            STORCLI_ENCLOSURES_SHOW,
+            read_expected('c0_show_health.json'),
+            read_expected('c1_show_health.json')
+        ])
         actual = self.storcli.controllers
         self.assertEqual(actual, self.controllers)
         expected_commands = (
             '{storcli_cmd} /call show all J',
             # controller 1 is NytroWarpDrive and has no enclosures
-            '{storcli_cmd} /c0/eall show J'
+            '{storcli_cmd} /c0/eall show J',
+            '{storcli_cmd} /c0 show health J',
+            '{storcli_cmd} /c1 show health J',
         )
         self.verify_storcli_commands(expected_commands)
 
@@ -169,7 +181,8 @@ class StorcliTest(unittest.TestCase):
         self._controller_details = self.controllers
         return self._controller_details
 
-    def _test_controller_details(self, capabilities=True):
+    def _test_controller_details(self, capabilities=True,
+                                 controller_health_works=False):
         controller_id = 0
         controller_dat = extract_controller_raw_data(STORCLI_SHOW_ALL,
                                                      controller_id,
@@ -178,9 +191,24 @@ class StorcliTest(unittest.TestCase):
             del controller_dat['Controllers'][0][
                 'Response Data']['Capabilities']
 
+        controller_health = read_expected(
+            'c{0}_show_health.json'.format(controller_id), raw=False)
+        if controller_health_works:
+            status_obj = controller_health['Controllers'][0]['Command Status']
+            del status_obj['ErrCd']
+            status_obj['Status'] = 'Success'
+            expected_controller = [c for c in self.controllers
+                                   if c['controller_id'] == controller_id][0]
+            expected_controller['health'] = {
+                'temperature': '74',
+                'overall_health': 'GOOD',
+                'warranty_remaining': '100',
+            }
+
         self.mock_check_output.side_effect = MultiReturnValues([
             json.dumps(controller_dat),
             STORCLI_ENCLOSURES_SHOW,
+            json.dumps(controller_health),
             STORCLI_C0_EALL_SALL_SHOW,
         ])
         expected = [c for c in self.controller_details
@@ -195,6 +223,7 @@ class StorcliTest(unittest.TestCase):
         expected_commands = (
             '{storcli_cmd} /c{controller_id} show all J',
             '{storcli_cmd} /c{controller_id}/eall show J',
+            '{storcli_cmd} /c{controller_id} show health J',
             '{storcli_cmd} /c{controller_id}/eall/sall show all J',
         )
         self.verify_storcli_commands(expected_commands,
@@ -206,18 +235,25 @@ class StorcliTest(unittest.TestCase):
     def test_controller_details_nocaps(self):
         self._test_controller_details(capabilities=False)
 
+    def test_controller_details_health(self):
+        self._test_controller_details(controller_health_works=True)
+
     def test_controller_details_all(self):
         controller_id = None
         self.mock_check_output.side_effect = MultiReturnValues([
             STORCLI_SHOW_ALL,
             STORCLI_ENCLOSURES_SHOW,
+            read_expected('c0_show_health.json'),
             STORCLI_C0_EALL_SALL_SHOW,
-            STORCLI_C1_SALL_SHOW
+            read_expected('c1_show_health.json'),
+            STORCLI_C1_SALL_SHOW,
         ])
         expected_commands = (
             '{storcli_cmd} /call show all J',
             '{storcli_cmd} /c0/eall show J',
+            '{storcli_cmd} /c0 show health J',
             '{storcli_cmd} /c0/eall/sall show all J',
+            '{storcli_cmd} /c1 show health J',
             '{storcli_cmd} /c1/sall show all J',
         )
         actual = self.storcli.controller_details(controller_id)

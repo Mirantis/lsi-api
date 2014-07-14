@@ -43,6 +43,11 @@ GET /v0.5/controllers
   "enclosures": [252],
   "capabilities": {
     "max_cachecade_size": 1024
+  },
+  "health": {
+    "temperature": "74",
+    "overall_health": "GOOD",
+    "warranty_remaining": "100"
   }
   }]
 
@@ -346,6 +351,11 @@ GET /v0.5/controllers/${controller_id}
  "capabilities": {
     "max_cachecade_size": 1024
  },
+ "health": {
+    "temperature": "74",
+    "overall_health": "GOOD",
+    "warranty_remaining": "100"
+  },
  "physical_drives": [PD_LIST],
  "virtual_drives": [VD_LIST]
 }
@@ -360,6 +370,14 @@ Complete example:
  "serial_number": "SV24603934",
  "model": "LSI MegaRAID SAS 9260-4i",
  "enclosures": [252],
+ "capabilities": {
+    "max_cachecade_size": 1024
+ },
+ "health": {
+    "temperature": "74",
+    "overall_health": "GOOD",
+    "warranty_remaining": "100"
+  },
  "physical_drives": [
 	{"controller_id": 0,
 	 "slot": 0,
